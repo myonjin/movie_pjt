@@ -18,5 +18,6 @@ class Movie(models.Model):
     release_date = models.DateField()
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
+
 # id,title,adult,actors,overview,popularity,release_date,vote_average,vote_count
 
