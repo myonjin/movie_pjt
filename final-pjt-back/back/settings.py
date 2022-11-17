@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'movies',
+    'accounts',
+    'community',
+    'quizs',
     "corsheaders",
     'rest_framework',
     'django.contrib.admin',
@@ -130,3 +133,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL=True
+
+AUTH_USER_MODEL = 'accounts.User'
