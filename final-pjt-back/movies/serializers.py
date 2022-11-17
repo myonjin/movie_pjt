@@ -7,3 +7,9 @@ class MovieListSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ('id','genre','title','poster_path','popularity','release_date',
                     'vote_average','vote_count')
+
+class MovieDetailSerializer(serializers.ModelSerializer):
+    # liked_user_set =
+    class Meta:
+        model = Movie
+        fields = '__all__'
