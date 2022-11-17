@@ -43,6 +43,7 @@ def order_by_filter(movies, filter):
 
 @api_view(['GET'])
 def total_movie_list(request, filter):
+    # print(request.GET.get('genre'))
     movies = Movie.objects.all()
     movies = order_by_filter(movies, filter)
     serializer = MovieListSerializer(movies, many=True)
