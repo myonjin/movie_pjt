@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex">
     <MovieListItem 
       v-for="movie in movieList" :key="movie.id" :movie="movie"
     />

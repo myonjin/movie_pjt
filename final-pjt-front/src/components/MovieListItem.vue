@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img :src="`https://image.tmdb.org/t/p/w400/${movie.poster_path}`" alt="hotel">
+  <div class="mt-5">
+    <img :src="`https://image.tmdb.org/t/p/w400/${movie.poster_path}`" alt="hotel" style="width:200px">
     {{movie.title}}
   </div>
 </template>
