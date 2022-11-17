@@ -21,11 +21,13 @@ export default {
     }
   },
   methods: {
+
   },
   created(){
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8000/movies/totalmovielist',
+      url: 'http://127.0.0.1:8000/movies/totalmovielist/1',
+      
     })
     .then((res)=>{
       this.movieList= res.data
