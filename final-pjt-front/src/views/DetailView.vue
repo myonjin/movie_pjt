@@ -1,15 +1,20 @@
 <template>
-  <div style="margin-top:60px;">
+  <div>
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
     <div id='show1'>
-      <div style="width:40%">
+      <br>
+      <div class="mt-5 " style="width:40%">
         <h1>{{movieDetail?.title}}</h1>
         <p>{{movieDetail?.overview}}</p>
-        <p style="font-family:'Montserrat';font-style: normal;font-weight: 600;font-size: 18px;line-height: 22px;color: #FF2E00;">GENRES</p>
-        <p>{{movieDetail?.genre}}</p>
+        <p style="font-family:'Montserrat'; 
+        font-style:normal;font-weight:600;font-size: 18px;line-height: 22px;color: #FF2E00;">
+          GENRES</p>
+        <div class="d-flex flex-row justify-content-center">
+          <p class="ms-2" v-for="(genre,index) in movieDetail.genre" :key="index">{{genre.name}}</p>
+        </div>
       </div>
       <div style="width:40%">
-        <button class="pinkBtn">WATCH</button>
+        <button class="pinkBtn" @click="youtubeFullScreen('https://www.youtube.com/embed/LnQw62a0Jy0',$event)" value=" 창 열기 ">WATCH</button>
         <button class="grayBtn">MY LIST</button>
       </div>
     </div>
@@ -35,10 +40,16 @@ export default {
   data(){
     return {
       movieId: this.$route.params.id,
-      movieDetail: null,
+      movieDetail: {"genre": [{"name": "모험"},]}, //비동기 에러 방지용
       movieSimilar: null,
     }
   },
+  methods:{
+    youtubeFullScreen(url){
+    window.open(url,"","fullscreen,scrollbars")
+}
+  }
+  ,
   created(){
     axios({
         method: 'get',
@@ -63,15 +74,16 @@ export default {
           })
   },
 }
+
 </script>
 
 <style>
 #show1 {
     background-image:
     linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)),
-    url('https://image.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg');
+    url('https://image.tmdb.org/t/p/original/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg');
     width: 100%;
-    height: 400px;
+    height: 500px;
     background-size: cover;
     color: white;
     padding: 20px;
