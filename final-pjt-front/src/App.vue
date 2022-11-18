@@ -5,7 +5,7 @@
         <a class="navbar-brand" href="#"> 
         </a>
         <router-link class="nav_font" :to="{ name: 'home' }">Home</router-link> |
-        <router-link class="nav_font" to="/about">About</router-link>
+        <router-link class="nav_font" to="/search">Search</router-link>
 
       </div>  
     </nav>

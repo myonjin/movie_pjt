@@ -120,7 +120,21 @@ export default {
     /* Note: backdrop-filter has minimal browser support */
   
     border-radius: 24px 0px 0px 24px;
-    } 
+    }
+  .actor_box{
+    position: absolute;
+    width: 90%;
+    height: 320px;
+    right: 0px;
+    bottom: 0px;
+  
+    background: rgba(11, 15, 22, 0.47);
+    box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12.5px);
+    /* Note: backdrop-filter has minimal browser support */
+  
+    border-radius: 24px 0px 0px 24px;
+    }  
 
 .genre_text{
   height: 22px;
