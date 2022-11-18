@@ -13,22 +13,24 @@
         <option value="old">구작순</option>
       </select>
       <div id="slideShow">
-        <ul class="slides">
-          <li><MovieListItem 
+        <!-- <ul class="slides"> -->
+          <!-- <li> -->
+            <MovieListItem 
             v-for="movie in movieList" :key="movie.id" :movie="movie"
-          /></li>
-        </ul>
-        <p class="controller">
+          />
+          <!-- </li> -->
+        <!-- </ul> -->
+        <!-- <p class="controller"> -->
           <!-- &lang: 왼쪽 방향 화살표
           &rang: 오른쪽 방향 화살표 -->
-          <span class="prev" @click="prevBtn">&lang;</span>  
-          <span class="next" @click="nextBtn">&rang;</span>
-        </p>
+          <!-- <span class="prev" @click="prevBtn">&lang;</span>   -->
+          <!-- <span class="next" @click="nextBtn">&rang;</span> -->
+        <!-- </p> -->
+      <!-- </div> -->
       </div>
-
     </div>
-
   </div>
+
 
 </template>
 
