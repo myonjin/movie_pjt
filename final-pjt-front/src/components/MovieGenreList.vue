@@ -7,7 +7,8 @@
       <button
         v-for="genre in genreList"
         :key="genre.id"
-        @click="addGenreFilter(genre.id)"
+        @click="addGenreFilter($event, genre.id)"
+        class="grayBtn"
       >
       {{genre.name}}</button>
     </div>
@@ -54,6 +55,30 @@ export default {
           id: '16',
           name: '애니메이션',
         },
+        {
+          id: '18',
+          name: '드라마',
+        },
+        {
+          id: '27',
+          name: '공포',
+        },
+        {
+          id: '28',
+          name: '액션',
+        },
+        {
+          id: '35',
+          name: '코미디',
+        },
+        {
+          id: '80',
+          name: '범죄',
+        },
+        {
+          id: '878',
+          name: 'SF',
+        },
       ],
     }
   },
@@ -73,13 +98,14 @@ export default {
             console.log(err)
           })
     },
-    addGenreFilter(add) {
+    addGenreFilter(event, add) {
       if (!this.genreFilter.includes(add)) {
         this.genreFilter.push(add)
+        event.target.classList = 'pinkBtn'
       } else {
         this.genreFilter = this.genreFilter.filter((exist) => exist!==add )
+        event.target.classList = 'grayBtn'
       }
-      console.log(this.genreFilter);
     }
 
   },
@@ -99,5 +125,40 @@ export default {
 </script>
 
 <style>
+.pinkBtn {
+  width: 80px;
+  height: 30px;
+  border: none;
+  margin-right: 5px;
 
+  background: #FF9999;
+  border-radius: 30px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+  }
+.grayBtn {
+  width: 80px;
+  height: 30px;
+  border: none;
+  margin-right: 5px;
+
+  background: #5C5C5C;
+  border-radius: 30px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+  }
 </style>
