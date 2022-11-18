@@ -9,6 +9,7 @@
         :key="genre.id"
         @click="addGenreFilter($event, genre.id)"
         class="grayBtn"
+        :id="genre.name"
       >
       {{genre.name}}</button>
     </div>
@@ -84,19 +85,21 @@ export default {
   },
   methods: {
     getGenreMovieList() {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/genremovielist/${this.filterList}`,
-        params: {
-          id: this.genreFilter.join(',')
-        }
-        })
-          .then((res) => {
-            this.genreMovieList = res.data
+      if (this.genreFilter.length > 0) {
+        axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/movies/genremovielist/${this.filterList}`,
+          params: {
+            id: this.genreFilter.join(',')
+          }
           })
-          .catch((err) => {
-            console.log(err)
-          })
+            .then((res) => {
+              this.genreMovieList = res.data
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+      }
     },
     addGenreFilter(event, add) {
       if (!this.genreFilter.includes(add)) {
@@ -119,7 +122,11 @@ export default {
   },
   created() {
     this.filterList = 'default'
-    this.genreFilter.push(12)
+    this.genreFilter.push('12')
+  },
+  mounted() {
+    const defaultBtn = document.querySelector('#모험')
+    defaultBtn.classList = 'pinkBtn'
   }
 }
 </script>
