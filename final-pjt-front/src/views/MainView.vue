@@ -5,12 +5,18 @@
     <div class="main-image">
       <div class="background-gradation"></div>
     </div>
-    <div class="popular_box">
+    <!-- <div style="height:1000px"></div> -->
 
-      <p class="popular_text">인기영화</p>
-      <movieList />
+
+    <div class="popular_box">
+      <MovieList/>
     </div>
-    <div style="height:500px"></div>
+
+    <div class="genre_box">
+      <MovieGenreList/>
+    </div>
+    
+
   </div>
 
 </template>
@@ -18,10 +24,13 @@
 <script>
 // import axios from 'axios'
 import MovieList from '@/components/MovieList'
+import MovieGenreList from '@/components/MovieGenreList'
+
 export default {
   name: 'MainView',
   components: {
-    MovieList
+    MovieList,
+    MovieGenreList,
   },
   data() {
     return {
@@ -58,23 +67,47 @@ export default {
   border-radius: 24px;
   } 
 .popular_text{
-  position: absolute;
-width: 351px;
-height: 22px;
-left: -80px;
-top: 20px;
+  height: 22px;
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #FFFFFF;
+  }
+  .genre_box{
+    position: absolute;
+    width: 85%;
+    height: 300px;
+    right: -20px;
+    bottom: -550px;
+  
+    background: rgba(11, 15, 22, 0.47);
+    box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12.5px);
+    /* Note: backdrop-filter has minimal browser support */
+  
+    border-radius: 24px;
+    } 
 
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+.genre_text{
+  height: 22px;
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
 
-
-color: #FFFFFF;
-
-}
+  color: #FFFFFF;
+  }
 
 .main-image {
         position: relative;
