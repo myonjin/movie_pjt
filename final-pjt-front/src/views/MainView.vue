@@ -16,7 +16,6 @@
       <MovieGenreList/>
     </div>
     
-
   </div>
 
 </template>
