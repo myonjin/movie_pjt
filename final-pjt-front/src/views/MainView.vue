@@ -2,7 +2,6 @@
 
   <div class="container">
     <!-- <img style="position:relative; width:100%; height:80%;" alt="Hotel" src="../assets/hotel.jpg"> -->
-    
     <div class="main-image">
       <div class="background-gradation"></div>
     </div>
@@ -12,9 +11,6 @@
       <movieList />
     </div>
     <div style="height:500px"></div>
-    
-    
-    
   </div>
 
 </template>
@@ -33,8 +29,6 @@ export default {
     }
   },
   methods: {
-    
-
   },
   
 }
