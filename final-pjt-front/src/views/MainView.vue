@@ -9,8 +9,9 @@
     <div class="popular_box">
 
       <p class="popular_text">인기영화</p>
-      <!-- <movieList/> -->
+      <movieList/>
     </div>
+    <div style="height:500px"></div>
     
     
     
@@ -21,11 +22,11 @@
 <script>
 // @ is an alias to /src
 // import axios from 'axios'
-// import MovieList from '@/components/MovieList'
+import MovieList from '@/components/MovieList'
 export default {
   name: 'MainView',
   components: {
-    // MovieList
+    MovieList
   },
   data() {
     return {
@@ -51,10 +52,10 @@ export default {
   }
 .popular_box{
   position: absolute;
-  width: 90%;
+  width: 85%;
   height: 300px;
   right: -20px;
-  bottom: -250px;
+  bottom: -150px;
 
   background: rgba(11, 15, 22, 0.47);
   box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
