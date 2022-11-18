@@ -10,6 +10,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 class MovieDetailSerializer(serializers.ModelSerializer):
     # liked_user_set =
+
     class Meta:
         model = Movie
         fields = '__all__'

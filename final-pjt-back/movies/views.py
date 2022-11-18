@@ -62,6 +62,14 @@ def genre_movie_list(request, filter):
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
+
+
+@api_view(['GET'])
+def detail_movie(request, movie_id):
+    movies = Movie.objects.get(pk=movie_id)
+    serializer = MovieDetailSerializer(movies)
+    return Response(serializer.data)
+
 # axios({
 #     method: 'get',
 #     url: 'http',

@@ -50,4 +50,22 @@ font-weight: 700;
 font-size: 16px;
 line-height: 20px;
 }
+.pinkBtn {
+  width: 80px;
+  height: 30px;
+  border: none;
+  margin-right: 5px;
+
+  background: #FF9999;
+  border-radius: 30px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+  }
 </style>
