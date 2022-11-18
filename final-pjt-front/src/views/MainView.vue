@@ -54,7 +54,7 @@ export default {
 .popular_box{
   position: absolute;
   width: 85%;
-  height: 300px;
+  height: 400px;
   right: -20px;
   bottom: -150px;
 
@@ -157,5 +157,6 @@ select {
   text-align: center;
 
   color: #FFFFFF;
+  letter-spacing:1.5px
 }
 </style>
