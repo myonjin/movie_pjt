@@ -2,25 +2,20 @@
 
   <div class="container">
     <!-- <img style="position:relative; width:100%; height:80%;" alt="Hotel" src="../assets/hotel.jpg"> -->
-    
     <div class="main-image">
       <div class="background-gradation"></div>
     </div>
     <div class="popular_box">
 
       <p class="popular_text">인기영화</p>
-      <movieList/>
+      <movieList />
     </div>
     <div style="height:500px"></div>
-    
-    
-    
   </div>
 
 </template>
 
 <script>
-// @ is an alias to /src
 // import axios from 'axios'
 import MovieList from '@/components/MovieList'
 export default {
@@ -34,8 +29,6 @@ export default {
     }
   },
   methods: {
-    
-
   },
   
 }
