@@ -141,4 +141,21 @@ export default {
           );  
   background-size: inherit;
   }
+
+select {
+  width: 139px;
+  height: 40px;
+
+  background: #5C5C5C;
+  border-radius: 30px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+}
 </style>

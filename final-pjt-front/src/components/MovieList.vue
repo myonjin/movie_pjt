@@ -2,7 +2,8 @@
   <div class="d-flex flex-column">
     <p class="popular_text">전체 영화</p>
     <select v-model="filterList" style="position: absolute;width: 139px;height: 40px;right:0px;top: 0px;">
-      <option value="default" selected>랜덤</option>
+      <option value="default" selected disabled hidden>FILTER</option>
+      <option value="random">랜덤</option>
       <!-- <option value="default">default</option> -->
       <option value="vote">평점순</option>
       <option value="popularity">인기순</option>

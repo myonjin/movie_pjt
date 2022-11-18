@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 # Create your views here.
 
 def order_by_filter(movies, filter):
-    if filter == 'default':
+    if filter == 'default' or filter == 'random':
         movies = list(movies)
         if len(movies) >= 20:
             movies = random.sample(movies, 20)
