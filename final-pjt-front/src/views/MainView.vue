@@ -5,7 +5,7 @@
     <div class="main-image">
       <div class="background-gradation"></div>
     </div>
-    <!-- <div style="height:1000px"></div> -->
+    <div style="height:1000px"></div>
 
 
     <div class="popular_box">
@@ -53,9 +53,9 @@ export default {
   }
 .popular_box{
   position: absolute;
-  width: 85%;
+  width: 80%;
   height: 400px;
-  right: -20px;
+  right: 0px;
   bottom: -150px;
 
   background: rgba(11, 15, 22, 0.47);
@@ -63,7 +63,7 @@ export default {
   backdrop-filter: blur(12.5px);
   /* Note: backdrop-filter has minimal browser support */
 
-  border-radius: 24px;
+  border-radius: 24px 0px 0px 24px;
   } 
 .popular_text{
   height: 22px;
@@ -80,17 +80,17 @@ export default {
   }
   .genre_box{
     position: absolute;
-    width: 85%;
+    width: 80%;
     height: 300px;
-    right: -20px;
-    bottom: -550px;
+    right: 0px;
+    bottom: -480px;
   
     background: rgba(11, 15, 22, 0.47);
     box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(12.5px);
     /* Note: backdrop-filter has minimal browser support */
   
-    border-radius: 24px;
+    border-radius: 24px 0px 0px 24px;
     } 
 
 .genre_text{
@@ -143,8 +143,11 @@ export default {
   }
 
 select {
-  width: 139px;
-  height: 40px;
+  position: absolute;
+  right:40px;
+  top: -45px;
+  width: 120px;
+  height: 35px;
 
   background: #5C5C5C;
   border-radius: 30px;
@@ -152,7 +155,7 @@ select {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 20px;
   text-align: center;
 

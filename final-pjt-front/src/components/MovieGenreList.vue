@@ -3,7 +3,7 @@
     <div>
       <p class="genre_text">어떤 장르를 좋아하세요?</p>
     </div>
-    <div>
+    <div class="btn-box">
       <button
         v-for="genre in genreList"
         :key="genre.id"
@@ -13,16 +13,16 @@
       >
       {{genre.name}}</button>
     </div>
-    <select v-model="filterList" style="position: absolute;width: 139px;height: 40px;right:0px;top: 0px;">
-      <option value="default" selected disabled hidden>FILTER</option>
-      <option value="random">랜덤</option>
-      <!-- <option value="default">default</option> -->
-      <option value="vote">평점순</option>
-      <option value="popularity">인기순</option>
-      <option value="new">신작순</option>
-      <option value="old">구작순</option>
-    </select>
-    <div class="d-flex">
+    <div class="d-flex" style="position: relative;">
+      <select v-model="filterList" style="top:-53px;">
+        <option value="default" selected disabled hidden>FILTERS</option>
+        <option value="random">랜덤</option>
+        <!-- <option value="default">default</option> -->
+        <option value="vote">평점순</option>
+        <option value="popularity">인기순</option>
+        <option value="new">신작순</option>
+        <option value="old">구작순</option>
+      </select>
       <MovieListItem 
         v-for="movie in genreMovieList" :key="movie.id" :movie="movie"
       />
@@ -133,6 +133,12 @@ export default {
 </script>
 
 <style>
+.btn-box {
+  display: flex;
+  justify-content: left;
+  margin: 20px;
+  margin-top: 0px;
+}
 .pinkBtn {
   width: 80px;
   height: 30px;
