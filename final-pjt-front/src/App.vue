@@ -6,6 +6,7 @@
         </a>
         <router-link class="nav_font" :to="{ name: 'home' }">Home</router-link> |
         <router-link class="nav_font" to="/about">About</router-link>
+        <router-link class="nav_font" :to="{ name: 'detail'}"></router-link>
       </div>  
     </nav>
     

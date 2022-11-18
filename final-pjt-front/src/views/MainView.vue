@@ -9,7 +9,7 @@
     <div class="popular_box">
 
       <p class="popular_text">인기영화</p>
-      <movieList/>
+      <movieList />
     </div>
     <div style="height:500px"></div>
     
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 // import axios from 'axios'
 import MovieList from '@/components/MovieList'
 export default {
