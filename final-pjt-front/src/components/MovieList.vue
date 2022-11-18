@@ -1,10 +1,6 @@
 <template>
   <div class="d-flex">
-    <MovieListItem 
-      v-for="movie in movieList" :key="movie.id" :movie="movie"
-    />
-
-    <select v-model="filterList" style="position: absolute;width: 139px;height: 40px;left: 1279px;top: 637px;">
+    <select v-model="filterList" style="position: absolute;width: 139px;height: 40px;right:0px;top: 0px;">
       <option value="default" selected>랜덤</option>
       <!-- <option value="default">default</option> -->
       <option value="vote">평점순</option>
@@ -12,6 +8,10 @@
       <option value="new">신작순</option>
       <option value="old">구작순</option>
     </select>
+    <MovieListItem 
+      v-for="movie in movieList" :key="movie.id" :movie="movie"
+    />
+
   </div>
 
 </template>
