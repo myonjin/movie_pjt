@@ -2,7 +2,7 @@
   <div class="ms-4" @click="goDetail()" v-if="movie.poster_path">
     <img class="poster" :src="`https://image.tmdb.org/t/p/w400/${movie.poster_path}`" alt="">
     <p class="title">{{movie.title}}</p>
-    <p class="release">{{movie.release_date.slice(0, 4)}}</p>
+    <p class="release" v-if="movie.release_date!==null">{{movie.release_date.slice(0, 4)}}</p>
     <div class="d-flex justify-content-between">
       <div class="d-flex">
         <img src="../assets/imdb_logo.png" alt="" style="width: 28px; height: 14px;">

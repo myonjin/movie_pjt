@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container">
+  <div>
     <!-- <img style="position:relative; width:100%; height:80%;" alt="Hotel" src="../assets/hotel.jpg"> -->
     <div class="main-image">
       <div class="background-gradation"></div>
@@ -9,18 +9,7 @@
 
 
     <div class="popular_box">
-
-      <!-- <div id="slideShow"> -->
-        <!-- <ul class="slides"> -->
           <MovieList/>
-        <!-- </ul> -->
-        <!-- <p class="controller"> -->
-          <!-- &lang: 왼쪽 방향 화살표
-          &rang: 오른쪽 방향 화살표 -->
-          <!-- <span class="prev" @click="prevBtn">&lang;</span>   -->
-          <!-- <span class="next" @click="nextBtn">&rang;</span> -->
-        <!-- </p> -->
-      <!-- </div> -->
     </div>
 
     <div class="genre_box">
@@ -63,7 +52,7 @@ export default {
   }
 .popular_box{
   position: absolute;
-  width: 80%;
+  width: 92%;
   height: 375px;
   right: 0px;
   bottom: -150px;
@@ -90,7 +79,7 @@ export default {
   }
   .genre_box{
     position: absolute;
-    width: 80%;
+    width: 92%;
     height: 420px;
     right: 0px;
     bottom: -600px;
@@ -139,11 +128,13 @@ export default {
         height: 100vh;
         background: linear-gradient(
             to left,
-            rgb(0, 0, 0, 1) 0%,
-            rgba(20, 20, 20, 0.4) 5%,
+            rgb(0, 0, 0, 0.9) 0%,
+            rgb(0, 0, 0, 0.7) 5%,
+            rgba(20, 20, 20, 0.4) 30%,
             rgba(20, 20, 20, 0.3) 50%,
-            rgba(20, 20, 20, 0.4) 95%,
-            rgba(0, 0, 0, 1) 100%
+            rgba(20, 20, 20, 0.4) 70%,
+            rgba(20, 20, 20, 0.7) 95%,
+            rgba(0, 0, 0, 0.9) 100%
           ), url(../assets/hotel.jpg);
         background-size: cover;
       }

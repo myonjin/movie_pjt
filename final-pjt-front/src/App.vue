@@ -5,8 +5,9 @@
         <a class="navbar-brand" href="#"> 
         </a>
         <router-link class="nav_font" :to="{ name: 'home' }">Home</router-link> |
-        <router-link class="nav_font" to="/search">Search</router-link>
-        <button @click="logOut">LOGOUT</button>
+        <router-link class="nav_font" to="/search">Search</router-link> |
+        <router-link class="nav font" :to="{ name: 'profile', params:{ username: this.$store.state.username } }" v-if="isLogin">MY</router-link>
+        <button @click="logOut" v-if="isLogin">LOGOUT</button>
 
       </div>  
     </nav>
@@ -21,10 +22,14 @@
 export default ({
   methods: {
     logOut() {
-      console.log('앱뷰');
       this.$store.dispatch('logOut')
     }
-  }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    }
+  },
 })
 </script>
 

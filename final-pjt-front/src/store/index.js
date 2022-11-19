@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     articles: [],
     token: null,
+    username: null,
   },
   getters: {
     isLogin(state) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'home' })
+    },
+    SAVE_USERNAME(state, username) {
+      state.username = username
     },
     DELETE_TOKEN(state) {
       state.token = null
@@ -63,10 +67,13 @@ export default new Vuex.Store({
           password2: payload.password2,
         }
       })
-        .then((res) => {
-          // console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
-        })
+      .then((res) => {
+        console.log(res);
+        context.commit('SAVE_TOKEN', res.data.key)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     },
     logIn(context, payload) {
       axios({
@@ -77,10 +84,10 @@ export default new Vuex.Store({
           password: payload.password,
         }
       })
-        .then((res) => {
-          // console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
-        })
+      .then((res) => {
+        context.commit('SAVE_TOKEN', res.data.key)
+      })
+      context.commit('SAVE_USERNAME', payload.username)
     },
     logOut(context) {
       axios({
