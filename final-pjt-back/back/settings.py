@@ -35,7 +35,21 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'quizs',
+
     "corsheaders",
+
+    # Auth
+    # 토큰을 각 로그인 유저에게 발급해서 user는 토큰을 요청과 함께 전송
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+    # registration
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
+
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +58,35 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    # Authentication 인증
+    # 우리는 토큰 쓰겠다 선언
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # permission 권한
+    'DEFAULT_PERMISSION_CLASSES': [
+        # IsAuthenticated 모든 요청에 대해 인증 요구
+        # 'rest_framework.permissions.IsAuthenticated',
+        # AllowAny = 모든 기능에 대해 인증 없어도 허용
+        'rest_framework.permissions.AllowAny',
+    ],
+
+#     # spectacular Settings
+#     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+# }
+
+# SPECTACULAR_SETTINGS = {
+#     'TITLE': 'Your Project API',
+#     'DESCRIPTION': 'Your project description',
+#     'VERSION': '1.0.0',
+#     'SERVE_INCLUDE_SCHEMA': False,
+#     # OTHER SETTINGS
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
