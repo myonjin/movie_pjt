@@ -28,7 +28,11 @@ export default new Vuex.Store({
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
-      router.push({ name: 'ArticleView' })
+      router.push({ name: 'home' })
+    },
+    DELETE_TOKEN(state) {
+      state.token = null
+      router.push({ name: 'login' })
     }
   },
   actions: {
@@ -78,6 +82,18 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
+    logOut(context) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/logout/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then(() => {
+        context.commit('DELETE_TOKEN')
+      })
+    }
   },
   modules: {
   }

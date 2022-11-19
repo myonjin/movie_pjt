@@ -6,15 +6,28 @@
         </a>
         <router-link class="nav_font" :to="{ name: 'home' }">Home</router-link> |
         <router-link class="nav_font" to="/search">Search</router-link>
+        <button @click="logOut">LOGOUT</button>
 
       </div>  
     </nav>
-    
-
+  
     <router-view/>
 
   </div>
 </template>
+
+<script>
+
+export default ({
+  methods: {
+    logOut() {
+      console.log('앱뷰');
+      this.$store.dispatch('logOut')
+    }
+  }
+})
+</script>
+
 
 <style>
 #app {
