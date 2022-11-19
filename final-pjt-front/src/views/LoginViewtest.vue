@@ -20,7 +20,7 @@
                       <h4 class="mb-4 pb-3">Log In</h4>
                       <div class="form-group">
                         <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-                        <i class="input-icon uil uil-at"></i>
+                        <Icon class="input-icon" icon="uil:user" />
                       </div>  
                       <div class="form-group mt-2">
                         <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
@@ -62,10 +62,17 @@
 </template>
 
 <script>
+import { Icon } from '@iconify/vue2';
+
 export default {
-  name:'LoginViewtest'
+  name:'LoginViewtest',
+  components:{
+    Icon
+  }
 }
+
 </script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
