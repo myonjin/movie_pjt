@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column" style="position: relative; height:100%;">
     <div>
       <p class="genre_text">어떤 장르를 좋아하세요?</p>
     </div>
@@ -13,20 +13,32 @@
       >
       {{genre.name}}</button>
     </div>
-    <div class="d-flex" style="position: relative;">
-      <select v-model="filterList" style="top:-53px;">
-        <option value="default" selected disabled hidden>FILTERS</option>
-        <option value="random">랜덤</option>
-        <!-- <option value="default">default</option> -->
-        <option value="vote">평점순</option>
-        <option value="popularity">인기순</option>
-        <option value="new">신작순</option>
-        <option value="old">구작순</option>
-      </select>
-      <MovieListItem 
-        v-for="movie in genreMovieList" :key="movie.id" :movie="movie"
-      />
+    <!-- <div class="d-flex" style="position: relative; height:100%;"> -->
+    <select v-model="filterList" style="top:53px;">
+      <option value="default" selected disabled hidden>FILTERS</option>
+      <option value="random">랜덤</option>
+      <!-- <option value="default">default</option> -->
+      <option value="vote">평점순</option>
+      <option value="popularity">인기순</option>
+      <option value="new">신작순</option>
+      <option value="old">구작순</option>
+    </select>
+    <div id="slideShow">
+      <ul class="slides" id="slides-genre">
+        <li v-for="movie in genreMovieList" :key="movie.id">
+          <MovieListItem 
+            :movie="movie"
+          />
+        </li>  
+      </ul>
+    <!-- </div> -->
     </div>
+    <p class="controller">
+      <!-- &lang: 왼쪽 방향 화살표
+      &rang: 오른쪽 방향 화살표 -->
+      <span class="prev" @click="prevBtn">&lang;</span>  
+      <span class="next" @click="nextBtn">&rang;</span>
+    </p>
   </div>
 </template>
 
@@ -82,6 +94,7 @@ export default {
           name: 'SF',
         },
       ],
+      currentIdx: 0,
     }
   },
   methods: {
@@ -110,6 +123,23 @@ export default {
         this.genreFilter = this.genreFilter.filter((exist) => exist!==add )
         event.target.classList = 'grayBtn'
       }
+    },
+    prevBtn() {
+      if (this.currentIdx !== 0) {
+        this.moveSlide(this.currentIdx - 1)
+      }
+    },
+    nextBtn() {
+      const slideImg = document.querySelectorAll('#slides-genre li')
+      const slideCount = slideImg.length
+      if (this.currentIdx !== slideCount - 1) {
+        this.moveSlide(this.currentIdx + 1);
+      }
+    },
+    moveSlide(num) {
+      const slides = document.querySelector('#slides-genre')
+      slides.style.left = -num * 800 + 'px';
+      this.currentIdx = num;
     }
 
   },
