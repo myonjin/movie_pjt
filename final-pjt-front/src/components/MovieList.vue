@@ -53,14 +53,12 @@ export default {
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/movies/totalmovielist/${filter}`,
-        // 권한이 필요한 요청은 token 붙여서 보내자
-        // headers: {
-        //   Authorization: `Token ${context.state.token}`
-        // }
         })
           .then((res) => {
-            
             this.movieList = res.data
+            const slides = document.querySelector('.slides')
+            slides.style.left = 0 + 'px';
+            this.currentIdx = 0
           })
           .catch((err) => {
             console.log(err)

@@ -209,7 +209,7 @@ li{
   display: inline-block;
   left: 0;
   top: 0;
-  width: 3500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  width: 15000px; /* 슬라이드할 사진과 마진 총 넓이 */
   height: 100%;
   transition: left 0.5s ease-out; 
   /*ease-out: 처음에는 느렸다가 점점 빨라짐*/

@@ -109,6 +109,9 @@ export default {
           })
             .then((res) => {
               this.genreMovieList = res.data
+              const slides = document.querySelector('#slides-genre')
+              slides.style.left = 0 + 'px';
+              this.currentIdx = 0
             })
             .catch((err) => {
               console.log(err)

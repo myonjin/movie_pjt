@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between">
       <div class="d-flex">
         <img src="../assets/imdb_logo.png" alt="" style="width: 28px; height: 14px;">
-        <p class="vote">{{ movie.vote_average }}</p>
+        <p class="vote">{{ movie.vote_average.toFixed(1) }}</p>
       </div>
       <!-- 임시!! 좋아요기능 구현 후 버튼넣을거임 -->
       <p>❤</p>
