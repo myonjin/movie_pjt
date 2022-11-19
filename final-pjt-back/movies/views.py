@@ -9,8 +9,8 @@ from rest_framework.decorators import api_view
 def order_by_filter(movies, filter):
     if filter == 'default' or filter == 'random':
         movies = list(movies)
-        if len(movies) >= 20:
-            movies = random.sample(movies, 20)
+        if len(movies) >= 40:
+            movies = random.sample(movies, 40)
         else:
             pass
 
@@ -19,24 +19,24 @@ def order_by_filter(movies, filter):
         print('이거')
         # movies = Movie.objects.all()
         movies = movies.order_by('-vote_average')
-        # if len(movies) >= 20:
-        #     movies = movies[:20]
+        # if len(movies) >= 40:
+        #     movies = movies[:40]
 
 
     # 인기순
     if filter == 'popularity':
         # movies = Movie.objects.all()
-        movies = movies.order_by('-popularity')[:20]
+        movies = movies.order_by('-popularity')[:40]
 
     # 신작순
     if filter == 'new':
         # movies = Movie.objects.all()
-        movies = movies.order_by('-release_date')[:20]
+        movies = movies.order_by('-release_date')[:40]
 
     # 구작순
     if filter == 'old':
         # movies = Movie.objects.all()
-        movies = movies.order_by('release_date')[:20]
+        movies = movies.order_by('release_date')[:40]
     
     return movies
 
