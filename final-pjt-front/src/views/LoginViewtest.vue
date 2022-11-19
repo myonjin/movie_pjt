@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container-login">
   <div class="move">
     <div class="p-button normal signin animated pulse">SIGN IN</div>
   </div>
@@ -182,7 +182,7 @@ p{
   font-size:14px;
 }
 
-.container{
+.container-login{
   height:450px;
   width:900px;
   position:absolute;
