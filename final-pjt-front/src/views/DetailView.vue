@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
-    <div id='show1'>
+    <div id='show1' >
       <br>
       <div class="mt-5 " style="width:40%">
         <h1>{{movieDetail?.title}}</h1>
@@ -112,6 +112,11 @@ export default {
             this.actor_list=actor_list
             // console.log(movies);
           })
+          .then(()=>{
+          document.getElementById("show1").style.backgroundImage = 
+          `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)), 
+          url('https://image.tmdb.org/t/p/original${this.movieDetail.backdrop_path}')`;
+          })
           .catch((err) => {
             console.log(err)
           })
@@ -136,22 +141,23 @@ export default {
         url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=6aff6c96fa8121c83d1a49c01d1407b3&language=ko-KR`,
         })
           .then((res) => { 
-            // console.log(res.data.results)
+            console.log(res)
             this.youtubeSrc = res.data.results[0].key
           })
           .catch((err) => {
             console.log(err)
           })
-  },
+        },
+      
 }
 
 </script>
 
 <style>
 #show1 {
-    background-image:
+    /* background-image:
     linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)),
-    url('https://image.tmdb.org/t/p/original/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg');
+    url('https://image.tmdb.org/t/p/original/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg'); */
     width: 100%;
     height: 500px;
     background-size: cover;
