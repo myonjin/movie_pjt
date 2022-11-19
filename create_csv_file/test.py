@@ -13,7 +13,8 @@ import csv
 with open('movielist.csv', 'w', newline='', encoding='utf-8') as csvfile:
     movie_genre = []
     pk = 0
-    for page in ['1', '2', '3', '4', '5']:
+    for page in range(1, 51):
+        page = str(page)
         url = requests.get(f'https://api.themoviedb.org/3/movie/popular?api_key=8513510776c862bf8d57bb36d072f05e&language=ko-KR&page={page}')
         text = url.text
 
@@ -21,23 +22,36 @@ with open('movielist.csv', 'w', newline='', encoding='utf-8') as csvfile:
         data = json.loads(text)
         data = data['results']
 
-        fieldnames = ['id', 'title','adult', 'poster_path','actors','overview','popularity','release_date','vote_average','vote_count']
+        fieldnames = ['id', 'title', 'poster_path', 'backdrop_path', 'actors','overview','popularity','release_date','vote_average','vote_count']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         writer.writeheader()
         for d in data:
-            url2 = requests.get(f"https://api.themoviedb.org/3/movie/{d['id']}/credits?api_key=8513510776c862bf8d57bb36d072f05e&language=ko-KR")
-            text2 = url2.text
-            casts = json.loads(text2)
-            casts = casts['cast']
-            actors = []
-            for gen in d['genre_ids']:
-                pk += 1
-                movie_genre.append([pk, d['id'], gen])
-            for cast in casts:
-                actors.append([cast['id'], cast['name'], cast['profile_path']])
-            writer.writerow({'id': d['id'], 'title': d['title'], 'adult': d['adult'], 'poster_path': d['poster_path'], 'actors':actors, 
-            'overview':d['overview'],'popularity':d['popularity'],'release_date':d['release_date'],'vote_average':d['vote_average'],'vote_count':d['vote_count']})
+            if d['adult'] == False:
+                url2 = requests.get(f"https://api.themoviedb.org/3/movie/{d['id']}/credits?api_key=8513510776c862bf8d57bb36d072f05e&language=ko-KR")
+                text2 = url2.text
+                casts = json.loads(text2)
+                casts = casts['cast']
+                actors = []
+                for gen in d['genre_ids']:
+                    pk += 1
+                    movie_genre.append([pk, d['id'], gen])
+                for cast in casts:
+                    actors.append([cast['id'], cast['name'], cast['profile_path']])
+                writer.writerow(
+                        {
+                            'id': d['id'],
+                            'title': d['title'],
+                            'poster_path': d['poster_path'],
+                            'backdrop_path': d['backdrop_path'],
+                            'actors':actors, 
+                            'overview':d['overview'],
+                            'popularity':d['popularity'],
+                            'release_date':d['release_date'],
+                            'vote_average':d['vote_average'],
+                            'vote_count':d['vote_count']
+                        }
+                    )
 
 
 with open('movie_genres.csv', 'w', newline='') as csvfile:
