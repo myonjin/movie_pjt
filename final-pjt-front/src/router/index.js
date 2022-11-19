@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
 import DetailView from '../views/DetailView.vue'
 import SearchView from '../views/SearchView.vue'
-import LoginView from '../views/LoginView.vue'
+import LoginViewtest from '../views/LoginViewtest.vue'
 
 Vue.use(VueRouter)
 
@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: LoginView
+    component: LoginViewtest
   },
   {
     path: '/home',
