@@ -12,7 +12,7 @@
 
       <!-- <div id="slideShow"> -->
         <!-- <ul class="slides"> -->
-          <li><MovieList/></li>
+          <MovieList/>
         <!-- </ul> -->
         <!-- <p class="controller"> -->
           <!-- &lang: 왼쪽 방향 화살표
@@ -21,7 +21,6 @@
           <!-- <span class="next" @click="nextBtn">&rang;</span> -->
         <!-- </p> -->
       <!-- </div> -->
-
     </div>
 
     <div class="genre_box">
@@ -46,27 +45,9 @@ export default {
   data() {
     return {
       movieList:null,
-      currentIdx: 0,
     }
   },
   methods: {
-    prevBtn() {
-      if (this.currentIdx !== 0) {
-        this.moveSlide(this.currentIdx - 1)
-      }
-    },
-    nextBtn() {
-      const slideImg = document.querySelectorAll('.slides li')
-      const slideCount = slideImg.length
-      if (this.currentIdx !== slideCount - 1) {
-        this.moveSlide(this.currentIdx + 1);
-      }
-    },
-    moveSlide(num) {
-      const slides = document.querySelector('.slides')
-      slides.style.left = -num * 400 + 'px';
-      this.currentIdx = num;
-    }
   }
 }
 </script>
@@ -83,7 +64,7 @@ export default {
 .popular_box{
   position: absolute;
   width: 80%;
-  height: 400px;
+  height: 375px;
   right: 0px;
   bottom: -150px;
 
@@ -110,9 +91,9 @@ export default {
   .genre_box{
     position: absolute;
     width: 80%;
-    height: 300px;
+    height: 420px;
     right: 0px;
-    bottom: -480px;
+    bottom: -600px;
   
     background: rgba(11, 15, 22, 0.47);
     box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
@@ -215,7 +196,8 @@ li{
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden;   
+  overflow: hidden;
+  display: flex;
   /*리스트 형식으로 이미지를 일렬로 
   정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은
   hidden으로 숨겨줘야됨*/
@@ -224,9 +206,11 @@ li{
 
 .slides{
   position: absolute;
+  display: inline-block;
   left: 0;
   top: 0;
-  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  width: 3500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  height: 100%;
   transition: left 0.5s ease-out; 
   /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
 }
@@ -234,13 +218,13 @@ li{
 /* 첫 번째 슬라이드 가운데에 정렬하기위해
 첫번째 슬라이드만 margin-left조정 */
 .slides li:first-child{
-  /* margin-left: 100px; */
+  margin-left: 30px;
 }
 
 /* 슬라이드들 옆으로 정렬 */
 .slides li:not(:last-child){
   float: left;
-  margin-right: 100px;
+  margin-right: 10px;
 }
 
 .slides li{
@@ -250,7 +234,7 @@ li{
 .controller span{
   position:absolute;
   background-color: transparent;
-  color: black;
+  color: rgb(226, 226, 226);
   text-align: center;
   border-radius: 50%;
   padding: 10px 20px;
@@ -261,7 +245,7 @@ li{
 
 /* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
 .controller span:hover{
-  background-color: rgba(128, 128, 128, 0.11);
+  background-color: rgba(188, 188, 188, 0.11);
 }
 
 .prev{
