@@ -43,14 +43,14 @@ export default {
 
 <style>
  
- @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
-
-@import url('https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap');
-
-body{
-  background: #4d4d4d;
-  margin:0;
-}
+ /* @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
+ 
+ @import url('https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap');
+ 
+ body{
+   background: #4d4d4d;
+   margin:0;
+ }
 
 .bold{
   font-family: 'Montserrat', sans-serif;
@@ -251,5 +251,5 @@ input{
   color:#fff;
   font-size:14px;
   border-radius:25px;
-}
+} */
 </style>
