@@ -15,7 +15,16 @@ export default new Vuex.Store({
   state: {
     articles: [],
     token: null,
-    username: null,
+    user: {
+      id: null,
+      username: null,
+      profile_img_src: null,
+      profile_msg: null,
+      following: null,
+      followers: null,
+      following_count: null,
+      followers_count: null,
+    }
   },
   getters: {
     isLogin(state) {
@@ -31,12 +40,25 @@ export default new Vuex.Store({
       state.token = token
       router.push({ name: 'home' })
     },
-    SAVE_USERNAME(state, username) {
-      state.username = username
+    SAVE_USER_PROFILE(state, user) {
+      const loginUser = {
+        id: user.id,
+        username: user.username,
+        profile_img_src: user.profile_img_src,
+        profile_msg: user.profile_msg,
+        following: user.following,
+        followers: user.followers,
+        following_count: user.following_count,
+        followers_count: user.followers_count,
+      }
+      state.user = loginUser
     },
     DELETE_TOKEN(state) {
       state.token = null
       router.push({ name: 'login' })
+    },
+    UPDATE_FOLLOWING(state, newFollowing) {
+      state.user.following = newFollowing
     }
   },
   actions: {
@@ -57,6 +79,45 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    getMyProfile(context, username) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/api/profile/${username}/`,
+      })
+      .then((res) => {
+        context.commit('SAVE_USER_PROFILE', res.data)
+      })
+    },
+    follow(context, followUserId) {
+      const oldFollowing = context.state.user.following
+      oldFollowing.push(followUserId)
+      context.commit('UPDATE_FOLLOWING', oldFollowing)
+      this.dispatch('updateFollowingDB', oldFollowing)
+    },
+    unFollow(context, UnfollowUserId) {
+      const oldFollowing = context.state.user.following
+      const newFollowing = oldFollowing.filter((exist) => exist!==UnfollowUserId)
+      context.commit('UPDATE_FOLLOWING', newFollowing)
+      this.dispatch('updateFollowingDB', newFollowing)
+    },
+    updateFollowingDB(context, newFollowing) {
+      axios({
+        method: 'put',
+        url: `${API_URL}/accounts/api/updatefollowing/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        },
+        data: {
+          newFollowing: newFollowing,
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    },
     signUp(context, payload) {
       axios({
         method: 'post',
@@ -68,8 +129,8 @@ export default new Vuex.Store({
         }
       })
       .then((res) => {
-        console.log(res);
         context.commit('SAVE_TOKEN', res.data.key)
+        this.dispatch('getMyProfile', payload.username)
       })
       .catch((err) => {
         console.log(err);
@@ -86,8 +147,9 @@ export default new Vuex.Store({
       })
       .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
+        this.dispatch('getMyProfile', payload.username)
       })
-      context.commit('SAVE_USERNAME', payload.username)
+      // context.commit('SAVE_USERNAME', payload.username)
     },
     logOut(context) {
       axios({
