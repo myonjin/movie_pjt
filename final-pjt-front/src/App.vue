@@ -6,13 +6,17 @@
         </a>
         <router-link class="nav_font" :to="{ name: 'home' }">Home</router-link> |
         <router-link class="nav_font" to="/search">Search</router-link> |
-        <router-link class="nav font" :to="{ name: 'profile', params:{ username: this.$store.state.username } }" v-if="isLogin">MY</router-link>
+        <router-link class="nav font" :to="{ name: 'profile', params:{ username: this.$store.state.user.username } }" v-if="isLogin">MY</router-link>
+
+        <router-link class="nav font" :to="{ name: 'community'}">Community</router-link>
+
         <button @click="logOut" v-if="isLogin">LOGOUT</button>
 
       </div>  
     </nav>
-  
-    <router-view/>
+
+    <!-- router params 변경 시 페이지 새로고침 -->
+    <router-view :key="$route.fullPath"/>
 
   </div>
 </template>
