@@ -34,3 +34,23 @@ def follow(request):
         me.following.add(you)
     serializer = UserProfileSerializer(me)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_img(request):
+    src = request.FILES['img-file']
+    User_model = get_user_model()
+    me = User_model.objects.get(id=request.user.id)
+    me.profile_img_src = src
+    me.save()
+    context = {
+        'src': str(me.profile_img_src)
+    }
+    return Response(context)
+
+# @api_view(['GET'])
+# def get_img(request, user_id):
+#     User_model = get_user_model()
+#     me = User_model.objects.get(id=request.user.id)
+#     src = me.profile_img_src
+#     render(request, '')
