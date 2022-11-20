@@ -5,6 +5,9 @@ import DetailView from '../views/DetailView.vue'
 import SearchView from '../views/SearchView.vue'
 import LoginViewtest from '../views/LoginViewtest.vue'
 import ProfileView from '@/views/ProfileView'
+import CommunityView from '../views/CommunityView'
+import CreateView from '../views/CreateView'
+import ArticleDetailView from '../views/ArticleDetailView'
 
 Vue.use(VueRouter)
 
@@ -28,6 +31,20 @@ const routes = [
     path: '/profile/:username',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path:'/community',
+    name: 'community',
+    component: CommunityView
+  },
+  {
+    path:'/create',
+    name: 'create',
+    component: CreateView
+  },
+   { path: '/detail/:id',
+    name: 'articledetail',
+    component: ArticleDetailView
   },
   {
     path: '/:id',

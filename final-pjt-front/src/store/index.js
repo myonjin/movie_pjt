@@ -13,10 +13,13 @@ export default new Vuex.Store({
     createPersistedState()
   ],
   state: {
-    articles: [],
+    articles: [
+
+    ],
     token: null,
     username: null,
   },
+  
   getters: {
     isLogin(state) {
       return state.token ? true : false
@@ -44,9 +47,9 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/articles/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
+        // headers: {
+        //   Authorization: `Token ${context.state.token}`
+        // }
       })
         .then((res) => {
           // console.log(res, context)
@@ -100,7 +103,8 @@ export default new Vuex.Store({
       .then(() => {
         context.commit('DELETE_TOKEN')
       })
-    }
+    },
+
   },
   modules: {
   }
