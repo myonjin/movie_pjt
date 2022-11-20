@@ -72,7 +72,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res, context)
-          // console.log(res.data)
+          console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
         })
         .catch((err) => {
@@ -92,32 +92,32 @@ export default new Vuex.Store({
       const oldFollowing = context.state.user.following
       oldFollowing.push(followUserId)
       context.commit('UPDATE_FOLLOWING', oldFollowing)
-      this.dispatch('updateFollowingDB', oldFollowing)
+      // this.dispatch('updateFollowingDB', oldFollowing)
     },
     unFollow(context, UnfollowUserId) {
       const oldFollowing = context.state.user.following
       const newFollowing = oldFollowing.filter((exist) => exist!==UnfollowUserId)
       context.commit('UPDATE_FOLLOWING', newFollowing)
-      this.dispatch('updateFollowingDB', newFollowing)
+      // this.dispatch('updateFollowingDB', newFollowing)
     },
-    updateFollowingDB(context, newFollowing) {
-      axios({
-        method: 'put',
-        url: `${API_URL}/accounts/api/updatefollowing/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        },
-        data: {
-          newFollowing: newFollowing,
-        }
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    },
+    // updateFollowingDB(context, newFollowing) {
+    //   axios({
+    //     method: 'put',
+    //     url: `${API_URL}/accounts/api/updatefollowing/`,
+    //     headers: {
+    //       Authorization: `Token ${context.state.token}`
+    //     },
+    //     data: {
+    //       newFollowing: newFollowing,
+    //     }
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+    // },
     signUp(context, payload) {
       axios({
         method: 'post',

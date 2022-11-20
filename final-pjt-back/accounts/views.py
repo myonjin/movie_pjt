@@ -24,17 +24,13 @@ def user_like_movies(request, user_id):
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def update_following(request):
-    print('유저는??????')
-    print(request.user.id)
+def follow(request):
     User_model = get_user_model()
     me = User_model.objects.get(id=request.user.id)
-    # serializer = ArticleSerializer(article, data=request.data)
-    #     # 수정은 앞쪽에 인스턴스 들어감 + data=request.data
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data
-    
-    print(request.data['newFollowing'])
-
-    return
+    you = request.data['user_id']
+    if me.following.filter(pk=you).exists():
+        me.following.remove(you)
+    else:
+        me.following.add(you)
+    serializer = UserProfileSerializer(me)
+    return Response(serializer.data)
