@@ -7,5 +7,5 @@ urlpatterns = [
     path('follow/', views.follow),
     path('uploadimg/', views.upload_img),
     # path('getimg/<int:user_id>/', views.get_img),
-
 ]
+
