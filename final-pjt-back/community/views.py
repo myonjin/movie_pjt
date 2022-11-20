@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.http import JsonResponse
 
 # permission Decorators
 # view 함수에 @permission_classes([IsAuthenticated]) 데코레이터 달면
 # 따로 인증 과정 필요함 (== 토큰 확인 == headers에 토큰 넣어서 요청보내야함)
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes 
 from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
@@ -90,11 +91,19 @@ def comment_create(request, article_pk):
 
 @api_view(['POST'])
 def likes(request,article_pk):
+    print(request.user)
+    print(request.user.id)
     article = get_object_or_404(Article, pk=article_pk)
-    if article.like_users.filter(pk=request.user.id).exits():
+    if article.like_users.filter(pk=request.user.pk).exists():
         article.like_users.remove(request.user)
+        is_liked= False
     else:
         article.like_users.add(request.user)
+        is_liked= True
     
-    serializer = ArticleSerializer(article)
-    return Response(serializer.data)
+    data = {
+        'is_liked':is_liked,
+        'liked_count':article.like_users.count()
+
+    }
+    return JsonResponse(data)
