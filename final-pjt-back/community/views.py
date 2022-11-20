@@ -95,6 +95,6 @@ def likes(request,article_pk):
         article.like_users.remove(request.user)
     else:
         article.like_users.add(request.user)
-
+    
     serializer = ArticleSerializer(article)
     return Response(serializer.data)
