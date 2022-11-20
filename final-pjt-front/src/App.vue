@@ -9,6 +9,7 @@
         <router-link class="nav font" :to="{ name: 'profile', params:{ username: this.$store.state.user.username } }" v-if="isLogin">MY</router-link>
 
         <router-link class="nav font" :to="{ name: 'community'}">Community</router-link>
+
         <button @click="logOut" v-if="isLogin">LOGOUT</button>
 
       </div>  

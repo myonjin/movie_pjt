@@ -23,3 +23,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('id', 'username', 'profile_img_src', 'profile_msg', 'following', 'followers', 'following_count' ,'followers_count',)
+
+class UserFollowingUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = '__all__'
