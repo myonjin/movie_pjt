@@ -76,6 +76,7 @@ export default {
         })
           .then((res) => {
           this.movieDetail = res.data
+          console.log(this.movieDetail)
 
           // // console.log(this.movieDetail.actor)
           //   console.log(typeof(this.movieDetail.actor))
