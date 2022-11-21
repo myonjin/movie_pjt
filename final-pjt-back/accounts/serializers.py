@@ -11,7 +11,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 class UserLikeMoviesSerializer(serializers.ModelSerializer):
     movie_set = MovieListSerializer(many=True, read_only=True)
-
+  
     class Meta:
         model = get_user_model()
         fields = ('username', 'movie_set')
@@ -29,3 +29,5 @@ class UserFollowingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = '__all__'
+
+        
