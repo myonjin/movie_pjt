@@ -8,7 +8,7 @@ class UserLikeMoviesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'movie_set')
+        fields = ('username', 'movie_set', 'profile_img_src')
 
 class UserProfileSerializer(serializers.ModelSerializer):
     followers_count = serializers.IntegerField(source='followers.count', read_only=True)

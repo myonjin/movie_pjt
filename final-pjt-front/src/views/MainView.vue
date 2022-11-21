@@ -5,7 +5,7 @@
     <div class="main-image">
       <div class="background-gradation"></div>
     </div>
-    <div style="height:1000px"></div>
+    <div style="height:1300px"></div>
 
 
     <div class="popular_box">
@@ -14,6 +14,10 @@
 
     <div class="genre_box">
       <MovieGenreList/>
+    </div>
+
+    <div class="following-like-movie-box" v-if="this.$store.state.user.following.length>0">
+      <FollowingLikeMovieList/>
     </div>
     
   </div>
@@ -24,12 +28,14 @@
 // import axios from 'axios'
 import MovieList from '@/components/MovieList'
 import MovieGenreList from '@/components/MovieGenreList'
+import FollowingLikeMovieList from '@/components/FollowingLikeMovieList.vue'
 
 export default {
   name: 'MainView',
   components: {
     MovieList,
     MovieGenreList,
+    FollowingLikeMovieList,
   },
   data() {
     return {
@@ -105,7 +111,33 @@ export default {
   
     border-radius: 24px 0px 0px 24px;
     }  
+  .following-like-movie-box{
+  position: absolute;
+  width: 92%;
+  height: 430px;
+  right: 0px;
+  bottom: -1040px;
 
+  background: rgba(11, 15, 22, 0.47);
+  box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12.5px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 24px 0px 0px 24px;
+  }
+  .following-like-movie-text{
+    height: 22px;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 0px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    color: #FFFFFF;
+    }
 .genre_text{
   height: 22px;
   text-align: left;
