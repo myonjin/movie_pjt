@@ -25,7 +25,8 @@ export default new Vuex.Store({
       followers: null,
       following_count: null,
       followers_count: null,
-    }
+    },
+    isLiked:null,
   },
   
   getters: {
