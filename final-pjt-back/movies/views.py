@@ -1,5 +1,6 @@
 import random
 from django.shortcuts import render,get_list_or_404
+from django.contrib.auth import get_user_model
 from .models import Movie, Genre
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated

@@ -6,6 +6,6 @@ urlpatterns = [
     path('likemovies/<int:user_id>/', views.user_like_movies),
     path('follow/', views.follow),
     path('uploadimg/', views.upload_img),
-    # path('getimg/<int:user_id>/', views.get_img),
+    path('userlikemovie/<int:user_id>/', views.user_like_movies),
 ]
 
