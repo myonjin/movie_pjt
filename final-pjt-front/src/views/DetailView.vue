@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
+    
     <div id='show1' >
       <br>
       <div class="mt-5 " style="width:40%">
@@ -17,6 +18,7 @@
         <button class="grayBtn">MY LIST</button>
       </div>
     </div>
+    
     <div class="actor_box">
       <p class="popular_text">배우 목록</p>
       
@@ -25,9 +27,31 @@
           v-for="actor in actor_list" :key="actor.id" :actor="actor"
         />
       </div>
+      
     </div>
     <p>{{movieDetail}}</p>
-    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     <div>
       <p class="popular_text">비슷한 영화</p>
       
@@ -64,6 +88,7 @@ export default {
   methods:{
     youtubeFullScreen(url){
     window.open(url,"","fullscreen,scrollbars")
+    
 }
   }
   ,
@@ -76,7 +101,7 @@ export default {
         })
           .then((res) => {
           this.movieDetail = res.data
-
+          console.log(res.data)
           // // console.log(this.movieDetail.actor)
           //   console.log(typeof(this.movieDetail.actor))
           //   const json = `[1083010,LetitiaWright,/i6fbYNn5jWA6swWtaqgzaj02RMc.jpg]`
