@@ -1,4 +1,5 @@
 import random
+from rest_framework import status
 from django.shortcuts import render,get_list_or_404
 # from .models import Movie, Genre
 from django.contrib.auth import get_user_model
@@ -73,6 +74,6 @@ def following_like_movies(request, user_id):
     random.shuffle(following)
     for f_user in following:
         if len(f_user.movie_set.all()) > 0:
-            break
-    serializer = UserLikeMoviesSerializer(f_user)
-    return Response(serializer.data)
+            serializer = UserLikeMoviesSerializer(f_user)
+            return Response(serializer.data)
+    return Response(status=status.HTTP_204_NO_CONTENT)

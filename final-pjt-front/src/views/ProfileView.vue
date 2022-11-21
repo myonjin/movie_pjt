@@ -28,9 +28,7 @@
       </div>
     </div>
 
-    <div style="height:450px; position:relative;">
-      <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-    </div>
+    <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
 
   </div>
 </template>

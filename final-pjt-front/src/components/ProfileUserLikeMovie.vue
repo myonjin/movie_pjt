@@ -1,5 +1,5 @@
 <template>
-  <div style="height:450px; position:relative;">
+  <div style="height:450px; position:relative;" v-if="movieList.length>0">
     <div class="profile-user-like-movie-box">
       <div class="d-flex flex-column" style="height:100%; position:relative;">
         <p class="profile-user-like-movie-text">{{ username }}님이 좋아하는 영화</p>
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       username: null,
-      movieList: null,
+      movieList: [],
       currentIdx: 0,
     }
   },
