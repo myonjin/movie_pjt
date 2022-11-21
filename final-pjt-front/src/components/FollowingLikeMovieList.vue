@@ -2,7 +2,7 @@
   <div class="d-flex flex-column" style="height:100%; position:relative;">
     <div class="d-flex align-items-center" style="margin-bottom: 15px;">
       <img class="follow-user-image" :src="`http://127.0.0.1:8000${profileImg}`" alt="">
-      <p class="following-like-movie-text"><span>{{ followUsername }}</span>님이 좋아하는 영화입니다.</p>
+      <p class="following-like-movie-text"><span>{{ followUsername }} </span>님이 좋아하는 영화입니다.</p>
     </div>
     <div id="slideShow">
       <ul class="slides" id="slides-follow-like-movie">
@@ -73,7 +73,9 @@ export default {
       this.followUsername = res.data.username
       this.movieList = res.data.movie_set
       console.log(res.data.profile_img_src);
-      this.profileImg = res.data.profile_img_src
+      if (res.data.profile_img_src !== null) {
+        this.profileImg = res.data.profile_img_src
+      }
     })
   }
 }
