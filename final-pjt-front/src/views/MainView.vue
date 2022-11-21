@@ -138,6 +138,11 @@ export default {
     /* identical to box height */
     color: #FFFFFF;
     }
+  
+    .following-like-movie-text span {
+      color:#FF9999;
+      font-size: 30px;
+    }
 .genre_text{
   height: 22px;
   text-align: left;
