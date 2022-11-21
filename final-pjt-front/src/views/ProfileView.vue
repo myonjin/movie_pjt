@@ -28,9 +28,7 @@
       </div>
     </div>
 
-    <div style="height:450px; position:relative;">
-      <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-    </div>
+    <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
 
   </div>
 </template>
@@ -155,7 +153,7 @@ export default {
 }
 
 .profile-username {
-  font-family: 'Roboto';
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 64px;
@@ -194,7 +192,7 @@ export default {
   font-style: normal;
   font-weight: 600;
   font-size: 50px;
-  line-height: 25px;
+  line-height: 36px;
   text-align: center;
 
   color: #FFFFFF;

@@ -1,26 +1,28 @@
 <template>
-  <div class="d-flex flex-column" style="height:100%; position:relative;">
-    <div class="d-flex align-items-center" style="margin-bottom: 15px;">
-      <img class="follow-user-image" :src="`http://127.0.0.1:8000${profileImg}`" alt="">
-      <p class="following-like-movie-text"><span>{{ followUsername }} </span>님이 좋아하는 영화입니다.</p>
+  <div class="following-like-movie-box" v-if="movieList.length>0">
+    <div class="d-flex flex-column" style="height:100%; position:relative;">
+      <div class="d-flex align-items-center" style="margin-bottom: 15px;">
+        <img @click="goProfile(followUsername)" class="follow-user-image" :src="`http://127.0.0.1:8000${profileImg}`" onerror="this.src='http://127.0.0.1:8000/media/users/default.png'">
+        <p class="following-like-movie-text"><span @click="goProfile(followUsername)">{{ followUsername }} </span>님이 좋아하는 영화입니다.</p>
+      </div>
+      <div id="slideShow">
+        <ul class="slides" id="slides-follow-like-movie">
+          <li v-for="movie in movieList" :key="movie.id">
+            <MovieListItem 
+              :movie="movie"
+            />
+          </li>  
+        </ul>
+      <!-- </div> -->
+      </div>
+      <p class="controller">
+        <!-- &lang: 왼쪽 방향 화살표
+        &rang: 오른쪽 방향 화살표 -->
+        <span class="prev" @click="prevBtn">&lang;</span>  
+        <span class="next" @click="nextBtn">&rang;</span>
+      </p>
+    
     </div>
-    <div id="slideShow">
-      <ul class="slides" id="slides-follow-like-movie">
-        <li v-for="movie in movieList" :key="movie.id">
-          <MovieListItem 
-            :movie="movie"
-          />
-        </li>  
-      </ul>
-    <!-- </div> -->
-    </div>
-    <p class="controller">
-      <!-- &lang: 왼쪽 방향 화살표
-      &rang: 오른쪽 방향 화살표 -->
-      <span class="prev" @click="prevBtn">&lang;</span>  
-      <span class="next" @click="nextBtn">&rang;</span>
-    </p>
-  
   </div>
   
 </template>
@@ -44,6 +46,9 @@ export default {
     }
   },
   methods: {
+    goProfile(followUsername) {
+      this.$router.push({name:'profile', params:{username : followUsername}})
+    },
     prevBtn() {
       if (this.currentIdx !== 0) {
         this.moveSlide(this.currentIdx - 1)
@@ -67,10 +72,12 @@ export default {
         url: `http://127.0.0.1:8000/accounts/api/followinglikemovie/${this.$store.state.user.id}/`
       })
       .then((res) => {
-        this.followUsername = res.data.username
-        this.movieList = res.data.movie_set
-        if (res.data.profile_img_src !== null) {
-          this.profileImg = res.data.profile_img_src
+        if (res.data !== '') {
+          this.followUsername = res.data.username
+          this.movieList = res.data.movie_set
+          if (res.data.profile_img_src !== null) {
+            this.profileImg = res.data.profile_img_src
+        }
         }
       })
     },

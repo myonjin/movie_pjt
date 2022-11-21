@@ -16,9 +16,7 @@
       <MovieGenreList/>
     </div>
 
-    <div class="following-like-movie-box" v-if="this.$store.state.user.following.length>0">
-      <FollowingLikeMovieList/>
-    </div>
+    <FollowingLikeMovieList v-if="this.$store.state.user.following.length>0"/>
     
   </div>
 
