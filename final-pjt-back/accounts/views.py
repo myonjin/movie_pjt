@@ -77,3 +77,18 @@ def following_like_movies(request, user_id):
             serializer = UserLikeMoviesSerializer(f_user)
             return Response(serializer.data)
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+# import unittest
+# from hglpkg import hangulutils as hu
+
+# case = '문자열입니다.'
+# a = hu.splitstring(case)
+# print(a)
+
+# def search_movies(request):
+#     key = request.data.key
+#     movie 다 불러와서 초성 단위로 쪼개서
+#     request.data.key도 초성 단위로 쪼개서
+#     key 길이만큼 movie 제목 짤라서  일치하는ㅈ ㅣ보고
+#     true면 반환 ? list에 push해서 따로 저장했다가 반환?
+# https://github.com/mohenjo/PyHangulUtils
