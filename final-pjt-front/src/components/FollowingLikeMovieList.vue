@@ -27,7 +27,7 @@
 
 <script>
 import axios from 'axios'
-import _ from 'lodash'
+// import _ from 'lodash'
 import MovieListItem from './MovieListItem.vue'
 
 export default {
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       followUsername: null,
-      movieList: null,
+      movieList: [],
       profileImg: '/media/users/default.png',
       currentIdx: 0,
     }
@@ -60,23 +60,23 @@ export default {
       const slides = document.querySelector('#slides-follow-like-movie')
       slides.style.left = -num * 800 + 'px';
       this.currentIdx = num;
-    }
+    },
+    getFollowingMovieList() {
+      axios({
+        methods: 'get',
+        url: `http://127.0.0.1:8000/accounts/api/followinglikemovie/${this.$store.state.user.id}/`
+      })
+      .then((res) => {
+        this.followUsername = res.data.username
+        this.movieList = res.data.movie_set
+        if (res.data.profile_img_src !== null) {
+          this.profileImg = res.data.profile_img_src
+        }
+      })
+    },
   },
   created() {
-    const userId = _.sample(this.$store.state.user.following);
-    console.log(userId);
-    axios({
-      methods: 'get',
-      url: `http://127.0.0.1:8000/accounts/api/userlikemovie/${userId}/`
-    })
-    .then((res) => {
-      this.followUsername = res.data.username
-      this.movieList = res.data.movie_set
-      console.log(res.data.profile_img_src);
-      if (res.data.profile_img_src !== null) {
-        this.profileImg = res.data.profile_img_src
-      }
-    })
+    this.getFollowingMovieList()
   }
 }
 </script>
