@@ -80,7 +80,7 @@ export default {
   .genre_box{
     position: absolute;
     width: 92%;
-    height: 420px;
+    height: 428px;
     right: 0px;
     bottom: -600px;
   

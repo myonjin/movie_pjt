@@ -1,7 +1,10 @@
 import random
 from django.shortcuts import render,get_list_or_404
 from .models import Movie, Genre
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 from .serializers import MovieListSerializer, MovieDetailSerializer
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Create your views here.
@@ -79,3 +82,19 @@ def detail_movie(request, movie_id):
 # })
 
 # 장르 여러개 배열에 담은 다음에 join 으로 id:32,23,13 이런 형태로 보내주기
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def movie_like(request):
+    user_id = request.user.id
+    movie = Movie.objects.get(id=request.data['movie_id'])
+    if movie.like_users.filter(pk=user_id).exists():
+        movie.like_users.remove(user_id)
+        is_liked = False
+    else:
+        movie.like_users.add(user_id)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context, status=status.HTTP_201_CREATED)
