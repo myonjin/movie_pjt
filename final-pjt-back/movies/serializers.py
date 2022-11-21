@@ -34,7 +34,8 @@ class MovieDetailSerializer(serializers.ModelSerializer):
             fields = ('id', 'username', 'profile_img_src')    
 
     genre = GenreNameSerializer(many=True)
-    reviews = ReviewSerializer(serializers.ModelSerializer)
+    reviews = ReviewSerializer(serializers.ModelSerializer,many=True)
+
     user = UserSerializer(read_only=True)
     liked_count = serializers.IntegerField(source="like_users.count",read_only=True)
     class Meta:
