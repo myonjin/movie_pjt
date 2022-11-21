@@ -1,24 +1,26 @@
 <template>
-  <div class="genre_box">
-    <div class="d-flex flex-column" style="height:100%; position:relative;">
-      <p class="profile-user-like-movie-text">{{ username }}님이 좋아하는 영화</p>
-      <div id="slideShow">
-      <ul class="slides" id="slides-profile-like-movie">
-        <li v-for="movie in movieList" :key="movie.id">
-          <MovieListItem 
-            :movie="movie"
-            />
-        </li>  
-      </ul>
+  <div style="height:450px; position:relative;">
+    <div class="profile-user-like-movie-box">
+      <div class="d-flex flex-column" style="height:100%; position:relative;">
+        <p class="profile-user-like-movie-text">{{ username }}님이 좋아하는 영화</p>
+        <div id="slideShow">
+        <ul class="slides" id="slides-profile-like-movie">
+          <li v-for="movie in movieList" :key="movie.id">
+            <MovieListItem 
+              :movie="movie"
+              />
+          </li>  
+        </ul>
+      </div>
+      <p class="controller">
+        <!-- &lang: 왼쪽 방향 화살표
+        &rang: 오른쪽 방향 화살표 -->
+        <span class="prev" @click="prevBtn">&lang;</span>  
+        <span class="next" @click="nextBtn">&rang;</span>
+      </p>
+      </div>
+  
     </div>
-    <p class="controller">
-      <!-- &lang: 왼쪽 방향 화살표
-      &rang: 오른쪽 방향 화살표 -->
-      <span class="prev" @click="prevBtn">&lang;</span>  
-      <span class="next" @click="nextBtn">&rang;</span>
-    </p>
-    </div>
-
   </div>
 </template>
 
@@ -75,7 +77,7 @@ export default {
 </script>
 
 <style>
-  .genre_box{
+  .profile-user-like-movie-box{
     position: absolute;
     width: 92%;
     height: 428px;
