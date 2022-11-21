@@ -6,6 +6,7 @@
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
+    <button @click="likebtn"></button>
   </div>
 </template>
 
@@ -16,7 +17,8 @@ export default {
   name:'ArticleDetailView',
   data(){
     return{
-        article:null
+        article:null,
+        isLiked:false
     }
   },
   created(){
