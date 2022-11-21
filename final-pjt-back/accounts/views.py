@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render,get_list_or_404
 # from .models import Movie, Genre
 from django.contrib.auth import get_user_model
@@ -56,8 +57,22 @@ def upload_img(request):
 #     render(request, '')
 
 @api_view(['GET'])
-def user_like_movie(request, user_id):
+def user_like_movies(request, user_id):
     User_model = get_user_model()
     user = User_model.objects.get(pk=user_id)
     serializer = UserLikeMoviesSerializer(user)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def following_like_movies(request, user_id):
+    User_model = get_user_model()
+    me = User_model.objects.get(pk=user_id)
+    following = list(me.following.all())
+    print(following[0].id)
+    random.shuffle(following)
+    for f_user in following:
+        if len(f_user.movie_set.all()) > 0:
+            break
+    serializer = UserLikeMoviesSerializer(f_user)
     return Response(serializer.data)

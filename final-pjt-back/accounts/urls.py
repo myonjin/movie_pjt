@@ -7,5 +7,6 @@ urlpatterns = [
     path('follow/', views.follow),
     path('uploadimg/', views.upload_img),
     path('userlikemovie/<int:user_id>/', views.user_like_movies),
+    path('followinglikemovie/<int:user_id>/', views.following_like_movies),
 ]
 
