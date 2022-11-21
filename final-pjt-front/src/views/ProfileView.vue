@@ -28,105 +28,119 @@
       </div>
     </div>
 
+    <div style="height:450px; position:relative;">
+      <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
+    </div>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ProfileUserLikeMovie from '@/components/ProfileUserLikeMovie.vue'
 
 export default {
-  name: 'ProfileView',
-  data() {
-    return {
-      user: null,
-      isFollowing: null,
-      imgFile: null,
-      profileImg: null,
-    }
-  },
-  methods: {
-    // selectFile(file) {
-    //   this.imgFile = file
-    // },
-    fileUpload(e) {
-      let info = new FormData()
-      info.append('img-file', e.target.files[0])
-      axios.post('http://127.0.0.1:8000/accounts/api/uploadimg/', info, {
-        headers: {
-          'Authorization': `Token ${this.$store.state.token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((res) => {
-        const src = res.data.src
-        console.log(src);
-        this.user.profile_img_src = '/media/' + src
-      })
+    name: "ProfileView",
+    conponents: {
+        ProfileUserLikeMovie,
     },
-    follow() {
-      const userId = this.user.id
-      const followersCountTag = document.querySelector('#followers-count')
-      if (this.isFollowing === false) {
-        // 팔로우
-        this.$store.dispatch('follow', userId)
-        this.isFollowing = true
-        followersCountTag.innerText++
-      } else {
-        // 언팔로우
-        this.$store.dispatch('unFollow', userId)
-        this.isFollowing = false
-        followersCountTag.innerText--
-      }
-      this.changeFollowBtn()
-      
-      axios({
-        method: 'put',
-        url: `http://127.0.0.1:8000/accounts/api/follow/`,
-        headers: {
-          Authorization: `Token ${this.$store.state.token}`
+    data() {
+        return {
+            user: null,
+            isFollowing: null,
+            imgFile: null,
+            profileImg: null,
+        };
+    },
+    methods: {
+        // selectFile(file) {
+        //   this.imgFile = file
+        // },
+        fileUpload(e) {
+            let info = new FormData();
+            info.append("img-file", e.target.files[0]);
+            axios.post("http://127.0.0.1:8000/accounts/api/uploadimg/", info, {
+                headers: {
+                    "Authorization": `Token ${this.$store.state.token}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+                .then((res) => {
+                const src = res.data.src;
+                console.log(src);
+                this.user.profile_img_src = "/media/" + src;
+            });
         },
-        data: {
-          user_id: userId,
-        }
-      })
-      .then(() => {
-        this.$store.dispatch('getMyProfile', this.$store.state.user.username)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+        follow() {
+            const userId = this.user.id;
+            const followersCountTag = document.querySelector("#followers-count");
+            if (this.isFollowing === false) {
+                // 팔로우
+                this.$store.dispatch("follow", userId);
+                this.isFollowing = true;
+                followersCountTag.innerText++;
+            }
+            else {
+                // 언팔로우
+                this.$store.dispatch("unFollow", userId);
+                this.isFollowing = false;
+                followersCountTag.innerText--;
+            }
+            this.changeFollowBtn();
+            axios({
+                method: "put",
+                url: `http://127.0.0.1:8000/accounts/api/follow/`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`
+                },
+                data: {
+                    user_id: userId,
+                }
+            })
+                .then(() => {
+                this.$store.dispatch("getMyProfile", this.$store.state.user.username);
+            })
+                .catch((err) => {
+                console.log(err);
+            });
+        },
+        changeFollowBtn() {
+            const followBtn = document.querySelector("#follow");
+            if (this.isFollowing === true) {
+                followBtn.innerText = "언팔로우";
+                followBtn.classList = "grayBtn";
+            }
+            else {
+                followBtn.innerText = "팔로우";
+                followBtn.classList = "pinkBtn";
+            }
+        },
     },
-    changeFollowBtn() {
-      const followBtn = document.querySelector('#follow')
-      if (this.isFollowing === true) {
-        followBtn.innerText = '언팔로우'
-        followBtn.classList = 'grayBtn'
-      } else {
-        followBtn.innerText = '팔로우'
-        followBtn.classList = 'pinkBtn'
+    computed: {
+      userId() {
+        return this.user.id
       }
     },
-
-  },
-  created() {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/accounts/api/profile/${this.$route.params.username}/`,
-    })
-    .then((res) => {
-      this.user = res.data
-      const me = this.$store.state.user.id
-      if (this.user.id !== me) {
-        if (this.user.followers.includes(me)) {
-          this.isFollowing = true
-        } else {
-          this.isFollowing = false
-        }
-      this.changeFollowBtn()
-        
-      }
-    })
-  },
+    created() {
+        axios({
+            method: "get",
+            url: `http://127.0.0.1:8000/accounts/api/profile/${this.$route.params.username}/`,
+        })
+            .then((res) => {
+            this.user = res.data;
+            const me = this.$store.state.user.id;
+            if (this.user.id !== me) {
+                if (this.user.followers.includes(me)) {
+                    this.isFollowing = true;
+                }
+                else {
+                    this.isFollowing = false;
+                }
+                this.changeFollowBtn();
+            }
+        });
+    },
+    components: { ProfileUserLikeMovie }
 }
 </script>
 

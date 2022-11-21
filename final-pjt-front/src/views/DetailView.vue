@@ -101,7 +101,6 @@ export default {
         })
           .then((res) => {
           this.movieDetail = res.data
-          console.log(res.data)
           // // console.log(this.movieDetail.actor)
           //   console.log(typeof(this.movieDetail.actor))
           //   const json = `[1083010,LetitiaWright,/i6fbYNn5jWA6swWtaqgzaj02RMc.jpg]`

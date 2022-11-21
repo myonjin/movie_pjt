@@ -1,17 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from movies.models import Movie
+from movies.serializers import MovieListSerializer
 
-class MovieListSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Movie
-        fields = ('id','genre','title','poster_path','popularity','release_date',
-                    'vote_average','vote_count')
 
 class UserLikeMoviesSerializer(serializers.ModelSerializer):
     movie_set = MovieListSerializer(many=True, read_only=True)
-  
+
     class Meta:
         model = get_user_model()
         fields = ('username', 'movie_set')
@@ -29,5 +23,3 @@ class UserFollowingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = '__all__'
-
-        

@@ -54,3 +54,10 @@ def upload_img(request):
 #     me = User_model.objects.get(id=request.user.id)
 #     src = me.profile_img_src
 #     render(request, '')
+
+@api_view(['GET'])
+def user_like_movie(request, user_id):
+    User_model = get_user_model()
+    user = User_model.objects.get(pk=user_id)
+    serializer = UserLikeMoviesSerializer(user)
+    return Response(serializer.data)
