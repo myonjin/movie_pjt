@@ -15,6 +15,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         class Meta:
             model = Genre
             fields = '__all__'
+    genre = GenreNameSerializer(many=True)
 
     # liked_user_set =
     class Meta:
