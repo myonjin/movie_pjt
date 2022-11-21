@@ -165,16 +165,18 @@ export default {
         url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=6aff6c96fa8121c83d1a49c01d1407b3&language=ko-KR`,
         })
           .then((res) => { 
-            console.log(res)
-            this.youtubeSrc = res.data.results[0].key
-          })
+            if (res.data.results[0]){
+              this.youtubeSrc = res.data.results[0].key
+            } else {
+              this.youtubeSrc = ''
+            
+          }})
           .catch((err) => {
             console.log(err)
           })
         },
       
 }
-
 </script>
 
 <style>
