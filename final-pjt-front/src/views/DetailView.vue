@@ -140,7 +140,7 @@ methods:{
   reviewCreate(){
     // const array1=["1","2","3","4","5"]
     // console.log(this.reviewScore)
-    if (5>=Number(this.reviewScore)>=0){
+    if (5>=Number(this.reviewScore) && Number(this.reviewScore)>=1){
       console.log(Number(this.reviewScore))
       console.log('참')
       axios({
