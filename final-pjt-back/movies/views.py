@@ -1,10 +1,10 @@
 import random
 from django.shortcuts import render,get_list_or_404
 from django.contrib.auth import get_user_model
-from .models import Movie, Genre
+from .models import Movie, Genre, Review
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .serializers import MovieListSerializer, MovieDetailSerializer
+from .serializers import MovieListSerializer, MovieDetailSerializer,ReviewSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -99,3 +99,32 @@ def movie_like(request):
         'is_liked': is_liked,
     }
     return Response(context, status=status.HTTP_201_CREATED)
+
+@api_view(['POST','DELETE'])
+def review_movie(request,movie_id):
+    if request.method == 'POST':
+        movie = Movie.objects.get(pk=movie_id)
+        # review = movie.reviews
+        # review = Review.objects.get(user_id=request.user.id)
+        # print(review)
+        # print(request.data)
+        # print(request.user.id)
+        # print(movie)
+        
+        # 같은 값이 있다
+        if movie.reviews.filter(user_id=request.user.id).exists():
+            review = Review.objects.get(user_id=request.user.id) 
+            serializer = ReviewSerializer(review, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # 같은 값이 없을때   
+        else:
+            serializer = ReviewSerializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(movie=movie, user=request.user)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'DELETE':
+        review = Review.objects.get(pk=1)
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

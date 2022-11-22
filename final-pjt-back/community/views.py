@@ -89,14 +89,12 @@ def comment_create(request, article_pk):
         serializer.save(article=article, user=request.user)
         # serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-         
-
+        
 
 @api_view(['POST'])
 def likes(request,article_pk):
-    print(request.user)
-    print(request.user.id)
+    # print(request.user)
+    # print(request.user.id)
     article = get_object_or_404(Article, pk=article_pk)
     if article.like_users.filter(pk=request.user.pk).exists():
         article.like_users.remove(request.user)

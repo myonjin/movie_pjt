@@ -7,8 +7,6 @@
     <!-- <p :to="{name:'articledetail', params:{id:article.id}}" class="ms-3">{{article.title}}</p> -->
     <!-- <p class="ms-3">{{article.content}}</p> 클릭 매서드를 이용하여서 
     this.$router.push({name:'articledetail', params:{id:article.id}})-->
-   
-    
   </div>
 </template>
 

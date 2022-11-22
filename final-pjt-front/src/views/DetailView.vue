@@ -30,33 +30,25 @@
       
     </div>
     <p>{{movieDetail}}</p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    
+  <div  class="review-box">
+    <div>
+      <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
+      />
+      <h1>작성된 리뷰가 없어요!!</h1>
+    </div>
+    <div>
+      <input v-model.trim="reviewContent" placeholder="내용">
+      <input v-model.trim="reviewScore" placeholder="평점">
+      <button @click="reviewCreate">생성</button>
     </div>
   </div>
-</div>
+
     <div>
       <p class="popular_text">비슷한 영화</p>
       
       <div class="d-flex flex-row">
-        <movieSimilarListItem 
+        <MovieSimilarListItem 
           v-for="similar in movieSimilar" :key="similar.id" :similar="similar"
         />
       </div>
@@ -69,13 +61,16 @@
 import axios from 'axios'
 import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
 import MovieActorItem from '@/components/MovieActorItem.vue'
+import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
+
 
 export default {
   name:'DetailView',
   components: {
     MovieSimilarListItem,
     MovieActorItem,
-  },
+    MovieReviewListItem
+},
   data(){
     return {
       movieId: this.$route.params.id,
@@ -83,24 +78,70 @@ export default {
       movieSimilar: null,
       youtubeSrc:'jD5Yc2qMzBw', //임시로 넣어둠 if 로 방지할수있을듯 (console에러)
       actor_list:null,
+      movieReviewList:null,
+      reviewContent:null,
+      reviewScore:null,
     }
   },
-  methods:{
+methods:{
     youtubeFullScreen(url){
     window.open(url,"","fullscreen,scrollbars")
-    
-}
-  }
-  ,
+  },
+  getReviewList(){
+    axios({
+      method:'get',
+      url:`http://127.0.0.1:8000/movies/detail/${this.movieId}`,
+    })
+    .then((res)=>{
+      this.movieReviewList=res.data.reviews
+    })
+  },
+  reviewCreate(){
+    // const array1=["1","2","3","4","5"]
+    // console.log(this.reviewScore)
+    if (5>=Number(this.reviewScore)>=0){
+      console.log(Number(this.reviewScore))
+      console.log('참')
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/movies/detail/${this.movieId}/review/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        },
+        data:{
+          content:this.reviewContent,
+          score:this.reviewScore,
+        },
+      })
+      .then(()=>{
+        this.getReviewList()
+      })
+      this.reviewContent=null
+      this.reviewScore=null
+    }else{
+      // console.log(22)
+      alert('평점은 1~5사이숫자만가능^^')
+      this.reviewContent=null
+      this.reviewScore=null
+    }
+  } 
+    ,
+  },
+  computed:{
+    movieReviewListc() {
+      this.movieReviewList
+      return this.movieReviewList
+    },
+  },
   created(){
-    
-
     axios({
         method: 'get',
         url: `http://127.0.0.1:8000/movies/detail/${this.movieId}`,
         })
           .then((res) => {
           this.movieDetail = res.data
+          this.movieReviewList = this.movieDetail.reviews
+          // console.log(this.movieReviewList)
           // // console.log(this.movieDetail.actor)
           //   console.log(typeof(this.movieDetail.actor))
           //   const json = `[1083010,LetitiaWright,/i6fbYNn5jWA6swWtaqgzaj02RMc.jpg]`
@@ -165,16 +206,19 @@ export default {
         url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=6aff6c96fa8121c83d1a49c01d1407b3&language=ko-KR`,
         })
           .then((res) => { 
-            console.log(res)
-            this.youtubeSrc = res.data.results[0].key
-          })
+            if (res.data.results[0]){
+              this.youtubeSrc = res.data.results[0].key
+            } else {
+              this.youtubeSrc = ''
+            
+          }})
           .catch((err) => {
             console.log(err)
           })
         },
+
       
 }
-
 </script>
 
 <style>
@@ -197,6 +241,24 @@ line-height: 20px;
 
 color: #FFFFFF;
 }
+h2{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+color: #FFFFFF;
+}
+h3{
+  
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+color: #FFFFFF;
+
+}
 p {
   font-family: 'Montserrat';
 font-style: normal;
@@ -213,5 +275,17 @@ color: #FFFFFF;
         font-size: 18px;
         line-height: 22px;color: #FF2E00;
 }
+.review-box{
+    width: 90%;
+    right: 0px;
+    bottom: 0px;
+  
+    background: rgba(11, 15, 22, 0.47);
+    box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12.5px);
+    /* Note: backdrop-filter has minimal browser support */
+  
+    border-radius: 24px 0px 0px 24px;
+    }  
 
 </style>
