@@ -8,7 +8,7 @@
       <iframe
       id="ytplayer"
       width="80%"
-      height="657px"
+      height="653px"
       align="right"
       type="text/html"
       allowfullscreen=""
@@ -20,7 +20,7 @@
   
       <!-- 영화 정보 box -->
       <div class="movie-detail-box">
-        <p class="release" style="font-size: 20px; font-weight: 700; line-height: 27px;" v-if="movieDetail?.release_date!==null">{{movieDetail?.release_date.slice(0, 4)}}</p>
+        <p class="release" style="font-size: 20px; font-weight: 700; line-height: 27px;" v-if="movieDetail?.release_date!==null">{{movieDetail?.release_date?.slice(0, 4)}}</p>
         <h1 class="movie-detail-box-h1">{{ movieDetail?.title }}</h1>
         <p class="movie-detail-box-p">{{ movieDetail?.overview }}</p>
         <p class="movie-detail-box-genre">GENRES</p>
@@ -30,13 +30,13 @@
         <!-- 평점 및 개봉년도 -->
         <div class="d-flex" style="margin-bottom: 30px;">
           <img src="../assets/imdb_logo.png" class="me-2" style="width: 54px; height: 27px;">
-          <p class="vote me-3" style="font-size: 20px; font-weight: 700; line-height: 27px;">{{ movieDetail?.vote_average.toFixed(1)}}</p>
+          <p class="vote me-3" style="font-size: 20px; font-weight: 700; line-height: 27px;">{{ movieDetail?.vote_average?.toFixed(1)}}</p>
         </div>
         <!-- 버튼 box -->
-        <div class="d-felx flex-row" style="margin-bottom: 90px;">
+        <div class="d-felx flex-row align-items-center" style="margin-bottom: 90px; height:54.5px; position:relative;">
           <!-- <button class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">Trailler  ▶</button> -->
-          <button id="ytplaybtn" v-if="youtubeSrc!==null" class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubePlay()">Trailer  ▶</button>
-          <button class="grayBtn" style="width: 158px; height: 50px;">좋아요</button>
+          <button id="ytplaybtn" v-if="youtubeSrc!==null" class="pinkBtn" style="width: 158px; height: 54.5px; font-size: 20px; position:absolute; top:0px; left:0px;" @click="youtubePlay()">Trailer  ▶</button>
+          <button id="detaillikebtn" @click="likeMovie" class="like-btn" style="font-size: 35px; margin:auto; position:absolute; top:0px; left:170px;">❤</button>
         </div>
         <!-- 리뷰 box -->
         <div style="height:500px;">
@@ -54,8 +54,8 @@
             </div>
 
             <div>
-              <input class="review-input" v-model.trim="reviewContent" placeholder="한줄평을 입력해주세요!">
-              <button class="review-btn" @click="reviewCreate">생성</button>
+              <input class="review-input" v-model.trim="reviewContent" placeholder="이 영화의 한줄평을 입력해주세요!">
+              <button id="reviewbtn" class="review-btn" @click="reviewCreate">생성</button>
             </div>
 
           </div>
@@ -65,11 +65,9 @@
             <!-- <h1>작성된 리뷰가 없어요!!</h1> -->
           </div>
         </div>
-        
       </div>
-
     </div>
-
+    <!-- 출연진 정보 -->
     <div class="actor_box">
       <p class="popular_text">CAST</p>
       
@@ -80,25 +78,26 @@
       </div>
       
     </div>
-   
-  
-
-    <!-- <div>
-      <p class="popular_text">비슷한 영화</p>
+    <!-- 비슷한 영화 -->
+    <div class="similar_box">
+      <p class="popular_text">SIMILAR MOVIES</p>
       
       <div class="d-flex flex-row">
         <MovieSimilarListItem 
           v-for="similar in movieSimilar" :key="similar.id" :similar="similar"
         />
       </div>
-    </div> -->
+    </div>
+   
+  
+
     
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
+import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
 import MovieActorItem from '@/components/MovieActorItem.vue'
 import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
 
@@ -106,7 +105,7 @@ import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
 export default {
   name:'DetailView',
   components: {
-    // MovieSimilarListItem,
+    MovieSimilarListItem,
     MovieActorItem,
     MovieReviewListItem
 },
@@ -121,9 +120,25 @@ export default {
       reviewContent:null,
       reviewScore:0,
       isYtPlaying: 0,
+      isLiked: null,
     }
   },
 methods:{
+  likeMovie() {
+    axios({
+      method: 'put',
+      url: `http://127.0.0.1:8000/movies/like/`,
+      headers: {
+        Authorization: `Token ${this.$store.state.token}`
+      },
+      data: {
+        movie_id: this.movieDetail.id,
+      }
+    })
+    .then((res) => {
+      this.isLiked = res.data['is_liked']
+    })
+  },
   drawStar(e) {
     const starTag = document.querySelector(`.star span`)
     starTag.style.width = `${e.target.value * 10}%`;
@@ -152,7 +167,8 @@ methods:{
       url:`http://127.0.0.1:8000/movies/detail/${this.movieId}`,
     })
     .then((res)=>{
-      this.movieReviewList=res.data.reviews
+      this.movieReviewList = res.data.reviews
+
     })
   },
   reviewCreate(){
@@ -183,7 +199,23 @@ methods:{
       this.reviewScore=null
     }
   } 
-    ,
+  },
+  watch: {
+    movieReviewList() {
+      const isMyRiviewExist = this.movieReviewList.some((review) => review.user.id === this.$store.state.user.id)
+      if (isMyRiviewExist) {
+        const reviewBtn = document.querySelector('#reviewbtn')
+        reviewBtn.innerText = '수정'
+      }
+    },
+    isLiked() {
+      const likeBtn = document.querySelectorAll(`#detaillikebtn`)
+      if (this.isLiked === true) {
+        likeBtn.forEach((tag) => tag.style.color = 'red')
+      } else {
+        likeBtn.forEach((tag) => tag.style.color = 'white')
+      }
+    }
   },
   computed:{
     movieReviewListc() {
@@ -199,20 +231,12 @@ methods:{
           .then((res) => {
           this.movieDetail = res.data
           this.movieReviewList = this.movieDetail.reviews
-          // console.log(this.movieReviewList)
-          // // console.log(this.movieDetail.actor)
-          //   console.log(typeof(this.movieDetail.actor))
-          //   const json = `[1083010,LetitiaWright,/i6fbYNn5jWA6swWtaqgzaj02RMc.jpg]`
-          //   // const json = this.movieDetail.actor
-          //   const obj = JSON.parse((json));
-            // console.log(obj);
             let movies = this.movieDetail.actor
             let cnt = 0
             movies=movies.split(",")
             var actor_list=new Array()
             var actor_index=new Array()
             for (let ac of movies){
-              // console.log(ac);
               ac=ac.trim()              
               ac=ac.replace(/\[/,"")
               ac=ac.replace(/"/g,"")
@@ -231,14 +255,17 @@ methods:{
                 actor_index.push(ac)
               }
             }
-            // console.log(actor_list)
             this.actor_list=actor_list
-            // console.log(movies);
           })
           .then(()=>{
-          document.getElementById("show1").style.backgroundImage = 
-          `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)), 
-          url('https://image.tmdb.org/t/p/original${this.movieDetail.backdrop_path}')`;
+            document.getElementById("show1").style.backgroundImage = 
+            `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)), 
+            url('https://image.tmdb.org/t/p/original${this.movieDetail.backdrop_path}')`;
+            if (this.movieDetail.like_users.includes(this.$store.state.user.id)) {
+              this.isLiked = true
+            } else {
+              this.isLiked = false
+            }
           })
           .catch((err) => {
             console.log(err)
@@ -266,6 +293,9 @@ methods:{
           .then((res) => { 
             if (res.data.results[0]){
               this.youtubeSrc = res.data.results[0].key
+            } else {
+              const likeBtn = document.querySelector('#detaillikebtn')
+              likeBtn.style.left = '0px'
             }})
           .catch((err) => {
             console.log(err)
@@ -300,7 +330,7 @@ methods:{
   left: 0px;
   top: 0px;
 
-  background: linear-gradient(90deg, #000000 17.76%, rgba(0, 0, 0, 0.687449) 31.44%, rgba(196, 196, 196, 0) 100%) , linear-gradient(
+  background: linear-gradient(90deg, #000000 24.76%, rgba(0, 0, 0, 0.687449) 42.44%, rgba(196, 196, 196, 0) 100%) , linear-gradient(
             to bottom,
             rgb(0, 0, 0, 0) 0%,
             rgba(20, 20, 20, 0.0) 5%,
@@ -322,7 +352,7 @@ methods:{
   font-style: normal;
   font-weight: 600;
   line-height: 50px;
-  font-size: 40px;
+  font-size: 35px;
   margin-bottom: 40px;
   text-align: left;
 
@@ -368,7 +398,7 @@ methods:{
     position: relative;
     font-size: 2rem;
     color: #ddd;
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
   
   .star input {
@@ -389,13 +419,14 @@ methods:{
     pointer-events: none;
   }
   .review-input {
-    width: 80%;
+    width: 85%;
     height: 50px;
     background-color: black;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom : 3px solid white;
+    outline: none;
 
     font-family: 'Montserrat';
     font-style: normal;
@@ -407,12 +438,15 @@ methods:{
     color: #FFFFFF;
     }
   .review-btn {
-    width: 50px;
-    height: 50px;
+    width: 15%;
+    height: 49px;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom : 3px solid white;
+    background-color: black;
+    font-weight: 700;
+    color: #FF9999;
   }
   
 </style>
