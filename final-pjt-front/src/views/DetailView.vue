@@ -16,7 +16,7 @@
         <p class="movie-detail-box-p">{{ movieDetail?.overview }}</p>
         <p class="movie-detail-box-genre">GENRES</p>
         <div class="d-flex flex-row justify-content-left">
-          <p class="me-2 movie-detail-box-p" v-for="(genre,index) in movieDetail.genre" :key="index">{{genre.name}} </p>
+          <p class="me-2 movie-detail-box-p" v-for="(genre,index) in movieDetail.genre" :key="index">#{{genre.name}} </p>
         </div>
         <!-- 평점 및 개봉년도 -->
         <div class="d-flex" style="margin-bottom: 30px;">
@@ -32,16 +32,23 @@
         <div style="height:500px;">
           <h1 class="movie-detail-box-h1">User Review</h1>
           <!-- 별점 box -->
-          <div class="d-flex">
+          <div class="d-flex" style="height:100px;">
             <span class="star">
               ★★★★★
               <span>★★★★★</span>
               <input type="range" @change ="drawStar($event)" v-model="reviewScore" value="1" step="1" min="0" max="10">
             </span>
-            <div>
+
+
+            <input id="input1" type="text" v-model.trim="reviewContent" placeholder="한줄평을 입력해주세요!" />
+            <button id="input2" type="submit" @click="reviewCreate">생성</button>
+
+
+            <!-- <div>
               <input v-model.trim="reviewContent" placeholder="내용">
-            </div>
-            <button @click="reviewCreate">생성</button>
+            </div> -->
+
+            <!-- <button @click="reviewCreate">생성</button> -->
           </div>
           <div>
             <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
@@ -358,5 +365,22 @@ methods:{
     overflow: hidden;
     pointer-events: none;
   }
-
+  #input1 {
+    width: 60px;
+    height: 50px;
+    background-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom : 3px solid white;
+    }
+  #input2 {
+    width: 15px;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom : 3px solid white;
+  }
+  
 </style>
