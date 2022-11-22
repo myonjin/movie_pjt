@@ -1,9 +1,5 @@
 <template>
   <div>
-    <a href="https://front.codes/" class="logo" target="_blank">
-    <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-  </a>
-
   <div class="section">
     <div class="container">
       <div class="row full-height justify-content-center">
@@ -26,8 +22,8 @@
                         <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" v-model="logPassword">
                         <Icon class="input-icon" icon="uil:lock-alt" />
                       </div>
-                      <button class="btn mt-4" @click="logIn">submit</button>
-                                    <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                      <button class="btna mt-4" @click="logIn">submit</button>
+                                   
                         </div>
                       </div>
                     </div>
@@ -47,7 +43,7 @@
                         <input type="password" name="logpassword2" class="form-style" placeholder="Password 확인" id="logpassword2" autocomplete="off" v-model="password2">
                         <Icon class="input-icon" icon="uil:check" />
                       </div>
-                      <button class="btn mt-4" @click="signUp">submit</button>
+                      <button class="btna mt-4" @click="signUp">submit</button>
                         </div>
                       </div>
                     </div>
@@ -146,7 +142,7 @@ a:hover {
   color: #c4c3ca;
 }
 .link:hover {
-  color: #ffeba7;
+  color: #3E3E3E;
 }
 p {
   font-weight: 500;
@@ -154,12 +150,14 @@ p {
   line-height: 1.7;
 }
 h4 {
-  font-weight: 600;
+  font-weight: 800;
+  color: #E8E8E8;
 }
 h6 span{
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
+  color: #E8E8E8;
 }
 .section{
   position: relative;
@@ -185,7 +183,7 @@ h6 span{
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: #3E3E3E;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before{
@@ -194,8 +192,8 @@ h6 span{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #ffeba7;
-  background-color: #102770;
+  color: #3E3E3E;
+  background-color: #FFC0CB;
   font-family: 'unicons';
   content: '\eb4f';
   z-index: 20;
@@ -235,7 +233,7 @@ h6 span{
   width: 100%;
   height: 100%;
   background-color: #2a2b38;
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+  /* background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg'); */
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: 300%;
@@ -306,7 +304,7 @@ h6 span{
   font-size: 24px;
   line-height: 48px;
   text-align: left;
-  color: #ffeba7;
+  color: #FFC0CB;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
@@ -356,7 +354,7 @@ h6 span{
     transition: all 200ms linear;
 }
 
-.btn{  
+.btna{  
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -380,19 +378,19 @@ h6 span{
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #ffeba7;
-  color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+  background-color: #1b1b22;
+  color: #FFC0CB;
+  box-shadow: 0 8px 24px 0 rgba(144, 144, 144, 0);
 }
-.btn:active,
-.btn:focus{  
-  background-color: #102770;
-  color: #ffeba7;
+.btna:active,
+.btna:focus{  
+  background-color: #FFC0CB;
+  color: #1b1b22;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
-.btn:hover{  
-  background-color: #102770;
-  color: #ffeba7;
+.btna:hover{  
+  background-color: #FFC0CB;
+  color: #1b1b22;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 

@@ -208,6 +208,10 @@ export default {
   }
 
 select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
   position: absolute;
   right:40px;
   top: -45px;
@@ -215,7 +219,7 @@ select {
   height: 35px;
 
   background: #5C5C5C;
-  border-radius: 30px;
+  border-radius: 10px;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -226,6 +230,10 @@ select {
 
   color: #FFFFFF;
   letter-spacing:1.5px
+}
+option {
+  background-color: black;
+  font-size: 14px;
 }
 
 li{
