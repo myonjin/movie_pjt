@@ -1,6 +1,6 @@
 <template>
   <div class="artdetailcontent mt-2" style="position:relative; min-width:320px; ">
-    <section class="artdetailsection d-flex flex-column" style="padding: 24px 32px 32px;">
+    <section class="artdetailsection d-flex flex-column community_font" style="padding: 24px 32px 32px;">
       <p>글 번호 : {{ article?.id }}</p>
       <div class="d-flex justify-content-between">
         <p class="ms-5">{{ article?.title }}</p>
@@ -19,10 +19,10 @@
       <!-- <p>{{commentList}}</p> -->
       <div class="d-flex flex-row justify-content-center">
         <Icon class="mt-1" icon="material-symbols:mode-comment-outline" style="color:blanchedalmond"/>
-        <p class="ms-2">{{commentList.length}}</p>
+        <h5 class="ms-2">{{commentList.length}}</h5>
       </div>
       <ArticleCommentListItem v-for="comment in commentList" :key="comment.id" :comment="comment"/>
-      <div>
+      <div class="mt-3">
         <input v-model.trim="commentContent" @keyup.enter="commentCreate">
         <button @click="commentCreate">생성</button>
       </div>

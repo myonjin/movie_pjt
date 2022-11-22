@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div>
-      <p>{{comment.username}}</p>
-      {{comment}}
+  <div class="border mt-3" style="border-radius:15px;">
+    <div class="d-flex justify-content-between">
+      <h5 class="ms-2" style="margin:0.5em">{{comment.content}}</h5>
+      <h5 class="me-2" style="margin:0.5em">{{comment.username}}</h5>
     </div>
-    <p>{{comment.id}} {{comment.content}} 글 작성자 : {{comment.username}} </p>
-  
   </div>
 </template>
 
