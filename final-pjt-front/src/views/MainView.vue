@@ -97,10 +97,10 @@ export default {
     }
   .actor_box{
     position: absolute;
-    width: 90%;
+    width: 55%;
     height: 320px;
     right: 0px;
-    bottom: 0px;
+    top: 650px;
   
     background: rgba(11, 15, 22, 0.47);
     box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);

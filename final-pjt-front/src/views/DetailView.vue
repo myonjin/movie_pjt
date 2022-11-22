@@ -1,50 +1,86 @@
 <template>
-  <div>
+  <div style="position:relative; top:0px; height:2000px;">
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
-    
-    <div id='show1' >
-      <br>
-      <div class="mt-5 " style="width:40%">
-        <h1>{{movieDetail?.title}}</h1>
-        <p>{{movieDetail?.overview}}</p>
-        <p class="genre_red">
-          GENRES</p>
-        <div class="d-flex flex-row justify-content-center">
-          <p class="ms-2" v-for="(genre,index) in movieDetail.genre" :key="index">{{genre.name}} /</p>
+    <div style="height:auto; position: relative; height: 657px;">
+      <div id='show1' >
+      </div>
+      <!-- 배경 그라데이션 -->
+      <div class="movie-detail-top-gradation">
+  
+      </div>
+  
+      <!-- 영화 정보 box -->
+      <div class="movie-detail-box">
+        <p class="release" style="font-size: 20px; font-weight: 700; line-height: 27px;" v-if="movieDetail?.release_date!==null">{{movieDetail?.release_date.slice(0, 4)}}</p>
+        <h1 class="movie-detail-box-h1">{{ movieDetail?.title }}</h1>
+        <p class="movie-detail-box-p">{{ movieDetail?.overview }}</p>
+        <p class="movie-detail-box-genre">GENRES</p>
+        <div class="d-flex flex-row justify-content-left">
+          <p class="me-2 movie-detail-box-p" v-for="(genre,index) in movieDetail.genre" :key="index">{{genre.name}} </p>
+        </div>
+        <!-- 평점 및 개봉년도 -->
+        <div class="d-flex" style="margin-bottom: 30px;">
+          <img src="../assets/imdb_logo.png" class="me-2" style="width: 54px; height: 27px;">
+          <p class="vote me-3" style="font-size: 20px; font-weight: 700; line-height: 27px;">{{ movieDetail?.vote_average.toFixed(1)}}</p>
+        </div>
+        <!-- 버튼 box -->
+        <div class="d-felx flex-row" style="margin-bottom: 50px;">
+          <button class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">WATCH  ▶</button>
+          <button class="grayBtn" style="width: 158px; height: 50px;">좋아요</button>
+        </div>
+        <!-- 리뷰 box -->
+        <div style="height:500px; background-color: white;">
+          <h1>리뷰</h1>
+          <!-- 별점 box -->
+          <div class="d-flex">
+            <span class="star">
+              ★★★★★
+              <span>★★★★★</span>
+              <input type="range" @change ="drawStar($event)" v-model="reviewScore" value="1" step="1" min="0" max="10">
+            </span>
+            <div>
+              <input v-model.trim="reviewContent" placeholder="내용">
+            </div>
+            <button @click="reviewCreate">생성</button>
+          </div>
+          <div>
+            <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
+            />
+            <h1>작성된 리뷰가 없어요!!</h1>
+          </div>
         </div>
       </div>
-      <div style="width:40%">
-        <button class="pinkBtn" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">WATCH</button>
-        <button class="grayBtn">MY LIST</button>
-      </div>
+
     </div>
-    
+
+
+    <!-- <div  class="review-box">
+      <div>
+        <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
+        />
+        <h1>작성된 리뷰가 없어요!!</h1>
+      </div>
+      <div>
+        <input v-model.trim="reviewContent" placeholder="내용">
+        <input v-model.trim="reviewScore" placeholder="평점">
+        <button @click="reviewCreate">생성</button>
+      </div>
+    </div> -->
+
     <div class="actor_box">
       <p class="popular_text">배우 목록</p>
       
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row mt-4">
         <MovieActorItem 
           v-for="actor in actor_list" :key="actor.id" :actor="actor"
         />
       </div>
       
     </div>
-    <p>{{movieDetail}}</p>
-    
-  <div  class="review-box">
-    <div>
-      <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
-      />
-      <h1>작성된 리뷰가 없어요!!</h1>
-    </div>
-    <div>
-      <input v-model.trim="reviewContent" placeholder="내용">
-      <input v-model.trim="reviewScore" placeholder="평점">
-      <button @click="reviewCreate">생성</button>
-    </div>
-  </div>
+   
+  
 
-    <div>
+    <!-- <div>
       <p class="popular_text">비슷한 영화</p>
       
       <div class="d-flex flex-row">
@@ -52,24 +88,24 @@
           v-for="similar in movieSimilar" :key="similar.id" :similar="similar"
         />
       </div>
-    </div>
+    </div> -->
     
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
+// import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
 import MovieActorItem from '@/components/MovieActorItem.vue'
-import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
+// import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
 
 
 export default {
   name:'DetailView',
   components: {
-    MovieSimilarListItem,
+    // MovieSimilarListItem,
     MovieActorItem,
-    MovieReviewListItem
+    // MovieReviewListItem
 },
   data(){
     return {
@@ -84,7 +120,12 @@ export default {
     }
   },
 methods:{
-    youtubeFullScreen(url){
+  drawStar(e) {
+    const starTag = document.querySelector(`.star span`)
+    starTag.style.width = `${e.target.value * 10}%`;
+    console.log(this.reviewScore)
+  },
+  youtubeFullScreen(url){
     window.open(url,"","fullscreen,scrollbars")
   },
   getReviewList(){
@@ -226,54 +267,75 @@ methods:{
     /* background-image:
     linear-gradient(to left, rgba(255, 255, 255, 0), rgba(24, 23, 23, 0.73)),
     url('https://image.tmdb.org/t/p/original/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg'); */
-    width: 100%;
-    height: 500px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin-left: auto;
+    width: 80%;
+    height: 657px;
     background-size: cover;
     color: white;
     padding: 20px;
-}
-h1 {
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 20px;
+ }
+.movie-detail-top-gradation {
+  box-sizing: border-box;
 
-color: #FFFFFF;
+  position: absolute;
+  width: 100%;
+  height: 657px;
+  left: 0px;
+  top: 0px;
+
+  background: linear-gradient(90deg, #000000 17.76%, rgba(0, 0, 0, 0.687449) 31.44%, rgba(196, 196, 196, 0) 100%) , linear-gradient(
+            to bottom,
+            rgb(0, 0, 0, 0) 0%,
+            rgba(20, 20, 20, 0.0) 5%,
+            rgba(20, 20, 20, 0) 50%,
+            rgba(20, 20, 20, 0.4) 90%,
+            rgba(0, 0, 0, 1) 100%
+          );
+  border: 1px solid #000000;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-h2{
-  font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 20px;
-color: #FFFFFF;
+.movie-detail-box {
+  position: absolute;
+  top: 100px;
+  width:35%;
+  margin-left: 70px;
 }
-h3{
-  
+.movie-detail-box-h1 {
   font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 20px;
-color: #FFFFFF;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 50px;
+  font-size: 40px;
+  margin-bottom: 40px;
+  text-align: left;
+
+  color: #FFFFFF;
+}
+.movie-detail-box-p {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: left;
+
+  color: #FFFFFF;
 
 }
-p {
+.movie-detail-box-genre {
   font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  text-align: left;
+  margin-bottom: 0px;
+  margin-top: 30px;
 
-color: #FFFFFF;
-}
-.genre_red{
-  font-family:'Montserrat';   
-        font-style:normal;
-        font-weight:600;
-        font-size: 18px;
-        line-height: 22px;color: #FF2E00;
+  color: #FF2E00;
+
 }
 .review-box{
     width: 90%;
@@ -287,5 +349,29 @@ color: #FFFFFF;
   
     border-radius: 24px 0px 0px 24px;
     }  
+
+  .star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+  }
+  
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
 </style>
