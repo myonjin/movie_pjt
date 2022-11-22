@@ -1,7 +1,7 @@
 <template>
   <div id="community" class="mt-2">
     <div id="comcontent" style="position:relative; background:#101322; max-width: 700px;" >
-      <h1 class="mt-3 mb-3">CommunityView</h1>
+      <h1 class="mt-3 mb-3 community_font">CommunityView</h1>
       <div class="me-5 rounded-pill" style="height:30px; float:right">  
         <router-link :to="{name: 'create'}">
           <h2  style="width:100px" class="nav_font_user rounded-pill bg-secondary">Create</h2>  
@@ -85,8 +85,8 @@ export default {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
+  font-size: 24px;
   text-decoration: none;
-  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   color: #FFFFFF;
@@ -102,5 +102,13 @@ export default {
   background: #FF9999;
   border-radius: 30px;
 }
-
+.community_font{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #FFFFFF;
+}
 </style>

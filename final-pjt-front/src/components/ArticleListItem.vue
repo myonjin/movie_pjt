@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-content-between align-items-center">
-      <h3 style="width:80px;" >{{article.id}}</h3>
+      <h3 class="community_font" style="width:80px;" >{{article.id}}</h3>
       <div style="width:55%">
         <router-link :to="{name:'articledetail', params:{id:article.id}}" class="ms-3">
           <p class="nav_font">{{article.title}}</p>
