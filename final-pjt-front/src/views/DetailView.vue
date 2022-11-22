@@ -24,13 +24,13 @@
           <p class="vote me-3" style="font-size: 20px; font-weight: 700; line-height: 27px;">{{ movieDetail?.vote_average.toFixed(1)}}</p>
         </div>
         <!-- 버튼 box -->
-        <div class="d-felx flex-row" style="margin-bottom: 50px;">
+        <div class="d-felx flex-row" style="margin-bottom: 90px;">
           <button class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">WATCH  ▶</button>
           <button class="grayBtn" style="width: 158px; height: 50px;">좋아요</button>
         </div>
         <!-- 리뷰 box -->
-        <div style="height:500px; background-color: white;">
-          <h1>리뷰</h1>
+        <div style="height:500px;">
+          <h1 class="movie-detail-box-h1">User Review</h1>
           <!-- 별점 box -->
           <div class="d-flex">
             <span class="star">
@@ -46,26 +46,13 @@
           <div>
             <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
             />
-            <h1>작성된 리뷰가 없어요!!</h1>
+            <!-- <h1>작성된 리뷰가 없어요!!</h1> -->
           </div>
         </div>
+        
       </div>
 
     </div>
-
-
-    <!-- <div  class="review-box">
-      <div>
-        <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
-        />
-        <h1>작성된 리뷰가 없어요!!</h1>
-      </div>
-      <div>
-        <input v-model.trim="reviewContent" placeholder="내용">
-        <input v-model.trim="reviewScore" placeholder="평점">
-        <button @click="reviewCreate">생성</button>
-      </div>
-    </div> -->
 
     <div class="actor_box">
       <p class="popular_text">배우 목록</p>
@@ -97,7 +84,7 @@
 import axios from 'axios'
 // import MovieSimilarListItem from '@/components/MovieSimilarListItem.vue'
 import MovieActorItem from '@/components/MovieActorItem.vue'
-// import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
+import MovieReviewListItem from '@/components/MovieReviewListItem.vue'
 
 
 export default {
@@ -105,7 +92,7 @@ export default {
   components: {
     // MovieSimilarListItem,
     MovieActorItem,
-    // MovieReviewListItem
+    MovieReviewListItem
 },
   data(){
     return {
@@ -116,14 +103,13 @@ export default {
       actor_list:null,
       movieReviewList:null,
       reviewContent:null,
-      reviewScore:null,
+      reviewScore:0,
     }
   },
 methods:{
   drawStar(e) {
     const starTag = document.querySelector(`.star span`)
     starTag.style.width = `${e.target.value * 10}%`;
-    console.log(this.reviewScore)
   },
   youtubeFullScreen(url){
     window.open(url,"","fullscreen,scrollbars")
@@ -140,7 +126,7 @@ methods:{
   reviewCreate(){
     // const array1=["1","2","3","4","5"]
     // console.log(this.reviewScore)
-    if (5>=Number(this.reviewScore)>=0){
+    if (10>=Number(this.reviewScore) && Number(this.reviewScore)>=0){
       console.log(Number(this.reviewScore))
       console.log('참')
       axios({
@@ -151,7 +137,7 @@ methods:{
         },
         data:{
           content:this.reviewContent,
-          score:this.reviewScore,
+          score:Number(this.reviewScore),
         },
       })
       .then(()=>{
@@ -161,7 +147,7 @@ methods:{
       this.reviewScore=null
     }else{
       // console.log(22)
-      alert('평점은 1~5사이숫자만가능^^')
+      alert('평점은 1~10사이숫자만가능^^')
       this.reviewContent=null
       this.reviewScore=null
     }
@@ -369,7 +355,7 @@ methods:{
     width: 0;
     position: absolute; 
     left: 0;
-    color: red;
+    color: #FFC907;
     overflow: hidden;
     pointer-events: none;
   }

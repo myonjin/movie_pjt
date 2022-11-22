@@ -158,6 +158,7 @@ export default {
 
 .main-image {
         position: relative;
+        top: 0px;
         margin: 0;
         width: 100%;
         height: 100vh;
@@ -183,8 +184,8 @@ export default {
 
   background: linear-gradient(
             to bottom,
-            rgb(0, 0, 0, 1) 0%,
-            rgba(20, 20, 20, 0.4) 5%,
+            rgb(0, 0, 0, 0) 0%,
+            rgba(20, 20, 20, 0.0) 5%,
             rgba(20, 20, 20, 0) 50%,
             rgba(20, 20, 20, 0.4) 90%,
             rgba(0, 0, 0, 1) 100%

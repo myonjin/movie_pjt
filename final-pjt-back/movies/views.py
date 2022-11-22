@@ -109,11 +109,11 @@ def review_movie(request,movie_id):
         # print(review)
         # print(request.data)
         # print(request.user.id)
-        # print(movie)
+        # print(movie.title)
         
         # 같은 값이 있다
-        if movie.reviews.filter(user_id=request.user.id).exists():
-            review = Review.objects.get(user_id=request.user.id) 
+        if movie.reviews.filter(user=request.user).exists():
+            review = movie.reviews.get(user=request.user)
             serializer = ReviewSerializer(review, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
