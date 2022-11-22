@@ -64,8 +64,9 @@ def comment_list(request):
         return Response(serializer.data)  
 
 @api_view(['GET'])
-def comment_detail(request, comment_pk):
+def comment_detail(request,comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
+    
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
@@ -79,6 +80,17 @@ def comment_detail(request, comment_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
+@api_view(['DELETE'])
+def comment_delete(request, article_pk, comment_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    print(article.comment_set.all())
+    if request.method == 'DELETE':
+        comment.delete()
+        comments=article.comment_set.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
 
 @api_view(['POST'])
 def comment_create(request, article_pk):
