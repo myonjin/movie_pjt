@@ -3,12 +3,13 @@
     <section class="artdetailsection d-flex flex-column community_font" style="padding: 24px 32px 32px;">
       <p>글 번호 : {{ article?.id }}</p>
       <div class="d-flex justify-content-between">
-        <p class="ms-5">{{ article?.title }}</p>
-        <p class="me-5">{{ article?.created_at.substr(0,10)}}</p>
+        <h5 class="ms-5">{{ article?.title }}</h5>
+        <h5 class="me-5">{{ article?.created_at.substr(0,10)}}</h5>
       </div>
       <div class="articlecontent">
         <div style="width:auto; height:400px;">
-          <h5>내용 : {{ article?.content }}</h5>
+          <h5
+          >내용 : {{ article?.content }}</h5>
         </div>
         <div class="" style="border:solid; border-color:blanchedalmond; width:100px; margin:auto;">
           <button class="like-btn mt-2" :style="is_liked ? 'color:red;' : 'color:white;'" @click="likeBtn">❤</button>
@@ -19,12 +20,19 @@
       <!-- <p>{{commentList}}</p> -->
       <div class="d-flex flex-row justify-content-center">
         <Icon class="mt-1" icon="material-symbols:mode-comment-outline" style="color:blanchedalmond"/>
-        <h5 class="ms-2">{{commentList.length}}</h5>
+        <!-- <h5 class="ms-2">{{commentList.length}}</h5> -->
       </div>
-      <ArticleCommentListItem v-for="comment in commentList" :key="comment.id" :comment="comment"/>
+      <ArticleCommentListItem 
+      v-for="comment in commentList" :key="comment.id" :comment="comment"
+      @delete-comment="deleteComment"/>
       <div class="mt-3">
         <input class="review-input" v-model.trim="commentContent" @keyup.enter="commentCreate">
-        <button class="review-btn" @click="commentCreate">생성</button>
+
+
+
+        <button class="review-btn2" @click="commentCreate">생성</button>
+      
+
       </div>
     </section>
   </div>
@@ -66,6 +74,22 @@ export default {
     }
   },
   methods:{
+    deleteComment(comment){
+      // console.log(comment.id)
+      axios({
+        method:'delete',
+        url: `${API_URL}/api/v1/articles/${this.article.id}/comments/${comment.id}`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        },
+      })
+      .then((res)=>{
+        // console.log('여기')
+        this.commentList=res.data
+        // console.log('여기')
+      })
+    }
+    ,
     commentCreate(){
       // console.log(this.commentContent)
       axios({
@@ -89,7 +113,6 @@ export default {
         
       })
       this.commentContent=null
-
     }
     ,
     getArticleDetail(){
@@ -100,6 +123,7 @@ export default {
         .then((res) => {
           // console.log(res.data)
           this.article = res.data
+          console.log(res.data.comment_set);
           this.liked_count= res.data.like_users.length
           if (res.data.like_users.includes(this.$store.state.user.id)){
             this.is_liked=true
@@ -159,4 +183,15 @@ export default {
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
 }
+.review-btn2 {
+    width: 15%;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom : 3px solid white;
+    background-color: black;
+    font-weight: 700;
+    color: #FF9999;
+  }
 </style>
