@@ -177,7 +177,7 @@ export default {
 .background-gradation {
   position: absolute;
   width: 100%;
-  height: 931px;
+  height: 951px;
   left: 0px;
   bottom: 0px;
 
