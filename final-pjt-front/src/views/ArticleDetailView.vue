@@ -8,7 +8,7 @@
       </div>
       <div class="articlecontent">
         <div style="width:auto; height:400px;">
-          <p>내용 : {{ article?.content }}</p>
+          <h5>내용 : {{ article?.content }}</h5>
         </div>
         <div class="" style="border:solid; border-color:blanchedalmond; width:100px; margin:auto;">
           <button class="like-btn mt-2" :style="is_liked ? 'color:red;' : 'color:white;'" @click="likeBtn">❤</button>
@@ -23,8 +23,8 @@
       </div>
       <ArticleCommentListItem v-for="comment in commentList" :key="comment.id" :comment="comment"/>
       <div class="mt-3">
-        <input v-model.trim="commentContent" @keyup.enter="commentCreate">
-        <button @click="commentCreate">생성</button>
+        <input class="review-input" v-model.trim="commentContent" @keyup.enter="commentCreate">
+        <button class="review-btn" @click="commentCreate">생성</button>
       </div>
     </section>
   </div>
