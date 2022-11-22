@@ -1,30 +1,45 @@
 <template>
-  <div>
-    <h1>Detail</h1>
-    <p>글 번호 : {{ article?.id }}</p>
-    <p>제목 : {{ article?.title }}</p>
-    <p>내용 : {{ article?.content }}</p>
-    <p>작성시간 : {{ article?.created_at }}</p>
-    <p>수정시간 : {{ article?.updated_at }}</p>
-    <button class="like-btn" :style="is_liked ? 'color:red;' : 'color:white;'" @click="likeBtn">❤</button>
-    <p>{{liked_count}}</p>
-    <!-- <p>{{commentList}}</p> -->
-    <ArticleCommentListItem v-for="comment in commentList" :key="comment.id" :comment="comment"/>
-    <div>
-      <input v-model.trim="commentContent" @keyup.enter="commentCreate">
-      <button @click="commentCreate">생성</button>
-    </div>
+  <div class="artdetailcontent mt-2" style="position:relative; min-width:320px; ">
+    <section class="artdetailsection d-flex flex-column" style="padding: 24px 32px 32px;">
+      <p>글 번호 : {{ article?.id }}</p>
+      <div class="d-flex justify-content-between">
+        <p class="ms-5">{{ article?.title }}</p>
+        <p class="me-5">{{ article?.created_at.substr(0,10)}}</p>
+      </div>
+      <div class="articlecontent">
+        <div style="width:auto; height:400px;">
+          <p>내용 : {{ article?.content }}</p>
+        </div>
+        <div class="" style="border:solid; border-color:blanchedalmond; width:100px; margin:auto;">
+          <button class="like-btn mt-2" :style="is_liked ? 'color:red;' : 'color:white;'" @click="likeBtn">❤</button>
+          <p>{{liked_count}}</p>
+        </div>
+        <br>
+      </div>
+      <!-- <p>{{commentList}}</p> -->
+      <div class="d-flex flex-row justify-content-center">
+        <Icon class="mt-1" icon="material-symbols:mode-comment-outline" style="color:blanchedalmond"/>
+        <p class="ms-2">{{commentList.length}}</p>
+      </div>
+      <ArticleCommentListItem v-for="comment in commentList" :key="comment.id" :comment="comment"/>
+      <div>
+        <input v-model.trim="commentContent" @keyup.enter="commentCreate">
+        <button @click="commentCreate">생성</button>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import { Icon } from '@iconify/vue2';
 import axios from 'axios'
 import ArticleCommentListItem from '@/components/ArticleCommentListItem'
 const API_URL = 'http://127.0.0.1:8000'
 export default {
   name:'ArticleDetailView',
   components:{
-    ArticleCommentListItem
+    ArticleCommentListItem,
+    Icon,
   },
   data(){
     return{
@@ -126,4 +141,22 @@ export default {
 
 <style>
 
+.artdetailcontent{
+    min-height: calc(100vh - env(safe-area-inset-bottom) - 56px);
+    max-width: 700px;
+    margin: 0 auto;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 56px);
+    box-sizing: border-box;
+  
+}
+.artdetailsection{
+    margin: 56px 16px 0;
+    margin: 0 auto;
+    padding-bottom: 56px;
+    background:#101322;
+    min-height: calc(100vh - 56px);
+    max-width: 668px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
 </style>

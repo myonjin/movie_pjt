@@ -127,8 +127,7 @@ methods:{
     // const array1=["1","2","3","4","5"]
     // console.log(this.reviewScore)
     if (10>=Number(this.reviewScore) && Number(this.reviewScore)>=0){
-      console.log(Number(this.reviewScore))
-      console.log('참')
+
       axios({
         method:'post',
         url:`http://127.0.0.1:8000/movies/detail/${this.movieId}/review/`,
