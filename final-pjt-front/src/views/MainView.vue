@@ -109,6 +109,20 @@ export default {
   
     border-radius: 24px 0px 0px 24px;
     }  
+  .similar_box {
+    position: absolute;
+    width: 55%;
+    height: 320px;
+    right: 0px;
+    top: 920px;
+  
+    background: rgba(11, 15, 22, 0.47);
+    box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12.5px);
+    /* Note: backdrop-filter has minimal browser support */
+  
+    border-radius: 24px 0px 0px 24px;
+    } 
   .following-like-movie-box{
   position: absolute;
   width: 92%;
