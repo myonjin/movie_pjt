@@ -4,6 +4,15 @@
     <div style="height:auto; position: relative; height: 657px;">
       <div id='show1' >
       </div>
+      <!-- 예고편 유튜부 -->
+      <iframe
+      id="ytplayer"
+      width="80%"
+      height="657px"
+      align="right"
+      type="text/html"
+      allowfullscreen=""
+      frameborder="0"></iframe>
       <!-- 배경 그라데이션 -->
       <div class="movie-detail-top-gradation">
   
@@ -25,30 +34,30 @@
         </div>
         <!-- 버튼 box -->
         <div class="d-felx flex-row" style="margin-bottom: 90px;">
-          <button class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">WATCH  ▶</button>
+          <!-- <button class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubeFullScreen(`https://www.youtube.com/embed/${youtubeSrc}`,$event)" value=" 창 열기 ">Trailler  ▶</button> -->
+          <button id="ytplaybtn" v-if="youtubeSrc!==null" class="pinkBtn" style="width: 158px; height: 50px; font-size: 20px" @click="youtubePlay()">Trailer  ▶</button>
           <button class="grayBtn" style="width: 158px; height: 50px;">좋아요</button>
         </div>
         <!-- 리뷰 box -->
         <div style="height:500px;">
           <h1 class="movie-detail-box-h1">User Review</h1>
           <!-- 별점 box -->
-          <div class="d-flex" style="height:100px;">
-            <span class="star">
-              ★★★★★
-              <span>★★★★★</span>
-              <input type="range" @change ="drawStar($event)" v-model="reviewScore" value="1" step="1" min="0" max="10">
-            </span>
+          <div class="d-flex flex-column" style="height:100px;">
+            <div class="d-flex justify-contents-left">
+              <span class="star">
+                ★★★★★
+                <span>★★★★★</span>
+                <input type="range" @change ="drawStar($event)" v-model="reviewScore" value="1" step="1" min="0" max="10">
+              </span>
+              <p class="user-score" style="line-height:55px; margin-left:5px; margin-right: auto;">{{ reviewScore }}</p>
 
+            </div>
 
-            <input id="input1" type="text" v-model.trim="reviewContent" placeholder="한줄평을 입력해주세요!" />
-            <button id="input2" type="submit" @click="reviewCreate">생성</button>
+            <div>
+              <input class="review-input" v-model.trim="reviewContent" placeholder="한줄평을 입력해주세요!">
+              <button class="review-btn" @click="reviewCreate">생성</button>
+            </div>
 
-
-            <!-- <div>
-              <input v-model.trim="reviewContent" placeholder="내용">
-            </div> -->
-
-            <!-- <button @click="reviewCreate">생성</button> -->
           </div>
           <div>
             <MovieReviewListItem v-for="(review,index) in movieReviewListc" :key="index" :review="review" 
@@ -62,7 +71,7 @@
     </div>
 
     <div class="actor_box">
-      <p class="popular_text">배우 목록</p>
+      <p class="popular_text">CAST</p>
       
       <div class="d-flex flex-row mt-4">
         <MovieActorItem 
@@ -106,11 +115,12 @@ export default {
       movieId: this.$route.params.id,
       movieDetail: {"genre": [{"name": "모험"},]}, //비동기 에러 방지용
       movieSimilar: null,
-      youtubeSrc:'jD5Yc2qMzBw', //임시로 넣어둠 if 로 방지할수있을듯 (console에러)
+      youtubeSrc:null, //임시로 넣어둠 if 로 방지할수있을듯 (console에러)
       actor_list:null,
       movieReviewList:null,
       reviewContent:null,
       reviewScore:0,
+      isYtPlaying: 0,
     }
   },
 methods:{
@@ -118,9 +128,24 @@ methods:{
     const starTag = document.querySelector(`.star span`)
     starTag.style.width = `${e.target.value * 10}%`;
   },
-  youtubeFullScreen(url){
-    window.open(url,"","fullscreen,scrollbars")
+  youtubePlay() {
+    const btn = document.querySelector('#ytplaybtn')
+    const iframeTag = document.querySelector('#ytplayer')
+    const backImg = document.querySelector('#show1')
+    if (this.isYtPlaying === 0) {
+      backImg.style.visibility = 'hidden'
+      iframeTag.src= `https://www.youtube.com/embed/${this.youtubeSrc}?autoplay=1&mute=1&loop=1`
+      btn.innerText = 'Stop  ■'
+      this.isYtPlaying = 1
+    } else {
+      backImg.style.visibility = 'visible'
+      btn.innerText = 'Trailer  ▶'
+      this.isYtPlaying = 0
+    }
   },
+  // youtubeFullScreen(url){
+  //   window.open(url,"","fullscreen,scrollbars")
+  // },
   getReviewList(){
     axios({
       method:'get',
@@ -241,10 +266,7 @@ methods:{
           .then((res) => { 
             if (res.data.results[0]){
               this.youtubeSrc = res.data.results[0].key
-            } else {
-              this.youtubeSrc = ''
-            
-          }})
+            }})
           .catch((err) => {
             console.log(err)
           })
@@ -346,6 +368,7 @@ methods:{
     position: relative;
     font-size: 2rem;
     color: #ddd;
+    margin-left: 20px;
   }
   
   .star input {
@@ -365,17 +388,26 @@ methods:{
     overflow: hidden;
     pointer-events: none;
   }
-  #input1 {
-    width: 60px;
+  .review-input {
+    width: 80%;
     height: 50px;
     background-color: black;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom : 3px solid white;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+
+    color: #FFFFFF;
     }
-  #input2 {
-    width: 15px;
+  .review-btn {
+    width: 50px;
     height: 50px;
     border-top: none;
     border-left: none;
