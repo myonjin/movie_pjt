@@ -17,7 +17,7 @@ class Movie(models.Model):
     actor = models.TextField()
     overview = models.TextField()
     popularity = models.FloatField()
-    release_date = models.DateField()
+    release_date = models.DateField(null=True)
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
 
