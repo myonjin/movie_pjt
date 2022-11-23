@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
@@ -13,6 +14,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import ArticleListSerializer,ArticleSerializer,CommentSerializer
 from .models import Article, Comment
+from timeline.models import Timeline
 # Create your views here.
 
 @api_view(['GET', 'POST'])
@@ -31,7 +33,26 @@ def article_list(request):
         if serializer.is_valid(raise_exception=True):
             # serializer.save()
             serializer.save(user=request.user)
-            # serializer.save(content=request.data)
+            # 타임라인에 추가
+            # 1. 글 생성한 유저
+            User_model = get_user_model()
+            user = User_model.objects.get(pk=request.user.id)
+            # 2. 해당 유저의 팔로워 목록 불러오기
+            followers = user.followers.all()
+            for follower in followers:
+                follower_id = follower.id
+                # 3. Timeline 인스턴스 생성
+                line = Timeline(
+                    follower_id = follower_id,
+                    username = user.username,
+                    profile_img = user.profile_img_src,
+                    what = 'article',
+                    content = serializer.data['title'],
+                    params = serializer.data['id'],
+                    router = 'articledetail',
+                    is_checked = False,
+                )
+                line.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         

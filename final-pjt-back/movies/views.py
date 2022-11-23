@@ -2,6 +2,7 @@ import random
 from django.shortcuts import render,get_list_or_404
 from django.contrib.auth import get_user_model
 from .models import Movie, Genre, Review
+from timeline.models import Timeline
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .serializers import MovieListSerializer, MovieDetailSerializer,ReviewSerializer
@@ -95,6 +96,27 @@ def movie_like(request):
     else:
         movie.like_users.add(user_id)
         is_liked = True
+        # 타임라인에 추가
+        # 1. 글 생성한 유저
+        User_model = get_user_model()
+        user = User_model.objects.get(pk=user_id)
+        # 2. 해당 유저의 팔로워 목록 불러오기
+        followers = user.followers.all()
+        for follower in followers:
+            follower_id = follower.id
+            # 3. Timeline 인스턴스 생성
+            line = Timeline(
+                follower_id = follower_id,
+                username = user.username,
+                profile_img = user.profile_img_src,
+                what = 'movielike',
+                content = movie.title,
+                params = movie.id,
+                router = 'detail',
+                is_checked = False,
+            )
+            line.save()
+
     context = {
         'is_liked': is_liked,
     }
@@ -110,6 +132,26 @@ def review_movie(request,movie_id):
         # print(request.data)
         # print(request.user.id)
         # print(movie.title)
+        # 타임라인에 추가
+        # 1. 글 생성한 유저
+        User_model = get_user_model()
+        user = User_model.objects.get(pk=request.user.id)
+        # 2. 해당 유저의 팔로워 목록 불러오기
+        followers = user.followers.all()
+        for follower in followers:
+            follower_id = follower.id
+            # 3. Timeline 인스턴스 생성
+            line = Timeline(
+                follower_id = follower_id,
+                username = user.username,
+                profile_img = user.profile_img_src,
+                what = 'review',
+                content = movie.title,
+                params = movie.id,
+                router = 'detail',
+                is_checked = False,
+            )
+            line.save()
         
         # 같은 값이 있다
         if movie.reviews.filter(user=request.user).exists():
@@ -124,6 +166,7 @@ def review_movie(request,movie_id):
             if serializer.is_valid(raise_exception=True):
                 serializer.save(movie=movie, user=request.user)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
     elif request.method == 'DELETE':
         review = Review.objects.get(pk=1)
         review.delete()

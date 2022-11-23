@@ -20,9 +20,14 @@
             <div class="nav_active"></div>
           </router-link>
         </div>
+        <!-- 알림창 -->
+        <div @click="goTimeline()">
+          <Icon class="bell-icon" icon="uil:bell" v-if="this.$store.getters.isLogin"/>
+
+        </div>
         <!-- search + logout -->
         
-        <Icon class="search-icon" icon="uil:search" />
+        <Icon class="search-icon" icon="uil:search" v-if="this.$route.name!=='login'"/>
         <div class="d-flex" v-if="this.$route.name!=='login'">
           <!-- 검색바 -->
           <form class="search-form" @submit.prevent="onSearch">
@@ -72,6 +77,9 @@ export default ({
     onSearch() {
       this.$router.push({ name:'search', params:{ keyword: this.inputKeyword }}).catch(()=>{})
       this.inputKeyword = ''
+    },
+    goTimeline() {
+      this.$router.push({ name:'timeline' })
     }
   },
   computed: {
@@ -214,6 +222,21 @@ nav a.router-link-exact-active {
   right: 410px;
   height: 48px;
   font-size: 22px;
+  line-height: 48px;
+  text-align: left;
+  color: #ffffff;
+  opacity: 1;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+
+.bell-icon {
+
+  position: absolute;
+  top: -13px;
+  right: 460px;
+  height: 48px;
+  font-size: 30px;
   line-height: 48px;
   text-align: left;
   color: #ffffff;

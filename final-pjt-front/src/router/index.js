@@ -8,6 +8,7 @@ import ProfileView from '@/views/ProfileView'
 import CommunityView from '../views/CommunityView'
 import CreateView from '../views/CreateView'
 import ArticleDetailView from '../views/ArticleDetailView'
+import TimelineView from '@/views/TimelineView'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
    { path: '/detail/:id',
     name: 'articledetail',
     component: ArticleDetailView
+  },
+  {
+    path: '/timeline',
+    name: 'timeline',
+    component: TimelineView
   },
   {
     path: '/:id',
