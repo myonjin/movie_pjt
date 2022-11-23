@@ -148,7 +148,7 @@ nav a.router-link-exact-active {
   margin-left: 20px;
   margin-right: 20px;
 
-  color: #FFC907;
+  color: #FF9999;
 }
 .pinkBtn {
   width: 80px;

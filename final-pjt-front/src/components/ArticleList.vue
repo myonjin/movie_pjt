@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ArticleListItem class="ms-5"
+    <ArticleListItem
     v-for="article in articles" :key="article.id" :article="article"
     />
   </div>

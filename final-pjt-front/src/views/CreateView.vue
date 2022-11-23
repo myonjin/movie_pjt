@@ -1,20 +1,30 @@
 <template>
-  <div id="community2" class="mt-2">
-    <div id="comcontent2" style="position:relative; background:#101322; max-width: 700px;">
-      <h1 class="mt-3">게시글 작성</h1>
+  <div id="community" class="mt-2" style="color:#E8E8E8;">
+    <div id="comcontent">
+      <!-- 제목 -->
+      <h1 class="mt-5">Create Post</h1>
+
       <form @submit.prevent="createArticle" style="padding: 32px 32px 24px; position: relative;">
-        <div class="d-flex justify-content-center">
-          <label for="title"> 제목 : </label>
-          <input class="ms-1" type="text" id="input1" v-model.trim="title"><br>
+        <div class="d-flex">
+          <label for="title"> 제목</label>
+          <input id="input-title" type="text" v-model.trim="title"><br>
         </div>
-        <div style="vertical-align:middle;" class="d-flex align-items-center">
-          <label class="mb-4"> 내용 : </label>
-          <textarea class="ms-2" id="input2" cols="30" rows="10" v-model="content"></textarea><br>
+        <div class="d-flex">
+          <label class="mb-4"> 내용</label>
+          <textarea id="input-content" cols="30" rows="10" v-model.trim="content"></textarea><br>
         </div>
         <input class="grayBtn" type="submit" id="submit">
       </form>
+
     </div>
   </div>
+
+
+  <!-- <div id="community2" class="mt-2">
+    <div id="comcontent2" style="position:relative; background:#101322; max-width: 700px;">
+      <h1 class="mt-3">게시글 작성</h1>
+    </div>
+  </div> -->
 </template>
 
 <script>
@@ -86,25 +96,36 @@ export default {
     border-radius: 50px;
 
 }
-#input1 {
-width: 300px;
-        height: 50px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom : 3px solid black;
-        border-radius: 10px;
-        
-    }
-#input2 {
-width: 480px;
-        height: 200px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom : 3px solid black;
-        border-radius: 10px;
-    }
+#input-title {
+  width: 100%;
+  height: 30px;
+  background-color: #2a2b38;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom : 3px solid #D0D0D5;
+  color: #D0D0D5;
+  /* opacity: 0.5; */
+  outline: none;
+  /* border: none; */
+  margin-bottom: 5px;
+  /* background: none; */
+  /* border-radius: 10px; */
+  
+}
+#input-content {
+  width: 100%;
+  height: 200px;
+  /* border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom : 3px solid black; */
+  /* opacity: 0.5; */
+  outline: none;
+  border: none;
+  background-color: #D0D0D5;
+  /* border-radius: 10px; */
+  }
 label{
   font-family: 'Montserrat';
   font-style: normal;
