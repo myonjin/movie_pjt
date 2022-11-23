@@ -80,7 +80,7 @@ export default {
   .profile-user-like-movie-box{
     position: absolute;
     width: 92%;
-    height: 428px;
+    height: 400px;
     right: 0px;
     bottom: 0px;
   
