@@ -29,8 +29,12 @@
     </div>
 
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-    
+
     <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
+    <div id="chart">
+        <p>Today's Chart</p>
+        <apexChart class="" width="500" height="350" type="bar" :options="options" :series="series"/>
+    </div>
   </div>
 </template>
 
@@ -48,6 +52,38 @@ export default {
     },
     data() {
         return {
+          options: {
+                    xaxis: {
+                        categories: ['모험', '판타지', '애니메이션', '드라마', '공포', '액션', '코미디', '범죄','SF'],
+                        labels:{
+                          style:{
+                            colors:['#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF'],
+                          }
+                        }
+                    },
+                    colors: ['#FEDD36'],
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shadeIntensity: 1,
+                            type: "vertical",
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                            colorStops: [
+                                {offset: 0, color: "#FF9999", opacity: 1},
+                                {offset: 100, color: "FF2E00", opacity: 1}
+                            ]
+                        }
+                    }, 
+                      plotOptions: {
+                        bar: {columnWidth: '40%', endingShape: 'rounded', dataLabels: {position: 'top'}}
+                    },
+                },
+            series: [{
+              name: 'data',
+              data: [1,2,3,4,5,6,7,8,9]
+            }],
+            movieList:[],
             user: null,
             isFollowing: null,
             imgFile: null,
@@ -142,6 +178,15 @@ export default {
                 this.changeFollowBtn();
             }
         });
+        axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/accounts/api/userlikemovie/${this.userId}/`,
+        })
+        .then((res) => {
+          this.movieList = res.data.movie_set
+          
+
+    })
     },
     components: { ProfileUserLikeMovie, ProfileUserReviewMovie }
 }

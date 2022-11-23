@@ -6,10 +6,12 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import SimpleVueValidation from 'simple-vue-validator';
-
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.use(SimpleVueValidation)
 Vue.use(BootstrapVue)
+Vue.use(VueApexCharts)
+Vue.component('apexChart', VueApexCharts)
 
 Vue.config.productionTip = false
 
