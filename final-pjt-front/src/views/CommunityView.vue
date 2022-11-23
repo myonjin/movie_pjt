@@ -1,6 +1,6 @@
 <template>
   <div id="community" class="mt-2">
-    <div id="comcontent" style="position:relative; background:#101322; max-width: 700px;" >
+    <div id="comcontent">
       <h1 class="mt-3 mb-3 community_font">CommunityView</h1>
       <div class="me-5 rounded-pill" style="height:30px; float:right">  
         <router-link :to="{name: 'create'}">
@@ -60,6 +60,7 @@ export default {
   overflow: visible;
 }
 #comcontent {
+    position:relative;
     min-height: calc(100vh - env(safe-area-inset-bottom) - 56px);
     max-width: 800px;
     margin: 0 auto;
@@ -68,6 +69,8 @@ export default {
     overflow: hidden;
     justify-content: center;
     border-radius: 50px;
+    background:#2a2b38;
+    max-width: 700px;
 }
 .nav_font {
   font-family: 'Montserrat';

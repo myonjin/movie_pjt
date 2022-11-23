@@ -220,7 +220,9 @@ select {
 
   background: #5C5C5C;
   border-radius: 10px;
-
+  outline: none;
+  border: none;
+  
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;

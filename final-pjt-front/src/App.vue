@@ -22,6 +22,7 @@
         </div>
         <!-- search + logout -->
         
+        <Icon class="search-icon" icon="uil:search" />
         <div class="d-flex" v-if="this.$route.name!=='login'">
           <!-- 검색바 -->
           <form class="search-form" @submit.prevent="onSearch">
@@ -31,7 +32,7 @@
 
           <!-- <router-link class="nav_font" to="/search">Search</router-link> -->
 
-          <button class="loginBtnPosition grayBtn" @click="logOut" v-if="isLogin" style="height:37px;">LOGOUT</button>
+          <button class="loginBtnPosition grayBtn" @click="logOut" v-if="isLogin" style="height:37px; background: none; opacity: 0.4; font-size: 16px;">LOGOUT</button>
           <button class="loginBtnPosition pinkBtn" @click="logIn" v-if="!isLogin" style="height:37px;">LOGIN</button>
 
         </div>
@@ -47,12 +48,16 @@
 
 <script>
 // import axios from 'axios'
+import { Icon } from '@iconify/vue2';
 
 export default ({
   data() {
     return {
       inputKeyword: null,
     }
+  },
+  components:{
+    Icon
   },
   methods: {
     logIn() {
@@ -175,22 +180,25 @@ nav a.router-link-exact-active {
   outline: none;
   background: rgba(255, 153, 153, 0.6);
   border-radius: 18.5px;
-  padding-left: 20px;
+  padding-left: 40px;
 
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 2px;
 
   color: #FFFFFF;
+  opacity: 1;
 }
 .search-form ::placeholder {
-  color: #FFFFFF
+  color: #FFFFFF;
+  opacity: 0.6;
 }
 .search-form ::-webkit-input-placeholder {
-  color: #FFFFFF
+  color: #FFFFFF;
+  opacity: 0.6;
 }
 .loginBtnPosition {
   position:absolute;
@@ -198,6 +206,20 @@ nav a.router-link-exact-active {
   right: 20px;
   height:37px;
 
+}
+.search-icon {
+
+  position: absolute;
+  top: -13px;
+  right: 410px;
+  height: 48px;
+  font-size: 22px;
+  line-height: 48px;
+  text-align: left;
+  color: #ffffff;
+  opacity: 1;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
 }
 
 </style>
