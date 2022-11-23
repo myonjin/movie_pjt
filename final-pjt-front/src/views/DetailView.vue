@@ -71,7 +71,7 @@
     <div class="actor_box">
       <p class="popular_text">CAST</p>
       <div id="slideShow">
-      <ul class="slides" id="slides-actor">
+      <ul class="slides" id="slides-actor" style="height: 210px; overflow: hidden;">
         <li v-for="actor in actor_list?.slice(0,100)" :key="actor.id">
           <MovieActorItem 
           :actor="actor"

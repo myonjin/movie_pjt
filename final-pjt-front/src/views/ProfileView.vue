@@ -2,7 +2,8 @@
   <div style="height: 1000px">
     <div style="height:350px; position:relative;">
       <div class="profile-box">
-        <div style="position:relative;">
+        <!-- 프로필 사진 -->
+        <div style="position:relative; width:20%;">
           <img
             class="profile-image"
             :src="`http://127.0.0.1:8000${user?.profile_img_src}`"
@@ -14,21 +15,24 @@
             v-if="this.$route.params.username === this.$store.state.user.username"
           />
         </div>
-        <div style="margin-left:20px;">
+        <!-- 이름 + 팔로우정보 -->
+        <div style="margin-left:50px; width:40%;">
           <p class="profile-username">{{ user?.username }}</p>
-          <p>상태메세지</p>
+          <div class="d-flex align-items-center">
+            <div style="margin-left:10px;">
+              <p class="follow-count">팔로잉 : <span id="following-count">{{ user?.following_count }}</span></p>
+              <p class="follow-count">팔로워 : <span id="followers-count">{{ user?.followers_count }}</span></p>
+            </div>
+            <button id="follow" class="pinkBtn" @click="follow"
+              v-if="this.$route.params.username !== this.$store.state.user.username"  style="margin-left:30px;"
+            ></button>
+          </div>
         </div>
-        <div id="chart">
-        <p>선호 장르</p>
-        <apexChart width="500" type="bar" :options="options" :series="[this.movieList]"></apexChart>
-    </div>
-        <div style="margin-left:10px;">
-          <p class="follow-count">팔로잉 : <span id="following-count">{{ user?.following_count }}</span></p>
-          <p class="follow-count">팔로워 : <span id="followers-count">{{ user?.followers_count }}</span></p>
+        <!-- 차트 -->
+        <div id="chart" style=" width:500px; height:230px; text-align:center; margin-left:100px;">
+          <p style="width: 100%; margin-bottom:0;">선호 장르</p>
+          <apexChart width="500" height="230" type="bar" :options="options" :series="[this.movieList]"></apexChart>
         </div>
-        <button id="follow" class="pinkBtn" @click="follow"
-          v-if="this.$route.params.username !== this.$store.state.user.username"  style="margin-left:30px;"
-        ></button>
       </div>
       
     </div>
@@ -263,6 +267,7 @@ export default {
 }
 
 .profile-username {
+  text-align: left;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
@@ -283,7 +288,8 @@ export default {
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  line-height: 22px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: #FFFFFF;
 }
 
