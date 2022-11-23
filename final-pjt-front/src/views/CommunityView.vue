@@ -38,7 +38,7 @@ export default {
   margin:0px;
   padding: 5px;
   box-sizing: border box;
-  margin: 30px ;
+  margin: 30 0 0px ;
   
 }
 #community div{

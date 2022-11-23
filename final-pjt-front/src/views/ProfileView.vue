@@ -31,7 +31,10 @@
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
 
     <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
-
+    <div id="chart">
+        <p>Today's Chart</p>
+        <apexChart class="" width="500" height="350" type="bar" :options="options" :series="series"/>
+    </div>
   </div>
 </template>
 
@@ -51,7 +54,12 @@ export default {
         return {
           options: {
                     xaxis: {
-                        categories: ['1월', '2월', '3월', '4월', '5월', '6월'],
+                        categories: ['모험', '판타지', '애니메이션', '드라마', '공포', '액션', '코미디', '범죄','SF'],
+                        labels:{
+                          style:{
+                            colors:['#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF'],
+                          }
+                        }
                     },
                     colors: ['#FEDD36'],
                     fill: {
@@ -62,15 +70,19 @@ export default {
                             opacityFrom: 0.7,
                             opacityTo: 0.9,
                             colorStops: [
-                                {offset: 0, color: "#fbc2eb", opacity: 1},
-                                {offset: 100, color: "#a18cd1", opacity: 1}
+                                {offset: 0, color: "#FF9999", opacity: 1},
+                                {offset: 100, color: "FF2E00", opacity: 1}
                             ]
                         }
-                    }, plotOptions: {
-                        bar: {columnWidth: '30%', endingShape: 'rounded', dataLabels: {position: 'top'}}
+                    }, 
+                      plotOptions: {
+                        bar: {columnWidth: '40%', endingShape: 'rounded', dataLabels: {position: 'top'}}
                     },
                 },
-                series: [{name: 'data', data: [1, 2, 3, 4, 5, 4]}],
+            series: [{
+              name: 'data',
+              data: [1,2,3,4,5,6,7,8,9]
+            }],
             user: null,
             isFollowing: null,
             imgFile: null,
