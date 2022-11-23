@@ -129,6 +129,7 @@ export default {
       .then((res)=>{
         // console.log('여기')
         this.commentList=res.data
+        this.article.comment_count -= 1
         // console.log('여기')
       })
     }
@@ -153,6 +154,7 @@ export default {
         content:res.data.content,
         username:res.data.username,
       })
+      this.article.comment_count += 1 
         
       })
       this.commentContent=null
