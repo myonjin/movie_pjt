@@ -27,6 +27,7 @@ export default new Vuex.Store({
       followers_count: null,
     },
     isLiked:null,
+    loginError:null,
   },
   
   getters: {
@@ -130,6 +131,13 @@ export default new Vuex.Store({
       .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
         this.dispatch('getMyProfile', payload.username)
+        context.state.loginError=''
+      })
+      .catch(()=>{
+        // alert('eeeeee')
+        // console.log(this.loginError)
+        context.state.loginError='사용자 정보를 잘못 입력하였습니다.'
+        // console.log(context.state.loginError)
       })
     },
     logOut(context) {

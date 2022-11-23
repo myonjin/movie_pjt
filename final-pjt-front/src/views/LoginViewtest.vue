@@ -19,10 +19,13 @@
                         <Icon class="input-icon" icon="uil:user" />
                       </div>  
                       <div class="form-group mt-2">
-                        <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" v-model="logPassword">
+                        <input  @keyup.enter="logIn" type="password" name="logpass" class="form-style mb-2" placeholder="Your Password" id="logpass" autocomplete="off" v-model="logPassword">
                         <Icon class="input-icon" icon="uil:lock-alt" />
+                        <p class="text-danger errorcode m-auto" v-if="this.$store.state.loginError !== undefined">
+                          {{this.$store.state.loginError}}
+                        </p>
                       </div>
-                      <button class="btna mt-4" @click="logIn">submit</button>
+                      <button class="btna mt-3" @click="logIn">submit</button>
                                    
                         </div>
                       </div>
@@ -32,18 +35,27 @@
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Sign Up</h4>
                       <div class="form-group">
-                        <input type="text" name="logid" class="form-style" placeholder="Your ID" id="logid" autocomplete="off" v-model="username">
+                        <input type="text" name="logid" class="form-style" placeholder="Your ID" id="logid" autocomplete="off" v-model="username"
+                        @keyup="validLogin">
                         <Icon class="input-icon" icon="uil:user" />
+                        <p class="text-danger errorcode m-auto" v-if="validation !== undefined">
+                        {{ validation.firstError('username') }}
+                        </p>
                       </div>  
                       <div class="form-group mt-2">
-                        <input type="password" name="logpassword1" class="form-style" placeholder="Password" id="logpassword1" autocomplete="off" v-model="password1">
-                        <Icon class="input-icon" icon="uil:lock-alt" />
+                        <input type="password" name="logpassword1" class="form-style" placeholder="Password" id="logpassword1" autocomplete="off" v-model="password1"
+                        >
+                        <p class="text-danger errorcode m-auto" v-if="validation !== undefined">
+                        {{ validation.firstError('password1') }}</p>
+                        <Icon class="input-icon" icon="uil:lock-alt"/>
                       </div>  
                       <div class="form-group mt-2">
-                        <input type="password" name="logpassword2" class="form-style" placeholder="Password 확인" id="logpassword2" autocomplete="off" v-model="password2">
+                        <input type="password" name="logpassword2" class="form-style mb-2" placeholder="Password 확인" id="logpassword2" autocomplete="off" v-model="password2">
                         <Icon class="input-icon" icon="uil:check" />
+                        <p class="text-danger errorcode m-auto" v-if="samePassword">
+                        비밀번호가 같지 않습니다</p>
                       </div>
-                      <button class="btna mt-4" @click="signUp">submit</button>
+                      <button class="btna mt-3" @click="signUp">submit</button>
                         </div>
                       </div>
                     </div>
@@ -54,12 +66,24 @@
           </div>
       </div>
   </div>
+
   </div>
 </template>
 
 <script>
 import { Icon } from '@iconify/vue2';
+import SimpleVueValidation from 'simple-vue-validator';
 
+    const Validator = SimpleVueValidation.Validator;
+    SimpleVueValidation.extendTemplates({
+        required: '필수 입력 항목입니다.',
+        length: '길이가 {0} 이어야 합니다.',
+        minLength: '{0} 글자 이상이어야 합니다.',
+        maxLength: '{0} 글자 이하여야 합니다.',
+        digit: '숫자만 입력해주세요.',
+        regex: '숫자,영대소문자로 구성되어야 합니다'
+    })
+  // console.log(Validator)
 export default {
   name:'LoginViewtest',
   components:{
@@ -74,12 +98,38 @@ export default {
       logPassword: null,
     }
   },
+  validators: {
+        username: function (value) {
+                // console.log(this.validation)
+               
+                return Validator.value(value).required().regex('^[A-Za-z0-9]*$')
+            },
+        password1: function (value) {
+                return Validator.value(value).required().minLength(8).maxLength(15).regex('^.*(?=^.{8,15}$)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$','숫자,특수문자,영문자를 포함해야합니다');
+            },
+    },
   computed: {
     isLogin() {
       return this.$store.getters.isLogin
+    },
+    samePassword(){
+      if (this.password2 !==null ){
+        if (this.password1===this.password2){
+          return false
+        }else{
+          return true
+        }
+      } 
+      return 0
     }
   },
   methods: {
+    validLogin(){
+      
+    },
+    validPassword1(){
+      // console.log('pass')
+    },
     signUp() {
       const username = this.username
       const password1 = this.password1
@@ -92,7 +142,7 @@ export default {
       }
 
       this.$store.dispatch('signUp', payload)
-
+      
     },
     logIn() {
       const username = this.logId
@@ -121,6 +171,23 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+.errorcode{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+
+color: #FF2E00;
+}
+.errorcodelog{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+
+color: #ff4500;
+}
 
 body{
 	font-family: 'Poppins', sans-serif;
