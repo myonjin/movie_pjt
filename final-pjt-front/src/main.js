@@ -5,7 +5,10 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import SimpleVueValidation from 'simple-vue-validator';
 
+
+Vue.use(SimpleVueValidation)
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false

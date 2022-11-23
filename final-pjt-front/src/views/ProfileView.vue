@@ -103,6 +103,7 @@ export default {
                 this.$store.dispatch("getMyProfile", this.$store.state.user.username);
             })
                 .catch((err) => {
+                  
                 console.log(err);
             });
         },
