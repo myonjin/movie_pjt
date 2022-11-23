@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    console.log(this.movie);
+    // console.log(this.movie);
     if (this.movie.like_users.includes(this.$store.state.user.id)) {
       this.isLiked = true
     } else {
