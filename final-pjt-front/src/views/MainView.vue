@@ -2,7 +2,7 @@
 
   <div>
     <!-- <img style="position:relative; width:100%; height:80%;" alt="Hotel" src="../assets/hotel.jpg"> -->
-    <div class="main-image">
+    <div class="main-image-dark">
       <div class="background-gradation"></div>
     </div>
     <div style="height:1300px"></div>
@@ -188,7 +188,25 @@ export default {
           ), url(../assets/hotel.jpg);
         background-size: cover;
       }
-
+.main-image-dark{
+        position: relative;
+        /* position: absolute; */
+        top: 0px;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(
+            to left,
+            rgb(0, 0, 0, 0.9) 0%,
+            rgb(0, 0, 0, 0.7) 5%,
+            rgba(20, 20, 20, 0.4) 30%,
+            rgba(20, 20, 20, 0.3) 50%,
+            rgba(20, 20, 20, 0.4) 70%,
+            rgba(20, 20, 20, 0.7) 95%,
+            rgba(0, 0, 0, 0.9) 100%
+          ), url(../assets/hotel4.jpg);
+        background-size: cover;
+      }
 .background-gradation {
   position: absolute;
   width: 100%;
