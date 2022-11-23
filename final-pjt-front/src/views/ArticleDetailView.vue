@@ -111,6 +111,7 @@ export default {
       console.log('바뀜');
       return this.profileImg
     }
+    
   },
   methods:{
     goProfile() {
