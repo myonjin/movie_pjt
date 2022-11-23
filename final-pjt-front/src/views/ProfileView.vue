@@ -33,7 +33,7 @@
     <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
     <div id="chart">
         <p>Today's Chart</p>
-        <apexChart class="" width="500" height="350" type="bar" :options="options" :series="series"/>
+        <apexChart id="chart" class="" width="500" height="350" type="bar" :options="options" :series="series"/>
     </div>
   </div>
 </template>
@@ -43,6 +43,7 @@ import axios from 'axios'
 import ProfileUserLikeMovie from '@/components/ProfileUserLikeMovie.vue'
 // import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
 import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
+import ApexCharts from 'apexcharts'
 
 export default {
     name: "ProfileView",
@@ -61,7 +62,6 @@ export default {
                           }
                         }
                     },
-                    colors: ['#FEDD36'],
                     fill: {
                         type: 'gradient',
                         gradient: {
@@ -81,7 +81,7 @@ export default {
                 },
             series: [{
               name: 'data',
-              data: [1,2,3,4,5,6,7,8,9]
+              data: []
             }],
             movieList:[],
             user: null,
@@ -105,7 +105,7 @@ export default {
             })
                 .then((res) => {
                 const src = res.data.src;
-                console.log(src);
+                // console.log(src);
                 this.user.profile_img_src = "/media/" + src;
             });
         },
@@ -177,16 +177,39 @@ export default {
                 }
                 this.changeFollowBtn();
             }
-        });
-        axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/accounts/api/userlikemovie/${this.userId}/`,
-        })
-        .then((res) => {
-          this.movieList = res.data.movie_set
-          
+            // console.log(this.user)
+            axios({
+            method: 'get',
+            url: `http://127.0.0.1:8000/accounts/api/userlikemovie/${this.user.id}/`,
+            })
+            .then((res) => {
+              console.log('2222')
+              let movie_number = {
+                12:0, 14:0,16:0,18:0,27:0,28:0,35:0,80:0,878:0,
+                36:0, 37:0, 53:0, 99:0, 9648:0, 10402:0, 10749:0
+              }
+              // this.movieList = res.data.movie_set
+              for (const movie of res.data.movie_set) {
+                for (const genre_id of movie.genre){
+                  movie_number[genre_id]++
+                } 
+              }
+              // console.log(movie_number)
+              const graphData = [movie_number[12],movie_number[14],movie_number[16],movie_number[18],movie_number[27],movie_number[28],movie_number[35],movie_number[80],movie_number[878]]            
+              console.log(graphData)
+              console.log(this.series[0])
+              // this.movieList.push(graphData)
+              // console.log(this.movieList)
+              // this.series[0].data = graphData
+              // console.log(this.series[0].data)
+              var chart = new ApexCharts(document.querySelector("#chart"), this.options);
+              chart.updateSeries([{
+                data: [32, 44, 31, 41, 22]
+              }])
+            })
 
-    })
+        });
+        
     },
     components: { ProfileUserLikeMovie, ProfileUserReviewMovie }
 }
