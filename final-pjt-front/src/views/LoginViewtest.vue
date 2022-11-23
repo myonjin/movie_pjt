@@ -25,8 +25,11 @@
                           {{this.$store.state.loginError}}
                         </p>
                       </div>
+                      <section class="test">
+                        <img  @click="kakaoLoginBtn" src="../assets/kako.png" alt="">
+      
+                      </section>
                       <button class="btna mt-3" @click="logIn">submit</button>
-                                   
                         </div>
                       </div>
                     </div>
@@ -123,7 +126,45 @@ export default {
       return 0
     }
   },
-  methods: {
+  methods: {kakaoLoginBtn:function(){
+
+window.Kakao.init('76b9eb0b553f9619b4d4cc4c244928e5') // Kakao Developers에서 요약 정보 -> JavaScript 키
+
+if (window.Kakao.Auth.getAccessToken()) {
+  window.Kakao.API.request({
+    url: '/v1/user/unlink',
+    success: function (response) {
+      console.log(response)
+    },
+    fail: function (error) {
+      console.log(error)
+    },
+  })
+  window.Kakao.Auth.setAccessToken(undefined)
+}
+
+
+window.Kakao.Auth.login({
+  success: function () {
+    window.Kakao.API.request({
+      url: '/v2/user/me',
+      data: {
+        property_keys: ["kakao_profile.image"]
+      },
+      success: async function (response) {
+        console.log(response);
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  },
+  fail: function (error) {
+    console.log(error)
+  },
+})
+}
+    ,
     validLogin(){
       
     },
