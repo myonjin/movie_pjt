@@ -4,8 +4,8 @@
       <!-- 제목 -->
       <h1 class="mt-5">Create Post</h1>
 
-      <form @submit.prevent="createArticle" style="padding: 32px 32px 24px; position: relative;">
-        <div class="d-flex">
+      <form class="ms-3 me-5" style="position: relative;">
+        <div class="d-flex mb-3">
           <label for="title"> 제목</label>
           <input id="input-title" type="text" v-model.trim="title"><br>
         </div>
@@ -13,9 +13,9 @@
           <label class="mb-4"> 내용</label>
           <textarea id="input-content" cols="30" rows="10" v-model.trim="content"></textarea><br>
         </div>
-        <input class="grayBtn" type="submit" id="submit">
       </form>
 
+      <button @click="createArticle()" class="create-btn" style="font-size:19px; font-weight:600;">POST</button>
     </div>
   </div>
 
@@ -124,7 +124,8 @@ export default {
   outline: none;
   border: none;
   background-color: #D0D0D5;
-  /* border-radius: 10px; */
+  border-radius: 10px;
+  padding: 10px;
   }
 label{
   font-family: 'Montserrat';

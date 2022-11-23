@@ -1,16 +1,12 @@
 <template>
-  <div class="border mt-3 ms-4 me-4 "  style="border-radius:15px;">
-    <div class="d-flex justify-content-between">
-      <h5 class="ms-2" style="margin:0.5em">{{comment.content}}</h5>
-
-
-
-      <div class="d-flex">
-        <h5 class="me-2" style="margin:0.5em">{{comment.username}}</h5>
-        <button @click="deleteComment" class="review-btn3">[x]</button>
-      </div>
+  <div class="">
+    <div class="d-flex">
+      <p class="commu-push me-2" style="width: 15%; cursor: pointer;" @click="goProfile()">{{comment.username}}</p>
+      <p class="ms-2">{{comment.content}}</p>
+      <button v-if="comment.username === this.$store.state.user.username" @click="deleteComment" class="review-btn3">[x]</button>
    <!-- {{comment}} -->
     </div>
+    <hr class="my-3" style="margin:0px; border: 1px solid #D0D0D5;">
   </div>
 </template>
 
@@ -32,6 +28,9 @@ export default {
     deleteComment : function () {
       this.$emit('delete-comment',this.comment)
     },
+    goProfile() {
+      this.$router.push({ name:'profile', params: { username: this.comment.username} })
+    },
     // deleteComment(){
     //   console.log(this.comment.id)
     //   axios({
@@ -48,12 +47,9 @@ export default {
 
 <style>
 .review-btn3 {
-    width: 15%;
-    height: 50px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background:#101322;
+    margin-left: 3px;
+    border: none;
+    background:#2a2b38;
     font-weight: 700;
     color: #FF9999;
   }

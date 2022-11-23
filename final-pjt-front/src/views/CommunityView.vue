@@ -73,7 +73,7 @@ export default {
 <style> 
 .create-btn {
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   left: calc( 50% + 250px );
   width: 70px;
   height: 70px;
@@ -97,6 +97,7 @@ export default {
     border-radius: 50px;
     background:#2a2b38;
     max-width: 700px;
+    margin-bottom: 50px;
 }
 #comcontent p {
   margin-bottom: 0px;
