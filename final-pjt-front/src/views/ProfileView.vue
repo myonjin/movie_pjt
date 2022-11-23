@@ -29,18 +29,22 @@
     </div>
 
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-
+    
+    <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import ProfileUserLikeMovie from '@/components/ProfileUserLikeMovie.vue'
+// import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
+import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
 
 export default {
     name: "ProfileView",
     conponents: {
         ProfileUserLikeMovie,
+        ProfileUserReviewMovie,
     },
     data() {
         return {
@@ -138,7 +142,7 @@ export default {
             }
         });
     },
-    components: { ProfileUserLikeMovie }
+    components: { ProfileUserLikeMovie, ProfileUserReviewMovie }
 }
 </script>
 
