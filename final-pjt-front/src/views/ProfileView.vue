@@ -29,7 +29,11 @@
     </div>
 
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-
+      <!--그래프 입니다 -->
+    <div id="chart">
+        <p>Today's Chart</p>
+        <apexChart width="500" height="350" type="bar" :options="options" :series="series"/>
+    </div>
   </div>
 </template>
 
@@ -44,6 +48,28 @@ export default {
     },
     data() {
         return {
+          options: {
+                    xaxis: {
+                        categories: ['1월', '2월', '3월', '4월', '5월', '6월'],
+                    },
+                    colors: ['#FEDD36'],
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shadeIntensity: 1,
+                            type: "vertical",
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                            colorStops: [
+                                {offset: 0, color: "#fbc2eb", opacity: 1},
+                                {offset: 100, color: "#a18cd1", opacity: 1}
+                            ]
+                        }
+                    }, plotOptions: {
+                        bar: {columnWidth: '30%', endingShape: 'rounded', dataLabels: {position: 'top'}}
+                    },
+                },
+                series: [{name: 'data', data: [1, 2, 3, 4, 5, 4]}],
             user: null,
             isFollowing: null,
             imgFile: null,
