@@ -23,7 +23,7 @@ const routes = [
     component: MainView
   },
   {
-    path: '/search',
+    path: '/search/:keyword',
     name: 'search',
     component: SearchView
   },

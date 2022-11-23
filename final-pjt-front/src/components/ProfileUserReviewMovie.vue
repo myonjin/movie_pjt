@@ -1,9 +1,9 @@
 <template>
-  <div style="height:450px; position:relative;">
+  <div class="pb-5" style="height:450px; position:relative; background-color: black;">
     <div class="profile-user-review-movie-box">
       <div class="d-flex flex-column" style="height:100%; position:relative;">
         <!-- 제목 -->
-        <div class="d-flex">
+        <div class="d-flex mb-4">
           <p class="profile-user-review-movie-text">{{ username }}님이</p>
           <span class="star-profile">
             ★★★★★
@@ -96,7 +96,7 @@ export default {
   .profile-user-review-movie-box{
     position: absolute;
     width: 92%;
-    height: 428px;
+    height: 430px;
     right: 0px;
     bottom: 0px;
   

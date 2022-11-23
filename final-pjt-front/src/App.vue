@@ -22,17 +22,17 @@
         </div>
         <!-- search + logout -->
         
-        <div class="d-flex">
-          <form class="search-form">
-            <input class="search-bar" type="text" name="" placeholder="SEARCH">
-            
+        <div class="d-flex" v-if="this.$route.name!=='login'">
+          <!-- 검색바 -->
+          <form class="search-form" @submit.prevent="onSearch">
+            <input class="search-bar" type="text" v-model="inputKeyword" name="" placeholder="SEARCH">
           </form>
 
 
           <!-- <router-link class="nav_font" to="/search">Search</router-link> -->
 
-          <button class="grayBtn" @click="logOut" v-if="isLogin">LOGOUT</button>
-          <button class="pinkBtn" @click="logIn" v-if="!isLogin">LOGIN</button>
+          <button class="loginBtnPosition grayBtn" @click="logOut" v-if="isLogin" style="height:37px;">LOGOUT</button>
+          <button class="loginBtnPosition pinkBtn" @click="logIn" v-if="!isLogin" style="height:37px;">LOGIN</button>
 
         </div>
 
@@ -46,8 +46,14 @@
 </template>
 
 <script>
+// import axios from 'axios'
 
 export default ({
+  data() {
+    return {
+      inputKeyword: null,
+    }
+  },
   methods: {
     logIn() {
       this.$router.push({ name: 'login' })
@@ -58,6 +64,10 @@ export default ({
     goHome() {
       this.$router.push({ name:'home' })
     },
+    onSearch() {
+      this.$router.push({ name:'search', params:{ keyword: this.inputKeyword }}).catch(()=>{})
+      this.inputKeyword = ''
+    }
   },
   computed: {
     isLogin() {
@@ -153,6 +163,11 @@ nav a.router-link-exact-active {
 
   color: #FFFFFF;
   }
+.search-form {
+  position: absolute;
+  top: -7px;
+  right: 120px;
+}
 .search-bar {
   width: 324px;
   height: 37px;
@@ -160,7 +175,7 @@ nav a.router-link-exact-active {
   outline: none;
   background: rgba(255, 153, 153, 0.6);
   border-radius: 18.5px;
-  padding-left: 10px;
+  padding-left: 20px;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -176,6 +191,13 @@ nav a.router-link-exact-active {
 }
 .search-form ::-webkit-input-placeholder {
   color: #FFFFFF
+}
+.loginBtnPosition {
+  position:absolute;
+  top: -7px;
+  right: 20px;
+  height:37px;
+
 }
 
 </style>

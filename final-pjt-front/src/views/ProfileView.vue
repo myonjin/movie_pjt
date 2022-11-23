@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 1000px">
     <div style="height:350px; position:relative;">
       <div class="profile-box">
         <div style="position:relative;">
