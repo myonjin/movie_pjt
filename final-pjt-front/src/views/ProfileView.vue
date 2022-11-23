@@ -18,7 +18,11 @@
           <p class="profile-username">{{ user?.username }}</p>
           <p>상태메세지</p>
         </div>
-        <div style="margin-left:300px;">
+        <div id="chart">
+        <p>선호 장르</p>
+        <apexChart width="500" type="bar" :options="options" :series="[this.movieList]"></apexChart>
+    </div>
+        <div style="margin-left:10px;">
           <p class="follow-count">팔로잉 : <span id="following-count">{{ user?.following_count }}</span></p>
           <p class="follow-count">팔로워 : <span id="followers-count">{{ user?.followers_count }}</span></p>
         </div>
@@ -26,15 +30,16 @@
           v-if="this.$route.params.username !== this.$store.state.user.username"  style="margin-left:30px;"
         ></button>
       </div>
+      
     </div>
 
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
 
     <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
-    <div id="chart">
+    <!-- <div id="chart">
         <p>Today's Chart</p>
-        <apexChart class="" width="500" height="350" type="bar" :options="options" :series="series"/>
-    </div>
+        <apexChart width="500" type="bar" :options="options" :series="[this.movieList]"></apexChart>
+    </div> -->
   </div>
 </template>
 
@@ -44,27 +49,46 @@ import ProfileUserLikeMovie from '@/components/ProfileUserLikeMovie.vue'
 // import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
 import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
 // import ApexCharts from 'apexcharts'
-import VueApexCharts from 'vue-apexcharts'
+// import VueApexCharts from 'vue-apexcharts'
 
 export default {
     name: "ProfileView",
     conponents: {
         ProfileUserLikeMovie,
         ProfileUserReviewMovie,
-        apexcharts: VueApexCharts
+        // apexcharts: VueApexCharts
     },
     data() {
         return {
           options: {
                     xaxis: {
-                        categories: ['모험', '판타지', '애니메이션', '드라마', '공포', '액션', '코미디', '범죄','SF'],
+                        categories: ['모험','판타지','애니메이션','드라마','공포','액션','코미디','범죄','SF',],
                         labels:{
                           style:{
-                            colors:['#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF'],
+                            colors:['#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF',]
+                          }
+                        },
+                        title:{
+                          style:{
+                            color:'#FFFFFF',
                           }
                         }
+                      },
+                    yaxis:{
+                      labels:{
+                        style:{
+                          colors:['#000000']
+                        }
+                      }
                     },
+                    colors: ['#FEDD36'],
+                    // group:{
+                    //   style:{
+                    //     colors:['FFFFFF','FFFFFF']
+                    //   }
+                    // },
                     fill: {
+                        
                         type: 'gradient',
                         gradient: {
                             shadeIntensity: 1,
@@ -72,20 +96,31 @@ export default {
                             opacityFrom: 0.7,
                             opacityTo: 0.9,
                             colorStops: [
-                                {offset: 0, color: "#FF9999", opacity: 1},
-                                {offset: 100, color: "FF2E00", opacity: 1}
+                                {offset: 0, color: "#fbc2eb", opacity: 1},
+                                {offset: 100, color: "#FF9999", opacity: 0.7}
                             ]
                         }
                     }, 
-                      plotOptions: {
-                        bar: {columnWidth: '40%', endingShape: 'rounded', dataLabels: {position: 'top'}}
+                    dataLabels:{
+                      offsetY: -20,
+                      style:{
+                        // fontSize:'10px',
+                        // fontWeight:'bold'
+                      }
+                    },
+                    plotOptions: {
+                        bar: {columnWidth: '40%', endingShape: 'rounded', 
+                        dataLabels: {
+                          position: 'top'}}
                     },
                 },
-          series: [{
-              name: 'data',
-              data: [this.movieList]
-            }],
-          movieList:[1,2,3,4,5],
+                series: [{name: 'data', data: [1, 2, 3, 4, 5, 4]}],
+            
+        
+          movieList:{
+            name: 'first',
+            data: []
+        },
           user: null,
           isFollowing: null,
           imgFile: null,
@@ -200,18 +235,9 @@ export default {
               const graphData = [movie_number[12],movie_number[14],movie_number[16],movie_number[18],movie_number[27],movie_number[28],movie_number[35],movie_number[80],movie_number[878]]            
               // console.log(graphData)
               // console.log(this.series[0])
-              // this.movieList.push(graphData)
-              // console.log(this.movieList)
-              this.series[0].data = graphData
-              // console.log(this.series[0].data)
-              // const q = document.querySelector("#follow")
+
+              this.movieList= {name:'data',data: graphData}
               
-              // var chart = new ApexCharts(document.querySelector("#chart"), this.options);
-              // // console.log(chart)
-              
-              // chart.updateSeries([{
-              //   data: [32, 44, 31, 41, 22]
-              // }])
               // chart.render()
             
             })
@@ -220,8 +246,7 @@ export default {
         
     },
     mounted(){
-      const q = document.querySelector("#follow")
-      console.log(q)
+      
     },
     components: { ProfileUserLikeMovie, ProfileUserReviewMovie }
 }
@@ -282,4 +307,13 @@ export default {
 
   color: #FFFFFF;
 }
+#chart p {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+        font-size: 20px;
+        font-weight: bold;
+        color: #FFFFFF;
+        
+    }
 </style>
