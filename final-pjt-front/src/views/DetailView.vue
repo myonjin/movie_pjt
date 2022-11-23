@@ -1,5 +1,5 @@
 <template>
-  <div style="position:relative; top:0px; height:2000px;">
+  <div style="position:relative; top:0px; height:1400px;">
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
     <div style="height:auto; position: relative; height: 657px;">
       <div id='show1' >
@@ -70,28 +70,43 @@
     <!-- 출연진 정보 -->
     <div class="actor_box">
       <p class="popular_text">CAST</p>
-      
-      <div class="d-flex flex-row mt-4">
-        <MovieActorItem 
-          v-for="actor in actor_list" :key="actor.id" :actor="actor"
-        />
+      <div id="slideShow">
+      <ul class="slides" id="slides-actor">
+        <li v-for="actor in actor_list?.slice(0,100)" :key="actor.id">
+          <MovieActorItem 
+          :actor="actor"
+            />
+          </li>  
+        </ul>
       </div>
+      <p class="controller">
+        <!-- &lang: 왼쪽 방향 화살표
+        &rang: 오른쪽 방향 화살표 -->
+        <span class="prev" @click="prevBtnActor">&lang;</span>  
+        <span class="next" @click="nextBtnActor">&rang;</span>
+      </p>
       
     </div>
     <!-- 비슷한 영화 -->
     <div class="similar_box">
       <p class="popular_text">SIMILAR MOVIES</p>
-      
-      <div class="d-flex flex-row">
-        <MovieSimilarListItem 
-          v-for="similar in movieSimilar" :key="similar.id" :similar="similar"
-        />
+      <div id="slideShow">
+        <ul class="slides" id="slides-similar">
+          <li v-for="similar in movieSimilar" :key="similar.id">
+            <MovieSimilarListItem
+            :similar="similar"
+            />
+          </li>  
+        </ul>
       </div>
+      <p class="controller">
+        <!-- &lang: 왼쪽 방향 화살표
+        &rang: 오른쪽 방향 화살표 -->
+        <span class="prev" @click="prevBtnSimilar">&lang;</span>  
+        <span class="next" @click="nextBtnSimilar">&rang;</span>
+      </p>
     </div>
    
-  
-
-    
   </div>
 </template>
 
@@ -121,6 +136,8 @@ export default {
       reviewScore:0,
       isYtPlaying: 0,
       isLiked: null,
+      currentIdxActor: 0,
+      currentIdxSimilar: 0,
     }
   },
 methods:{
@@ -197,8 +214,42 @@ methods:{
       alert('평점은 1~10사이숫자만가능^^')
       this.reviewContent=null
       this.reviewScore=null
+      }
+    },
+    prevBtnActor() {
+      if (this.currentIdxActor !== 0) {
+        this.movieSlideActor(this.currentIdxActor - 1)
+      }
+    },
+    nextBtnActor() {
+      const slideImg = document.querySelectorAll('#slides-actor li')
+      const slideCount = slideImg.length
+      if (this.currentIdxActor !== slideCount - 1) {
+        this.movieSlideActor(this.currentIdxActor + 1);
+      }
+    },
+    movieSlideActor(num) {
+      const slides = document.querySelector('#slides-actor')
+      slides.style.left = -num * 800 + 'px';
+      this.currentIdxActor = num;
+    },
+    prevBtnSimilar() {
+      if (this.currentIdxSimilar !== 0) {
+        this.movieSlideSimilar(this.currentIdxSimilar - 1)
+      }
+    },
+    nextBtnSimilar() {
+      const slideImg = document.querySelectorAll('#slides-similar li')
+      const slideCount = slideImg.length
+      if (this.currentIdxSimilar !== slideCount - 1) {
+        this.movieSlideSimilar(this.currentIdxSimilar + 1);
+      }
+    },
+    movieSlideSimilar(num) {
+      const slides = document.querySelector('#slides-similar')
+      slides.style.left = -num * 800 + 'px';
+      this.currentIdxSimilar = num;
     }
-  } 
   },
   watch: {
     movieReviewList() {

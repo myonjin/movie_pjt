@@ -29,22 +29,23 @@
     </div>
 
     <ProfileUserLikeMovie v-if="user!==null" :userId="userId"/>
-      <!--그래프 입니다 -->
-    <div id="chart">
-        <p>Today's Chart</p>
-        <apexChart width="500" height="350" type="bar" :options="options" :series="series"/>
-    </div>
+
+    <ProfileUserReviewMovie v-if="user!==null" :userId="userId" :username="user.username"/>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import ProfileUserLikeMovie from '@/components/ProfileUserLikeMovie.vue'
+// import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
+import ProfileUserReviewMovie from '@/components/ProfileUserReviewMovie.vue';
 
 export default {
     name: "ProfileView",
     conponents: {
         ProfileUserLikeMovie,
+        ProfileUserReviewMovie,
     },
     data() {
         return {
@@ -165,7 +166,7 @@ export default {
             }
         });
     },
-    components: { ProfileUserLikeMovie }
+    components: { ProfileUserLikeMovie, ProfileUserReviewMovie }
 }
 </script>
 

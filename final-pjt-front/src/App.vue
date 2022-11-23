@@ -21,10 +21,18 @@
           </router-link>
         </div>
         <!-- search + logout -->
+        
         <div class="d-flex">
-          <router-link class="nav_font" to="/search">Search</router-link>
+          <form class="search-form">
+            <input class="search-bar" type="text" name="" placeholder="SEARCH">
+            
+          </form>
 
-          <button class="pinkBtn" @click="logOut" v-if="isLogin">LOGOUT</button>
+
+          <!-- <router-link class="nav_font" to="/search">Search</router-link> -->
+
+          <button class="grayBtn" @click="logOut" v-if="isLogin">LOGOUT</button>
+          <button class="pinkBtn" @click="logIn" v-if="!isLogin">LOGIN</button>
 
         </div>
 
@@ -41,6 +49,9 @@
 
 export default ({
   methods: {
+    logIn() {
+      this.$router.push({ name: 'login' })
+    },
     logOut() {
       this.$store.dispatch('logOut')
     },
@@ -142,4 +153,29 @@ nav a.router-link-exact-active {
 
   color: #FFFFFF;
   }
+.search-bar {
+  width: 324px;
+  height: 37px;
+  border: none;
+  outline: none;
+  background: rgba(255, 153, 153, 0.6);
+  border-radius: 18.5px;
+  padding-left: 10px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 2px;
+
+  color: #FFFFFF;
+}
+.search-form ::placeholder {
+  color: #FFFFFF
+}
+.search-form ::-webkit-input-placeholder {
+  color: #FFFFFF
+}
+
 </style>

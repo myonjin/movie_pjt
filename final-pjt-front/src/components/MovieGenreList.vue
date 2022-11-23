@@ -31,7 +31,6 @@
           />
         </li>  
       </ul>
-    <!-- </div> -->
     </div>
     <p class="controller">
       <!-- &lang: 왼쪽 방향 화살표

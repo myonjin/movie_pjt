@@ -128,3 +128,18 @@ def review_movie(request,movie_id):
         review = Review.objects.get(pk=1)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def review_list(request, user_id, score):
+    # 유저가 쓴 리뷰중에 스코어가 몇점인거만
+    # user 인스탠스.리뷰 역참조.필터(스코어= 몇점이상)
+    User_model = get_user_model()
+    user = User_model.objects.get(pk=user_id)
+    reviews = user.review_set.filter(score=score)
+    movies = []
+    for review in reviews:
+        movie_id = review.movie.id
+        movie = Movie.objects.get(pk=movie_id)
+        movies.append(movie)
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
