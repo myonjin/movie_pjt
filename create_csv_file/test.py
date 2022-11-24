@@ -13,6 +13,10 @@ import csv
 with open('movielist.csv', 'w', newline='', encoding='utf-8') as csvfile:
     movie_genre = []
     pk = 0
+    fieldnames = ['id', 'title', 'poster_path', 'backdrop_path', 'actors','overview','popularity','vote_average','vote_count','release_date']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
     for page in range(1, 51):
         page = str(page)
         url = requests.get(f'https://api.themoviedb.org/3/movie/popular?api_key=8513510776c862bf8d57bb36d072f05e&language=ko-KR&page={page}')
@@ -22,10 +26,6 @@ with open('movielist.csv', 'w', newline='', encoding='utf-8') as csvfile:
         data = json.loads(text)
         data = data['results']
 
-        fieldnames = ['id', 'title', 'poster_path', 'backdrop_path', 'actors','overview','popularity','release_date','vote_average','vote_count']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        writer.writeheader()
         for d in data:
             if d['adult'] == False:
                 url2 = requests.get(f"https://api.themoviedb.org/3/movie/{d['id']}/credits?api_key=8513510776c862bf8d57bb36d072f05e&language=ko-KR")
@@ -47,9 +47,9 @@ with open('movielist.csv', 'w', newline='', encoding='utf-8') as csvfile:
                             'actors':actors, 
                             'overview':d['overview'],
                             'popularity':d['popularity'],
-                            'release_date':d['release_date'],
                             'vote_average':d['vote_average'],
-                            'vote_count':d['vote_count']
+                            'vote_count':d['vote_count'],
+                            'release_date':d['release_date'],
                         }
                     )
 
