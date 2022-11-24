@@ -1,0 +1,139 @@
+[
+{
+    "model": "community.article",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "title": "현진이가 작성한 게시글",
+        "content": "내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용",
+        "created_at": "2022-11-24T14:10:46.400Z",
+        "updated_at": "2022-11-24T14:10:46.400Z",
+        "like_users": [
+            9
+        ]
+    }
+},
+{
+    "model": "community.article",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "title": "미림이 작성한 게시글",
+        "content": "내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용",
+        "created_at": "2022-11-24T14:11:24.116Z",
+        "updated_at": "2022-11-24T14:11:24.116Z",
+        "like_users": []
+    }
+},
+{
+    "model": "community.article",
+    "pk": 3,
+    "fields": {
+        "user": 4,
+        "title": "게시글 작성~~~~게시글 작성~~~~",
+        "content": "게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~",
+        "created_at": "2022-11-24T14:14:27.519Z",
+        "updated_at": "2022-11-24T14:14:27.519Z",
+        "like_users": []
+    }
+},
+{
+    "model": "community.article",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "title": "게시글",
+        "content": "게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~게시글 작성~~~~",
+        "created_at": "2022-11-24T14:16:08.940Z",
+        "updated_at": "2022-11-24T14:16:08.940Z",
+        "like_users": []
+    }
+},
+{
+    "model": "community.article",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "title": "와 진짜 이쁘다",
+        "content": "와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다와 진짜 이쁘다",
+        "created_at": "2022-11-24T14:22:54.835Z",
+        "updated_at": "2022-11-24T14:22:54.835Z",
+        "like_users": []
+    }
+},
+{
+    "model": "community.article",
+    "pk": 6,
+    "fields": {
+        "user": 7,
+        "title": "대박",
+        "content": "대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박대박",
+        "created_at": "2022-11-24T14:26:12.006Z",
+        "updated_at": "2022-11-24T14:26:12.006Z",
+        "like_users": []
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 1,
+    "fields": {
+        "article": 1,
+        "user": 9,
+        "content": "이게 뭐냐?"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 2,
+    "fields": {
+        "article": 1,
+        "user": 6,
+        "content": "으"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 3,
+    "fields": {
+        "article": 5,
+        "user": 6,
+        "content": "대박대박대박대박대박"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 4,
+    "fields": {
+        "article": 4,
+        "user": 2,
+        "content": "대박대박대박"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 5,
+    "fields": {
+        "article": 3,
+        "user": 2,
+        "content": "대박대박대박"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 6,
+    "fields": {
+        "article": 3,
+        "user": 7,
+        "content": "대박대박대박대박"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 7,
+    "fields": {
+        "article": 1,
+        "user": 7,
+        "content": "대박대박대박대박"
+    }
+}
+]
