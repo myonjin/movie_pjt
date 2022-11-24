@@ -281,9 +281,13 @@ methods:{
         url: `http://127.0.0.1:8000/movies/detail/${this.movieId}`,
         })
           .then((res) => {
-          this.movieDetail = res.data
-          this.movieReviewList = this.movieDetail.reviews
+            this.movieDetail = res.data
+            this.movieReviewList = this.movieDetail.reviews
             let movies = this.movieDetail.actor
+            // movies = movies.replace(/'/g, '"')
+            // console.log(movies);
+            // movies = JSON.parse(movies)
+            // console.log(movies[0]);
             let cnt = 0
             movies=movies.split(",")
             var actor_list=new Array()
@@ -307,7 +311,7 @@ methods:{
                 actor_index.push(ac)
               }
             }
-            this.actor_list=actor_list
+            this.actor_list=actor_list.slice(0, 50)
           })
           .then(()=>{
             document.getElementById("show1").style.backgroundImage = 
