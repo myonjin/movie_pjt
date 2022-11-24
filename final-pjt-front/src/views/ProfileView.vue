@@ -299,6 +299,7 @@ export default {
   bottom: -10px;
   width: 40px;
   height: 40px;
+  cursor: pointer;
 
   border: none;
   background: #FF9999;

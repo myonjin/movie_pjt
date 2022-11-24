@@ -95,5 +95,6 @@ export default {
   margin: 20px;
   border: 1px solid #FFFFFF;
   border-radius: 5px;
+  cursor: pointer;
 }
 </style>

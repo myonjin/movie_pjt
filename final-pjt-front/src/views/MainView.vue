@@ -149,11 +149,13 @@ export default {
     line-height: 22px;
     /* identical to box height */
     color: #FFFFFF;
+    
     }
   
     .following-like-movie-text span {
       color:#FF9999;
       font-size: 30px;
+      cursor: pointer;
     }
 .genre_text{
   height: 22px;

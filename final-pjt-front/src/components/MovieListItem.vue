@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-4" v-if="movie.poster_path">
+  <div class="ms-4" v-if="movie.poster_path" style="cursor: pointer;">
     <img @click="goDetail()" class="poster" :src="`https://image.tmdb.org/t/p/w400/${movie.poster_path}`" alt="">
     <p @click="goDetail()" class="title">{{movie.title}}</p>
     <p @click="goDetail()" class="release" v-if="movie.release_date!==null">{{movie.release_date.slice(0, 4)}}</p>
