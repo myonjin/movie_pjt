@@ -187,7 +187,7 @@ export default {
             rgba(20, 20, 20, 0.4) 70%,
             rgba(20, 20, 20, 0.7) 95%,
             rgba(0, 0, 0, 0.9) 100%
-          ), url(../assets/hotel.jpg);
+          ), url(../assets/hotel5.jfif);
         background-size: cover;
       }
 .main-image-dark{
