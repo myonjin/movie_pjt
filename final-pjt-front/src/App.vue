@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar fixed-top" style="position:relative;">
       <div class="d-flex justify-contents-between" style="position:absolute; top:35px; width:100%">
-        <p @click="goHome()" class="logo-text">Kim&Jang</p>
+        <p @click="goHome()" class="logo-text" style="cursor: pointer;">Kim&Jang</p>
         <div class="d-flex" style="width:100%">
           <a class="navbar-brand" href="#"> 
           </a>
@@ -21,7 +21,7 @@
           </router-link>
         </div>
         <!-- 알림창 -->
-        <div @click="goTimeline()">
+        <div @click="goTimeline()" style="cursor: pointer;">
           <Icon class="bell-icon" icon="uil:bell" v-if="this.$store.getters.isLogin"/>
 
         </div>

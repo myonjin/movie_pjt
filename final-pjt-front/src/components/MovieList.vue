@@ -3,7 +3,7 @@
     <p class="popular_text">전체 영화</p>
     
     <!-- <div class="d-flex flex-row" style="position: relative;"> -->
-    <select v-model="filterList" style="top:10px;">
+    <select v-model="filterList" style="top:10px; cursor: pointer;">
       <option value="default" selected disabled hidden>FILTERS</option>
       <option value="random">랜덤</option>
       <!-- <option value="default">default</option> -->

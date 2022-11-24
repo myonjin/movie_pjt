@@ -3,7 +3,7 @@
     <div style="height:350px; position:relative;">
       <div class="profile-box">
         <!-- 프로필 사진 -->
-        <div style="position:relative; width:20%;">
+        <div style="position:relative; width:20%; margin-left: 150px;">
           <img
             class="profile-image"
             :src="`http://127.0.0.1:8000${user?.profile_img_src}`"
@@ -16,7 +16,7 @@
           />
         </div>
         <!-- 이름 + 팔로우정보 -->
-        <div style="margin-left:50px; width:40%;">
+        <div style="margin-left:80px; width:40%;">
           <p class="profile-username">{{ user?.username }}</p>
           <div class="d-flex align-items-center">
             <div style="margin-left:10px;">
@@ -29,7 +29,7 @@
           </div>
         </div>
         <!-- 차트 -->
-        <div id="chart" style=" width:500px; height:230px; text-align:center; margin-left:100px;">
+        <div id="chart" style=" width:500px; height:230px; text-align:center; margin-left:180px;">
           <p style="width: 100%; margin-bottom:0;">선호 장르</p>
           <apexChart width="500" height="230" type="bar" :options="options" :series="[this.movieList]"></apexChart>
         </div>
@@ -299,6 +299,7 @@ export default {
   bottom: -10px;
   width: 40px;
   height: 40px;
+  cursor: pointer;
 
   border: none;
   background: #FF9999;

@@ -14,7 +14,7 @@
       {{genre.name}}</button>
     </div>
     <!-- <div class="d-flex" style="position: relative; height:100%;"> -->
-    <select v-model="filterList" style="top:53px;">
+    <select v-model="filterList" style="top:53px; cursor: pointer;">
       <option value="default" selected disabled hidden>FILTERS</option>
       <option value="random">랜덤</option>
       <!-- <option value="default">default</option> -->

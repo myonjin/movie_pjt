@@ -100,7 +100,7 @@ export default {
     width: 55%;
     height: 320px;
     right: 0px;
-    top: 610px;
+    top: 730px;
   
     background: rgba(11, 15, 22, 0.47);
     box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
@@ -114,7 +114,7 @@ export default {
     width: 55%;
     height: 320px;
     right: 0px;
-    top: 920px;
+    top: 1040px;
   
     background: rgba(11, 15, 22, 0.47);
     box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
@@ -149,11 +149,13 @@ export default {
     line-height: 22px;
     /* identical to box height */
     color: #FFFFFF;
+    
     }
   
     .following-like-movie-text span {
       color:#FF9999;
       font-size: 30px;
+      cursor: pointer;
     }
 .genre_text{
   height: 22px;
@@ -204,7 +206,7 @@ export default {
             rgba(20, 20, 20, 0.4) 70%,
             rgba(20, 20, 20, 0.7) 95%,
             rgba(0, 0, 0, 0.9) 100%
-          ), url(../assets/hotel4.jpg);
+          ), url(../assets/hotel5.jfif);
         background-size: cover;
       }
 .background-gradation {

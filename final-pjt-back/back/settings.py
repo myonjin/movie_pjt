@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'timeline',
-    'quizs',
 
     "corsheaders",
 

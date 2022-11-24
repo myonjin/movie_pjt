@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <div @click="checkLine()" :class="line.is_checked ? '' : 'newline'">
+    <div @click="checkLine()" :class="line.is_checked ? '' : 'newline'" style="cursor: pointer;">
       <div class="d-flex align-items-center">
         <!-- 프사 -->
         <img class="article-detail-user-img me-2" :src="`http://127.0.0.1:8000/media/${line.profile_img}`" onerror="this.src='http://127.0.0.1:8000/media/users/default.png'">
@@ -34,7 +34,6 @@ export default {
     }
   },
   created() {
-    console.log(this.line);
     if (this.line.what === 'movielike') {
       this.msg = '영화를 좋아합니다.'
     }

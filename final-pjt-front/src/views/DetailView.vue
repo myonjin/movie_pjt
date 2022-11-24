@@ -1,18 +1,19 @@
 <template>
   <div style="position:relative; top:0px; height:1400px;">
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
-    <div style="height:auto; position: relative; height: 657px;">
+    <div style="height:auto; position: relative; height: 867px;">
       <div id='show1' >
       </div>
       <!-- 예고편 유튜부 -->
       <iframe
       id="ytplayer"
       width="80%"
-      height="653px"
+      height="863px"
       align="right"
       type="text/html"
       allowfullscreen=""
       frameborder="0"></iframe>
+
       <!-- 배경 그라데이션 -->
       <div class="movie-detail-top-gradation">
   
@@ -280,9 +281,13 @@ methods:{
         url: `http://127.0.0.1:8000/movies/detail/${this.movieId}`,
         })
           .then((res) => {
-          this.movieDetail = res.data
-          this.movieReviewList = this.movieDetail.reviews
+            this.movieDetail = res.data
+            this.movieReviewList = this.movieDetail.reviews
             let movies = this.movieDetail.actor
+            // movies = movies.replace(/'/g, '"')
+            // console.log(movies);
+            // movies = JSON.parse(movies)
+            // console.log(movies[0]);
             let cnt = 0
             movies=movies.split(",")
             var actor_list=new Array()
@@ -306,7 +311,7 @@ methods:{
                 actor_index.push(ac)
               }
             }
-            this.actor_list=actor_list
+            this.actor_list=actor_list.slice(0, 50)
           })
           .then(()=>{
             document.getElementById("show1").style.backgroundImage = 
@@ -367,7 +372,7 @@ methods:{
     top: 0px;
     margin-left: auto;
     width: 80%;
-    height: 657px;
+    height: 867px;
     background-size: cover;
     color: white;
     padding: 20px;
@@ -377,7 +382,7 @@ methods:{
 
   position: absolute;
   width: 100%;
-  height: 657px;
+  height: 867px;
   left: 0px;
   top: 0px;
 

@@ -6,7 +6,7 @@
         <!-- 제목 -->
         <h5>{{ article?.title }}</h5>
         <div class="d-flex align-items-center">
-          <img class="article-detail-user-img me-2" :src="`http://127.0.0.1:8000${profileImg}`" onerror="this.src='http://127.0.0.1:8000/media/users/default.png'">
+          <img class="article-detail-user-img me-2" @click="goProfile()" :src="`http://127.0.0.1:8000${profileImg}`" onerror="this.src='http://127.0.0.1:8000/media/users/default.png'">
           <h6 class="commu-push mb-0 ms-1" style="width: 15%; cursor: pointer; font-size:20px;" @click="goProfile()">{{ article?.username }}</h6>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <div class="mt-3">
         <Icon class="m-2" icon="uil:pen" style="color:white;"/>
         <input class="review-input" style="background-color: #2a2b38; width:80%;" v-model.trim="commentContent" @keyup.enter="commentCreate">
-        <button class="review-btn2" style="background-color: #2a2b38;" @click="commentCreate">생성</button>
+        <button class="review-btn2" style="background-color: #2a2b38; cursor: pointer;" @click="commentCreate">생성</button>
       </div>
     </div>
   </div>
@@ -108,7 +108,6 @@ export default {
       }
     },
     getProfileImg() {
-      console.log('바뀜');
       return this.profileImg
     }
     
@@ -147,7 +146,6 @@ export default {
         },
       })
       .then((res)=> {
-        console.log(res.data)
       
       this.commentList.push({
         id:res.data.id,
@@ -168,7 +166,6 @@ export default {
         .then((res) => {
           // console.log(res.data)
           this.article = res.data
-          console.log(res.data);
           this.liked_count= res.data.like_users.length
           if (res.data.like_users.includes(this.$store.state.user.id)){
             this.is_liked=true
@@ -203,7 +200,6 @@ export default {
         }
       })
       .then((res) => {
-        console.log(res)
         this.is_liked=res.data.is_liked
         this.liked_count=res.data.liked_count
       })
@@ -241,6 +237,7 @@ export default {
     border-bottom : 3px solid white;
     background-color: black;
     font-weight: 700;
+    padding-top: 2px;
     color: #FF9999;
   }
 
@@ -248,5 +245,6 @@ export default {
   width: 50px;
   height: 50px;
   border-radius: 100px;
+  cursor: pointer;
 }
 </style>
