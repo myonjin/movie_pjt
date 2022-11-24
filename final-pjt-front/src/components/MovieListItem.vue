@@ -49,10 +49,12 @@ export default {
   },
   created() {
     // console.log(this.movie);
-    if (this.movie.like_users.includes(this.$store.state.user.id)) {
-      this.isLiked = true
-    } else {
-      this.isLiked = false
+    if (this.$route.name!=='search') {
+      if (this.movie.like_users.includes(this.$store.state.user.id)) {
+        this.isLiked = true
+      } else {
+        this.isLiked = false
+      }
     }
   },
   watch: {

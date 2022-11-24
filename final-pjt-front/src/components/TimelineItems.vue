@@ -34,7 +34,6 @@ export default {
     }
   },
   created() {
-    console.log(this.line);
     if (this.line.what === 'movielike') {
       this.msg = '영화를 좋아합니다.'
     }

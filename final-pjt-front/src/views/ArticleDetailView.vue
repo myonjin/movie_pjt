@@ -108,7 +108,6 @@ export default {
       }
     },
     getProfileImg() {
-      console.log('바뀜');
       return this.profileImg
     }
     
@@ -147,7 +146,6 @@ export default {
         },
       })
       .then((res)=> {
-        console.log(res.data)
       
       this.commentList.push({
         id:res.data.id,
@@ -168,7 +166,6 @@ export default {
         .then((res) => {
           // console.log(res.data)
           this.article = res.data
-          console.log(res.data);
           this.liked_count= res.data.like_users.length
           if (res.data.like_users.includes(this.$store.state.user.id)){
             this.is_liked=true
@@ -203,7 +200,6 @@ export default {
         }
       })
       .then((res) => {
-        console.log(res)
         this.is_liked=res.data.is_liked
         this.liked_count=res.data.liked_count
       })
@@ -241,6 +237,7 @@ export default {
     border-bottom : 3px solid white;
     background-color: black;
     font-weight: 700;
+    padding-top: 2px;
     color: #FF9999;
   }
 

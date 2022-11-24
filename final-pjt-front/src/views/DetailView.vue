@@ -1,18 +1,19 @@
 <template>
   <div style="position:relative; top:0px; height:1400px;">
     <!-- <img class="bakcimage" :src="`https://mage.tmdb.org/t/p/w1280/rl7Jw8PjhSIjArOlDNv0JQPL1ZV.jpg`" alt="hotel" style="width:100%"> -->
-    <div style="height:auto; position: relative; height: 657px;">
+    <div style="height:auto; position: relative; height: 867px;">
       <div id='show1' >
       </div>
       <!-- 예고편 유튜부 -->
       <iframe
       id="ytplayer"
       width="80%"
-      height="653px"
+      height="863px"
       align="right"
       type="text/html"
       allowfullscreen=""
       frameborder="0"></iframe>
+
       <!-- 배경 그라데이션 -->
       <div class="movie-detail-top-gradation">
   
@@ -367,7 +368,7 @@ methods:{
     top: 0px;
     margin-left: auto;
     width: 80%;
-    height: 657px;
+    height: 867px;
     background-size: cover;
     color: white;
     padding: 20px;
@@ -377,7 +378,7 @@ methods:{
 
   position: absolute;
   width: 100%;
-  height: 657px;
+  height: 867px;
   left: 0px;
   top: 0px;
 

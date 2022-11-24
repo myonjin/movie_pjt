@@ -36,7 +36,6 @@ export default {
   computed: {
   },
   created() {
-    console.log(this.$route.params.keyword);
     axios({
           method:'get',
           url:`https://api.themoviedb.org/3/search/movie?api_key=6aff6c96fa8121c83d1a49c01d1407b3&language=ko-KR&query=${this.$route.params.keyword}&page=1&include_adult=false`
