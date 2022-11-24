@@ -168,7 +168,7 @@ def review_movie(request,movie_id):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         
     elif request.method == 'DELETE':
-        review = Review.objects.get(pk=1)
+        review = Review.objects.get(pk=23)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
