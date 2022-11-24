@@ -26,7 +26,7 @@
                         </p>
                       </div>
                       <section class="test">
-                        <img  @click="kakaoLoginBtn" src="../assets/kako.png" alt="">
+                        <!-- <img  @click="kakaoLoginBtn" src="../assets/kako.png" alt=""> -->
       
                       </section>
                       <button class="btna mt-3" @click="logIn">submit</button>

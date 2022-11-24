@@ -2,7 +2,7 @@
 
   <div>
     <!-- <img style="position:relative; width:100%; height:80%;" alt="Hotel" src="../assets/hotel.jpg"> -->
-    <div class="main-image-dark">
+    <div class="main-image">
       <div class="background-gradation"></div>
     </div>
     <div style="height:1300px"></div>

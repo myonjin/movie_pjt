@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
 import DetailView from '../views/DetailView.vue'
 import SearchView from '../views/SearchView.vue'
-import LoginViewtest from '../views/LoginViewtest.vue'
+import LoginView from '../views/LoginView.vue'
 import ProfileView from '@/views/ProfileView'
 import CommunityView from '../views/CommunityView'
 import CreateView from '../views/CreateView'
@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: LoginViewtest
+    component: LoginView
   },
   {
     path: '/home',
